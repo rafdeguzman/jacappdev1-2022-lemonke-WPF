@@ -24,5 +24,10 @@ namespace HomeBudgetWPF
         {
             InitializeComponent();
         }
+
+        private void btnAdd1_Click(object sender, RoutedEventArgs e)
+        {
+            cmbCategories.Items.Add(txtBox1.Text);
+        }
     }
 }

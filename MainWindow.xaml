@@ -13,14 +13,16 @@
             
         </ListBox>
         <Grid>
-            <ComboBox Width="200" HorizontalAlignment="Left" Margin="15, 0, 5, 5">
-                <ComboBoxItem Content="Expenses" IsSelected="True" />
-
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <ComboBox Width="125" Grid.Column="0" HorizontalAlignment="Center" Name="cmbCategories">
+                <ComboBoxItem Content="Categories" IsSelected="True" />
             </ComboBox>
-            <ComboBox Width="200" HorizontalAlignment="Right" Margin="5, 0, 15, 5">
-                <ComboBoxItem Content="Expenses" IsSelected="True" />
-
-            </ComboBox>
+            <TextBox Name="txtBox1" Height="25" Grid.Column="1" Width="150" HorizontalAlignment="Center"/>
+            <Button Name="btnAdd1" Width="80" Height="25" Grid.Column="2" Content="Add Item" HorizontalAlignment="Center" Click="btnAdd1_Click"/>
         </Grid>
 
     </StackPanel>
