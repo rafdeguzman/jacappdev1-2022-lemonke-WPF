@@ -18,16 +18,25 @@ namespace HomeBudgetWPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IView
     {
+        private readonly Presenter presenter;
         public MainWindow()
         {
             InitializeComponent();
+            presenter = new Presenter(this);
         }
 
         private void btnAdd1_Click(object sender, RoutedEventArgs e)
         {
             cmbCategories.Items.Add(txtBox1.Text);
+            presenter.AddCategory();
         }
+
+        public string GetStringInput()
+        {
+            return txtBox1.Text;
+        }
+
     }
 }
