@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="400" Width="500">
+    <StackPanel>
+        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="20">Home Budget</TextBlock>
+        <TextBlock HorizontalAlignment="Center">Budget Items</TextBlock>
+        <ListBox Height="200" Margin="15, 0, 15, 15">
+            
+        </ListBox>
+        <Grid>
+            <ComboBox Width="200" HorizontalAlignment="Left" Margin="15, 0, 5, 5">
+                <ComboBoxItem Content="Expenses" IsSelected="True" />
 
-    </Grid>
+            </ComboBox>
+            <ComboBox Width="200" HorizontalAlignment="Right" Margin="5, 0, 15, 5">
+                <ComboBoxItem Content="Expenses" IsSelected="True" />
+
+            </ComboBox>
+        </Grid>
+
+    </StackPanel>
 </Window>
