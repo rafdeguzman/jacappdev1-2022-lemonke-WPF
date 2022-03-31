@@ -4,21 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
-        mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="500">
-    <StackPanel>
+    <StackPanel Background ="{DynamicResource App.Background}">
         <!-- Menu: row 0-->
         <Menu>
             <MenuItem Header="_File">
-                <MenuItem Header="Open" Click="MenuItem_Click"/>
-                <MenuItem Header="Save" Click="MenuItem_Click"/>
+                <MenuItem Header="Open" Click="MenuOpen_Click"/>
+                <MenuItem Header="Save" Click="MenuSave_Click"/>
             </MenuItem>
             <MenuItem Header="_About Us" x:Name="AboutUs"/>
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
 
         </Menu>
-        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="20">Home Budget</TextBlock>
-        <TextBlock HorizontalAlignment="Center">Budget Items</TextBlock>
+        <TextBlock Text="Home Budget" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+        <TextBlock Text="Budget Items" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Center"/>
         <ListBox Height="200" Margin="15, 0, 15, 15">
             
         </ListBox>

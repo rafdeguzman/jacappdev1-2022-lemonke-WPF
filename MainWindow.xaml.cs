@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using Path = System.IO.Path;
 
 namespace HomeBudgetWPF
 {
@@ -25,7 +27,11 @@ namespace HomeBudgetWPF
             InitializeComponent();
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        private void MenuOpen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void MenuSave_Click(object sender, RoutedEventArgs e)
         {
 
         }

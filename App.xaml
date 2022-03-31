@@ -4,6 +4,13 @@
              xmlns:local="clr-namespace:HomeBudgetWPF"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/BaseRD.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/ListOfColors.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/TextBlockDictionary.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/ButtonDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
