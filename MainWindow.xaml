@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="500">
     <StackPanel>
+        <!-- Menu: row 0-->
+        <Menu>
+            <MenuItem Header="_File">
+                <MenuItem Header="Open" Click="MenuItem_Click"/>
+                <MenuItem Header="Save" Click="MenuItem_Click"/>
+            </MenuItem>
+            <MenuItem Header="_About Us" x:Name="AboutUs"/>
+            <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
+
+        </Menu>
         <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="20">Home Budget</TextBlock>
         <TextBlock HorizontalAlignment="Center">Budget Items</TextBlock>
         <ListBox Height="200" Margin="15, 0, 15, 15">

@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Haley.MVVM" Version="6.0.4" />
+    <PackageReference Include="Haley.WPF" Version="5.0.18" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Budget">
       <HintPath>dlls\Budget.dll</HintPath>
     </Reference>
