@@ -9,5 +9,6 @@ namespace HomeBudgetWPF
     interface IView
     {
         string GetStringInput();
+        void DisplayCategories(List<string> categories);
     }
 }

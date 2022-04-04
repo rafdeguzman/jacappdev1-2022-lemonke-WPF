@@ -11,8 +11,7 @@
         <TextBlock HorizontalAlignment="Center">Budget Items</TextBlock>
         <StackPanel>
 </StackPanel>
-        <ComboBox Width="125" Grid.Column="0" HorizontalAlignment="Center" Name="cmbCategories" IsEditable="True" KeyDown="cmbCategories_KeyDown">
-            <ComboBoxItem Content="Categories" IsSelected="True" />
+        <ComboBox Width="125" Grid.Column="0" HorizontalAlignment="Center" Name="cmbCategories" IsEditable="True" KeyDown="cmbCategories_KeyDown" Text="Categories">
         </ComboBox>
     </StackPanel>
 </Window>

@@ -25,6 +25,8 @@ namespace HomeBudgetWPF
             model = new HomeBudget(DEFAULT_FILENAME, !File.Exists(DEFAULT_FILENAME));
             view = v;
 
+            view.DisplayCategories(PopulateCategories());
+            
         }
         public void AddCategory()
         {

@@ -36,14 +36,13 @@ namespace HomeBudgetWPF
             return category;
         }
 
-        //Gorav's code
-        public void DisplayCategories(List<Category> categories)
+        public void DisplayCategories(List<string> categories)
         {
-            cmbCategory.DisplayMemberPath = "Description";
-            foreach (Category Displaycategories in categories)
+            foreach (string category in categories)
             {
-                cmbCategory.Items.Add(Displaycategories);
-            }
+                items.Add(category);
+                cmbCategories.Items.Add(category);
+            }   
         }
 
         //Stackoverflow references: https://stackoverflow.com/questions/4609847/wpf-combobox-with-iseditable-true-how-can-i-indicate-that-no-match-was-found
