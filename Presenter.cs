@@ -19,17 +19,29 @@ namespace HomeBudgetWPF
         
         public Presenter(IView v)
         {
-            if (!Directory.Exists(DEFAULT_PATH))
-                Directory.CreateDirectory(DEFAULT_PATH);
-            
-            model = new HomeBudget(DEFAULT_FILENAME, !File.Exists(DEFAULT_FILENAME));
+            model = new HomeBudget("newDB");
             view = v;
+
+            view.DisplayCategories(PopulateCategories());
         }
-        public void AddCategory()
+
+        public List<Category> PopulateCategories()
         {
-            model.categories.Add(view.GetStringInput());
+
+            List<Category> categoriesList = new();
+            foreach (Category categories in model.categories.List())
+            {
+                categoriesList.Add(categories);
+            }
+
+            return categoriesList;
         }
 
+        public Expense AddExpense()
+        {
 
+
+            return 
+        }
     }
 }
