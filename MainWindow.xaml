@@ -7,23 +7,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="500">
     <StackPanel>
-        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="20">Home Budget</TextBlock>
+        <TextBlock HorizontalAlignment="Center" FontWeight="Bold" FontSize="20">Add Category</TextBlock>
         <TextBlock HorizontalAlignment="Center">Budget Items</TextBlock>
-        <ListBox Height="200" Margin="15, 0, 15, 15">
-            
-        </ListBox>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-            <ComboBox Width="125" Grid.Column="0" HorizontalAlignment="Center" Name="cmbCategories">
-                <ComboBoxItem Content="Categories" IsSelected="True" />
-            </ComboBox>
-            <TextBox Name="txtBox1" Height="25" Grid.Column="1" Width="150" HorizontalAlignment="Center"/>
-            <Button Name="btnAdd1" Width="80" Height="25" Grid.Column="2" Content="Add Item" HorizontalAlignment="Center" Click="btnAdd1_Click"/>
-        </Grid>
-
+        <StackPanel>
+</StackPanel>
+        <ComboBox Width="125" Grid.Column="0" HorizontalAlignment="Center" Name="cmbCategories" IsEditable="True" KeyDown="cmbCategories_KeyDown">
+            <ComboBoxItem Content="Categories" IsSelected="True" />
+        </ComboBox>
     </StackPanel>
 </Window>
