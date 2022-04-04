@@ -23,6 +23,23 @@ namespace HomeBudgetWPF
         public MainWindow()
         {
             InitializeComponent();
+
+            Budget.HomeBudget homeBudget = new Budget.HomeBudget("newDB", true);
+            cmbCategory.DisplayMemberPath = "Description";
+            foreach (Budget.Category categories in homeBudget.categories.List())
+            {
+                cmbCategory.Items.Add(categories);
+            }
+        }
+
+        private void checkCredit_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

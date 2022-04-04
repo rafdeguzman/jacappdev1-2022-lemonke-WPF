@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightBlue.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/Crimson.xaml"/>        
+        <ResourceDictionary Source="pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/Green.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightGreen.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/Navy.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightRed.xaml"/>
+        <!--<ResourceDictionary Source="pack://application:,,,/Haley.WPF;component/dictionaries/haleyRD.xaml"/>-->
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>
