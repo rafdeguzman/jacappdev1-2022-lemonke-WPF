@@ -9,9 +9,10 @@ namespace HomeBudgetWPF
 {
     public interface ViewInterface
     {
+        bool CheckUserInput();
         void GetUserInput();
         void ResetText();
-        void LastInput (Categories categories, DateTime date, double amount, string description, bool creditFlag);
+        void LastInput (string categories, DateTime date, double amount, string description, bool creditFlag);
         void DisplayCategories(List <Category> categories);
 
     }

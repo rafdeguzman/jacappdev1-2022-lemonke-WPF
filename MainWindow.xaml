@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
 
             <!-- Title -->
-            <TextBlock Text="Add Budget" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Column="0" Grid.Row="0" FontSize="25" FontWeight="Bold"/>
+            <TextBlock Text="Add Expense" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Column="0" Grid.Row="0" FontSize="25" FontWeight="Bold"/>
 
             <Border CornerRadius="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource Backdrop}" Padding="10">
                 <!--Name-->
@@ -53,21 +53,21 @@
 
                     <!--Amount-->
                     <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Amount" Grid.Row="4" Grid.Column="0"/>
-                    <TextBox Background="{DynamicResource Alternation1}" BorderBrush="{DynamicResource TextColor}" Foreground="{DynamicResource TextColor}" Margin="0,5,5,5" Grid.Row="4" Grid.Column="1" x:Name="txtAmmount"></TextBox>
+                    <TextBox Background="{DynamicResource Alternation1}" BorderBrush="{DynamicResource TextColor}" Foreground="{DynamicResource TextColor}" Margin="0,5,5,5" Grid.Row="4" Grid.Column="1" x:Name="txtAmount"></TextBox>
 
                     <!--Check Box-->
                     <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Credit" Grid.Row="5" Grid.Column="0"/>
-                    <CheckBox Margin="0,5,5,5" Grid.Row="5" Grid.Column="1" x:Name="checkCredit" HorizontalAlignment="Center" Checked="checkCredit_Checked" ></CheckBox>
+                    <CheckBox Margin="0,5,5,5" Grid.Row="5" Grid.Column="1" x:Name="checkCredit" HorizontalAlignment="Right" ></CheckBox>
                 </Grid>
             </Border>
 
 
             <!--Buttons-->
             <!--Add Button-->
-            <Button Style="{DynamicResource RoundedButton}" Content="Add" Grid.Row="8" Grid.Column="0" x:Name="btnAdd"/>
+            <Button Style="{DynamicResource RoundedButton}" Content="Add" Grid.Row="8" Grid.Column="0" x:Name="btnAdd" Click="btnAdd_Click"/>
 
             <!--Clear Button-->
-            <Button Style="{DynamicResource RoundedButton}" Content="Clear" Grid.Row="8" Grid.Column="1" x:Name="btnClear" />
+            <Button Style="{DynamicResource RoundedButton}" Content="Clear" Grid.Row="8" Grid.Column="1" x:Name="btnClear" Click="btnClear_Click"/>
         </Grid>
     </Border>
 </Window>

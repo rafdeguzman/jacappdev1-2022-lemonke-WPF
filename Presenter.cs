@@ -15,29 +15,46 @@ namespace HomeBudgetWPF
         private readonly HomeBudget model;
         public Presenter(ViewInterface v)
         {
-            model = new HomeBudget("newDB");
+            model = new HomeBudget("testDB");
             view = v;
 
             view.DisplayCategories(PopulateCategories());
+            
         }
 
         public List<Category> PopulateCategories()
         {
-
             List<Category> categoriesList = new();
             foreach (Category categories in model.categories.List())
             {
                 categoriesList.Add(categories);
             }
-
             return categoriesList;
         }
 
-        public Expense AddExpense()
+        public void AddExpense(DateTime dt, int catID, double amount, string desc, bool? isChecked)
         {
 
-
-            return 
+            model.categories.
+            if (isChecked == false)
+            {
+                if ( == credit || catID == saving)
+                {
+                    model.expenses.Add(dt, catID, amount*-1, desc);
+                }
+                else
+                {
+                    model.expenses.Add(dt, catID, amount, desc);
+                }
+            
+                
+            }
+            else
+            {
+                model.expenses.Add(dt, catID, amount * -1, desc);
+                model.expenses.Add(dt, catID, amount, desc);
+            }
         }
     }
+
 }
