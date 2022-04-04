@@ -41,7 +41,7 @@
 
                     <!--Category-->
                     <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Category" Grid.Row="0" Grid.Column="0"/>
-                    <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory"/>
+                    <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>
 
                     <!--Date-->
                     <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Date" Grid.Row="1" Grid.Column="0"/>
@@ -49,7 +49,7 @@
 
                     <!--Quantity-->
                     <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Description" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Background="{DynamicResource Alternation1}" BorderBrush="{DynamicResource TextColor}" Foreground="{DynamicResource TextColor}" Margin="0,5,5,5" Grid.Row="3" Grid.Column="1" x:Name="txtDescription" TextChanged="txtDescription_TextChanged"></TextBox>
+                    <TextBox Background="{DynamicResource Alternation1}" BorderBrush="{DynamicResource TextColor}" Foreground="{DynamicResource TextColor}" Margin="0,5,5,5" Grid.Row="3" Grid.Column="1" x:Name="txtDescription"></TextBox>
 
                     <!--Amount-->
                     <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Amount" Grid.Row="4" Grid.Column="0"/>
