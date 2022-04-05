@@ -4,6 +4,9 @@
     <!-- Active colors-->
     <SolidColorBrush x:Key="App.Background" Color="{DynamicResource DarkBackground}"/>
     <SolidColorBrush x:Key="MainColor" Color="{DynamicResource LightBlue}"/>
+    <SolidColorBrush x:Key="OppositeRed" Color="{DynamicResource LightRed}"/>
+    <SolidColorBrush x:Key="OppositeGreen" Color="{DynamicResource LightGreen}"/>
+    <SolidColorBrush x:Key="OppositeBlue" Color="{DynamicResource LightBlue}"/>
     <SolidColorBrush x:Key="Button.OnMouseOver" Color="{DynamicResource MouseOverLightBue}"/>
     <SolidColorBrush x:Key="Button.TextColor" Color="{DynamicResource Black}"/>
     <SolidColorBrush x:Key="TextColor" Color="{DynamicResource White}"/>

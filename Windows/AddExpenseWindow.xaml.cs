@@ -87,6 +87,7 @@ namespace HomeBudgetWPF
             {
                 GetUserInput();
                 clear();
+                blastInput.Visibility = Visibility.Visible;                
             }
         }
 

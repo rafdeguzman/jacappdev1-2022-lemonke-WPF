@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="SettingsWindow" MinHeight="200" MaxHeight="200" Width="350" MaxWidth="350">
     <Grid>
-        <Border Padding="10" Background="#e6e6e6">
+        <Border Padding="10" Background="{DynamicResource App.Background}">
             <Grid Background="{DynamicResource App.Background}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -19,11 +19,11 @@
                 </Grid.RowDefinitions>
 
                 <!-- Title -->
-                <TextBlock Text="Color Picker" Margin="5,10,10,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" FontSize="25" FontWeight="Bold"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Color Picker" Margin="5,10,10,10" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" FontSize="25" FontWeight="Bold"/>
 
-                <Border CornerRadius="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="white" Padding="10" BorderThickness="1">
+                <Border CornerRadius="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource Backdrop}" Padding="10" BorderThickness="1">
                     <!--Name-->
-                    <Grid>
+                    <Grid Background="{DynamicResource Backdrop}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
@@ -35,17 +35,17 @@
                         </Grid.RowDefinitions>
                         <!--Dark Mode-->
                         <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Padding="10">
-                            <CheckBox Content="Dark Mode" FontWeight="UltraBold" x:Name="cbDarkMode" Click="CbDarkMode_OnClick"/>
+                            <CheckBox Foreground="{DynamicResource TextColor}" Content="Dark Mode" FontWeight="UltraBold" x:Name="cbDarkMode" Click="CbDarkMode_OnClick"/>
                         </Border>
 
                         <!--Navy-->
-                        <CheckBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Content="Navy" Background="#e6e6e6" Foreground="Navy" FontWeight="Bold" BorderBrush="White" x:Name="cbNavyOption" Click="cb_OnClick"></CheckBox>
+                        <CheckBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Content="Navy" Background="#e6e6e6" Foreground="{DynamicResource OppositeBlue}" FontWeight="Bold" BorderBrush="White" x:Name="cbNavyOption" Click="cb_OnClick"></CheckBox>
                         
                         <!--Crimson-->
-                        <CheckBox Content="Crimson" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="DarkRed" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="1" x:Name="cbRedOption" Click="cb_OnClick"></CheckBox>
+                        <CheckBox Content="Crimson" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="{DynamicResource OppositeRed}" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="1" x:Name="cbRedOption" Click="cb_OnClick"></CheckBox>
 
                         <!--Lime-->
-                        <CheckBox Content="Green" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="DarkGreen" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="2" x:Name="cbGreenOption" Click="cb_OnClick"></CheckBox>
+                        <CheckBox Content="Green" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="{DynamicResource OppositeGreen}" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="2" x:Name="cbGreenOption" Click="cb_OnClick"></CheckBox>
                     </Grid>
                 </Border>
             </Grid>

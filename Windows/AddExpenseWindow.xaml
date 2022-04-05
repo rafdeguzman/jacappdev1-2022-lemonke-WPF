@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-   Title="Add Window" MinHeight="480" MaxHeight="480" MinWidth="400" MaxWidth="400">
+   Title="Add Window" Height="Auto" SizeToContent="Height" MinWidth="450" MaxWidth="450">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -35,7 +35,7 @@
                 <!-- Title -->
                 <TextBlock Text="Add Expense" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Column="0" Grid.Row="0" FontSize="20" FontWeight="Bold"/>
 
-                <Border CornerRadius="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource Backdrop}" Padding="10">
+                <Border CornerRadius="10" Margin="0,10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource Backdrop}" Padding="10">
                     <!--Name-->
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -75,23 +75,44 @@
                     </Grid>
                 </Border>
                 <!-- Last input -->
-                <Grid  Grid.Row="2" Grid.Column="0" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
-                    <!-- Last Input Title -->
-                    <TextBlock Text="Last Input" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Row="0" FontSize="15" FontWeight="Bold"/>
-                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="1" x:Name="previousCategory" FontSize="10"/>
-                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="3" x:Name="previousDescription" FontSize="10"/>
-                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="2" x:Name="previousDate" FontSize="10"/>
-                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="4" x:Name="previousAmount" FontSize="10"/>
-                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="5" x:Name="isCredit" FontSize="10" />
-                </Grid>
+                <Border x:Name="blastInput" Margin="0,0,0,10" Grid.Row="2" Grid.Column="0" CornerRadius="10" Visibility="Collapsed" Grid.ColumnSpan="2" Background="{DynamicResource Backdrop}" Padding="10">
+                    <Grid  >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <!-- Last Input Title -->                        
+                        <TextBlock Text="Last Input" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Row="0" Grid.Column="0" FontSize="15" FontWeight="Bold"/>
+
+                        <!--Category-->
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Category" Grid.Row="1" Grid.Column="0"/>
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Foreground="{DynamicResource TextColor}" Text="" Grid.Row="1" Grid.Column="1" x:Name="previousCategory"/>
+
+                        <!--Description-->
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Description" Grid.Row="2" Grid.Column="0"/>
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Foreground="{DynamicResource TextColor}" Text="" Grid.Row="2" Grid.Column="1" x:Name="previousDescription"/>
+
+                        <!--Previous Date-->
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Date" Grid.Row="3" Grid.Column="0"/>
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Foreground="{DynamicResource TextColor}" Text="" Grid.Row="3" Grid.Column="1" x:Name="previousDate"/>
+                        
+                        <!--Amount-->
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Amount" Grid.Row="4" Grid.Column="0"/>
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Foreground="{DynamicResource TextColor}" Text="" Grid.Row="4" Grid.Column="1" x:Name="previousAmount"/>
+
+                        <!--Credit-->
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Credit" Grid.Row="5" Grid.Column="0"/>
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Foreground="{DynamicResource TextColor}" Text="" Grid.Row="5" Grid.Column="1" x:Name="isCredit"/>
+                    </Grid>
+                </Border>                
 
                 <!--Buttons-->
                 <!--Add Button-->

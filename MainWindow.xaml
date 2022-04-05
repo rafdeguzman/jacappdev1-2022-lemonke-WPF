@@ -5,11 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="500">
+        Title="MainWindow" Height="Auto" SizeToContent="Height"  Width="500">
     <StackPanel Background="{DynamicResource App.Background}">
-        <TextBlock Foreground="{DynamicResource TextColor}" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" TextAlignment="Center" FontFamily="Comic Sans MS" />
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="Open" />
+                <MenuItem Header="Save" />
+            </MenuItem>
+            <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
+        </Menu>
+        <TextBlock Foreground="{DynamicResource MainColor}" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" TextAlignment="Center" FontFamily="Comic Sans MS" />
         <TextBlock Foreground="{DynamicResource TextColor}" Text="Expenses" HorizontalAlignment="Center" FontWeight="Bold"/>
-        <DataGrid Background="{DynamicResource Alternation1}" Margin="20, 10, 20, 10" Height="250"></DataGrid>
+        <DataGrid Margin="20, 10, 20, 10" Height="250">
+            <!--For Styling-->
+            <DataGrid.Resources>
+                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                    <!--Colors-->
+                    <Setter Property="Background" Value="{DynamicResource Backdrop}" />
+                    <Setter Property="Foreground" Value="{DynamicResource MainColor}"/>
+
+                    <!--Text-->
+                    <Setter Property="FontWeight" Value="Bold"/>
+
+                    <!--Text Placement-->
+                    <Setter Property="Padding" Value="5"></Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+                    <!--Separators-->
+                    <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+                    <Setter Property="BorderBrush" Value="{DynamicResource Backdrop}"/>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
         <Grid Height="25" Margin="20, 5, 20, 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>

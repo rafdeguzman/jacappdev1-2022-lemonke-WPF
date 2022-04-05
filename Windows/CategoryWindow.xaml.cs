@@ -130,5 +130,10 @@ namespace HomeBudgetWPF
                     ShowCategoryError(tb.Text);
             }
         }
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow sw = new SettingsWindow();
+            sw.Show();
+        }
     }
 }

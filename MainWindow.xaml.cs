@@ -47,5 +47,10 @@ namespace HomeBudgetWPF
             CategoryWindow cw = new CategoryWindow();
             cw.ShowDialog();
         }
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow sw = new SettingsWindow();
+            sw.Show();
+        }
     }
 }
