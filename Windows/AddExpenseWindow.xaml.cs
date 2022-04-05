@@ -21,7 +21,7 @@ namespace HomeBudgetWPF
     /// <summary>
     /// Interaction logic for AddExpense.xaml
     /// </summary>
-    public partial class AddExpenseWindow : Window, ViewInterface
+    public partial class AddExpenseWindow : Window, ExpenseInterface
     {
         private readonly ExpensePresenter presenter;
         public AddExpenseWindow()

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HomeBudgetWPF
 {
-    interface IView
+    interface CategoryInterface
     {
         string GetStringInput();
         void DisplayCategories(List<string> categories);

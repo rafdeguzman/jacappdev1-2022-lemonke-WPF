@@ -7,7 +7,7 @@ using Budget;
 
 namespace HomeBudgetWPF
 {
-    public interface ViewInterface
+    public interface ExpenseInterface
     {
         bool CheckUserInput();
         void GetUserInput();

@@ -36,10 +36,16 @@ namespace HomeBudgetWPF
             
         }
 
-        private void Add_Click(object sender, RoutedEventArgs e)
+        private void Expense_Click(object sender, RoutedEventArgs e)
         {
             AddExpenseWindow aew = new AddExpenseWindow();
-            aew.Show();
+            aew.ShowDialog();
+        }
+
+        private void Category_Click(object sender, RoutedEventArgs e)
+        {
+            CategoryWindow cw = new CategoryWindow();
+            cw.ShowDialog();
         }
     }
 }

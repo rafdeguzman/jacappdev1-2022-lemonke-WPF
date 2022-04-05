@@ -16,9 +16,9 @@ namespace HomeBudgetWPF
         //const string DEFAULT_FILEPATH = DEFAULT_PATH + DEFAULT_FILENAME;
         const string DEFAULT_FILENAME = "./budget.db";
         HomeBudget model;
-        IView view;
+        CategoryInterface view;
 
-        public CategoryPresenter(IView v)
+        public CategoryPresenter(CategoryInterface v)
         {
             if (!Directory.Exists(DEFAULT_PATH))
                 Directory.CreateDirectory(DEFAULT_PATH);

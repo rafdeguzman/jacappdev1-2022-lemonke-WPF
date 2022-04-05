@@ -11,7 +11,7 @@ namespace HomeBudgetWPF
     {
 
         private static Dictionary<string, int> coordinate = new Dictionary<string, int>();
-        private readonly ViewInterface view;
+        private readonly ExpenseInterface view;
         private readonly HomeBudget model;
 
         //private static int previousCategory;
@@ -19,7 +19,7 @@ namespace HomeBudgetWPF
         //private static double previousAmount;
         //private static string previousDescristion;
         //private static bool previousIsCredit;
-        public ExpensePresenter(ViewInterface v)
+        public ExpensePresenter(ExpenseInterface v)
         {
             model = new HomeBudget("testDB");
             view = v;

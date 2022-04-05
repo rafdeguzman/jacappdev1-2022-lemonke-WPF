@@ -19,7 +19,7 @@ namespace HomeBudgetWPF
     /// Interaction logic for CategoryWindow.xaml
     /// </summary>
 
-    public partial class CategoryWindow : Window, IView
+    public partial class CategoryWindow : Window, CategoryInterface
     {
         private string category;
         private readonly CategoryPresenter presenter;
@@ -105,8 +105,8 @@ namespace HomeBudgetWPF
 
                 //if items doesnt have tb.text and return is pressed
                 if (e.Key == Key.Return && !categories.Contains(tb.Text))
-                    AddCategoryToDB(tb.Text);   
-                
+                    AddCategoryToDB(tb.Text);
+
                 else if (e.Key == Key.Return && categories.Contains(tb.Text))
                     ShowCategoryError(tb.Text);
             }
