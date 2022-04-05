@@ -19,16 +19,16 @@ using Path = System.IO.Path;
 namespace HomeBudgetWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddExpense.xaml
     /// </summary>
-    public partial class MainWindow : Window, ViewInterface
+    public partial class AddExpenseWindow : Window, ViewInterface
     {
-        private readonly Presenter presenter;
-        public MainWindow()
+        private readonly ExpensePresenter presenter;
+        public AddExpenseWindow()
         {
             InitializeComponent();
             datePicker.SelectedDate = DateTime.Today;
-            presenter = new Presenter(this);
+            presenter = new ExpensePresenter(this);
             checkCredit.IsChecked = false;
         }
 

@@ -7,7 +7,7 @@ using Budget;
 
 namespace HomeBudgetWPF
 {
-    class Presenter
+    class ExpensePresenter
     {
 
         private static Dictionary<string, int> coordinate = new Dictionary<string, int>();
@@ -19,7 +19,7 @@ namespace HomeBudgetWPF
         //private static double previousAmount;
         //private static string previousDescristion;
         //private static bool previousIsCredit;
-        public Presenter(ViewInterface v)
+        public ExpensePresenter(ViewInterface v)
         {
             model = new HomeBudget("testDB");
             view = v;
