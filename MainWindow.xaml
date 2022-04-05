@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-   Title="Add Window" MinHeight="450" MaxHeight="450" MinWidth="400" MaxWidth="400">
+   Title="Add Window" MinHeight="480" MaxHeight="480" MinWidth="400" MaxWidth="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

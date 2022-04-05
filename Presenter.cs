@@ -13,6 +13,12 @@ namespace HomeBudgetWPF
         private static Dictionary<string, int> coordinate = new Dictionary<string, int>();
         private readonly ViewInterface view;
         private readonly HomeBudget model;
+
+        //private static int previousCategory;
+        //private static DateTime previousDate;
+        //private static double previousAmount;
+        //private static string previousDescristion;
+        //private static bool previousIsCredit;
         public Presenter(ViewInterface v)
         {
             model = new HomeBudget("testDB");
@@ -34,6 +40,7 @@ namespace HomeBudgetWPF
 
         public void AddExpense(DateTime dt, int catID, double amount, string desc, bool? isChecked)
         {
+            
             string isCredit = "";
             Category categoryType = model.categories.GetCategoryFromId(catID+1);
             if (isChecked == false)
@@ -54,6 +61,7 @@ namespace HomeBudgetWPF
                 model.expenses.Add(dt, catID, amount, desc);
                 isCredit = "Credit Checked";
             }
+
             view.LastInput(categoryType.Type.ToString(), dt.ToString(),amount.ToString(), desc,isCredit);
         }
     }
