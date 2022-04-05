@@ -20,9 +20,20 @@ namespace HomeBudgetWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        //encapsulate each in presenter view etc after.
+
+        //IF BUDGET.DB DOESNT EXIST IT MEANS IT'S A FIRST TIME USER
+        //show messagebox window and ask if they want to create using DEFAULT PATH
+        //or select the directory
+        const string DEFAULT_DIRECTORY = "\\Documents\\BudgetFiles\\";
+        //const string DEFAULT_FILENAME = "budget.db";
+        //const string DEFAULT_FILEPATH = DEFAULT_DIRECTORY + DEFAULT_FILENAME
+        const string DEFAULT_FILENAME = "./budget.db";
         public MainWindow()
         {
             InitializeComponent();
+            
+            
         }
     }
 }
