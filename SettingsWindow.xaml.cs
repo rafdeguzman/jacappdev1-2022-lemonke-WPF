@@ -21,7 +21,7 @@ namespace HomeBudgetWPF
     {
         #region BACKING FIELDS
 
-        private static string currentTheme;
+        private static Uri currentTheme;
 
         private static bool darkMode = true;
         // URI's to the different themes
@@ -45,7 +45,7 @@ namespace HomeBudgetWPF
 
         #region PROPERTIES
 
-        private static string Theme
+        private static Uri Theme
         {
             get { return currentTheme; }
             set
@@ -69,6 +69,8 @@ namespace HomeBudgetWPF
             InitializeComponent();
             if (darkMode)
                 cbDarkMode.IsChecked = true;
+            if (Theme is null)
+                Theme = lightRedUri;
             switch (GetCurrentColor())
             {
                 case "Red":
@@ -81,7 +83,7 @@ namespace HomeBudgetWPF
                     cbGreenOption.IsChecked = true;
                     break;
                 default:
-                    Theme = "LightRed";
+                    Theme = lightRedUri;
                     cbRedOption.IsChecked = true;
                     break;
             }
@@ -102,79 +104,30 @@ namespace HomeBudgetWPF
         }
 
         // On Color Switch Checkbox click, calls ChangeThemeColor(Color to switch to)
-        private void cbNavyOption_OnClick(object sender, RoutedEventArgs e)
+        private void cb_OnClick(object sender, RoutedEventArgs e)
         {
-            ChangeThemeColor("Blue");
-        }
-
-        private void cbRedOption_Onclick(object sender, RoutedEventArgs e)
-        {
-            ChangeThemeColor("Red");
-        }
-
-        private void cbGreenOption_OnClick(object sender, RoutedEventArgs e)
-        {
-            ChangeThemeColor("Green");
+            ChangeThemeColor((sender as CheckBox).Content.ToString());
         }
 
         // Sets the old theme color, then calls CurrentTheme to get the color to switch to, then switch to the new theme
         private void ChangeThemeColor(string color)
         {
-            // Sets the base theme
-            Theme _newTheme = new Theme(new Uri(String.Format(emptyUri.ToString() + Theme + ".xaml")), lightRedUri, baseRDUri);
-
-            // Sets the current theme
-            switch (Theme)
-            {
-                case "LightBlue":
-                    _newTheme.old_theme_uri = lightBlueUri;
-                    break;
-                case "LightRed":
-                    _newTheme.old_theme_uri = lightRedUri;
-                    break;
-                case "LightGreen":
-                    _newTheme.old_theme_uri = lightGreenUri;
-                    break;
-                case "Navy":
-                    _newTheme.old_theme_uri = NavyUri;
-                    break;
-                case "Crimson":
-                    _newTheme.old_theme_uri = CrimsonUri;
-                    break;
-                case "Green":
-                    _newTheme.old_theme_uri = GreenUri;
-                    break;
-            }
-
-            // Gets the new theme
+            //Get the selected option
             CurrentTheme(color);
 
-            // Sets the new theme
-            _newTheme.new_theme_uri = new Uri(String.Format(emptyUri.ToString() + Theme + ".xaml"));
+            var app = (App)Application.Current;
+            app.ChangeTheme(currentTheme);
 
-            // Changes themes
-            ThemeAP.SetNewTheme(this, _newTheme);
         }
 
         // Gets Blue / Red / Green for the CurrentTheme method
         private string GetCurrentColor()
         {
-            switch (Theme)
-            {
-                case "LightBlue":
-                    return "Blue";
-                case "LightRed":
-                    return "Red";
-                case "LightGreen":
-                    return "Green";
-                case "Navy":
-                    return "Blue";
-                case "Crimson":
-                    return "Red";
-                case "Green":
-                    return "Green";
-            }
-            return string.Empty;
+            if (currentTheme.Equals(lightBlueUri) || currentTheme.Equals(NavyUri))
+                return "Navy";
+            if (currentTheme.Equals(lightGreenUri) || currentTheme.Equals(GreenUri))
+                return "Green";
+            return "Crimson";
         }
 
         // Goes over the new color and sets the theme according to the Dark Mode button clicked or not
@@ -183,29 +136,29 @@ namespace HomeBudgetWPF
         {
             switch (color)
             {
-                case "Blue":
+                case "Navy":
                     if (DarkMode)
-                        Theme = "LightBlue";
+                        currentTheme = lightBlueUri;
                     else
-                        Theme = "Navy";
+                        currentTheme = NavyUri;
                     cbNavyOption.IsChecked = true;
                     cbGreenOption.IsChecked = false;
                     cbRedOption.IsChecked = false;
                     break;
-                case "Red":
+                case "Crimson":
                     if (DarkMode)
-                        Theme = "LightRed";
+                        currentTheme = lightRedUri;
                     else
-                        Theme = "Crimson";
+                        currentTheme = CrimsonUri;
                     cbNavyOption.IsChecked = false;
                     cbGreenOption.IsChecked = false;
                     cbRedOption.IsChecked = true;
                     break;
                 case "Green":
                     if (DarkMode)
-                        Theme = "LightGreen";
+                        currentTheme = lightGreenUri;
                     else
-                        Theme = "Green";
+                        currentTheme = GreenUri;
                     cbNavyOption.IsChecked = false;
                     cbGreenOption.IsChecked = true;
                     cbRedOption.IsChecked = false;

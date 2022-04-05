@@ -21,7 +21,7 @@ namespace HomeBudgetWPF
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window,ViewInterface
+    public partial class MainWindow : Window, ViewInterface
     {
         private readonly Presenter presenter;
         public MainWindow()

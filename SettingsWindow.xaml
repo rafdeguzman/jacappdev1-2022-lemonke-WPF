@@ -8,7 +8,7 @@
         Title="SettingsWindow" MinHeight="200" MaxHeight="200" Width="350" MaxWidth="350">
     <Grid>
         <Border Padding="10" Background="#e6e6e6">
-            <Grid Background="{DynamicResource }">
+            <Grid Background="{DynamicResource App.Background}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
                     <ColumnDefinition Width="1*"></ColumnDefinition>
@@ -39,13 +39,13 @@
                         </Border>
 
                         <!--Navy-->
-                        <CheckBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Content="Navy" Background="#e6e6e6" Foreground="Navy" FontWeight="Bold" BorderBrush="White" x:Name="cbNavyOption" Click="cbNavyOption_OnClick"></CheckBox>
+                        <CheckBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Content="Navy" Background="#e6e6e6" Foreground="Navy" FontWeight="Bold" BorderBrush="White" x:Name="cbNavyOption" Click="cb_OnClick"></CheckBox>
                         
                         <!--Crimson-->
-                        <CheckBox Content="Crimson" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="DarkRed" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="1" x:Name="cbRedOption" Click="cbRedOption_Onclick"></CheckBox>
+                        <CheckBox Content="Crimson" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="DarkRed" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="1" x:Name="cbRedOption" Click="cb_OnClick"></CheckBox>
 
                         <!--Lime-->
-                        <CheckBox Content="Green" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="DarkGreen" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="2" x:Name="cbGreenOption" Click="cbGreenOption_OnClick"></CheckBox>
+                        <CheckBox Content="Green" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="DarkGreen" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="2" x:Name="cbGreenOption" Click="cb_OnClick"></CheckBox>
                     </Grid>
                 </Border>
             </Grid>

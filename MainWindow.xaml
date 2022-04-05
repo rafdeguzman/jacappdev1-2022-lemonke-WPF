@@ -5,87 +5,102 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-   Title="AddWindow" MinHeight="450" MaxHeight="450" MinWidth="400" MaxWidth="400">
-    <Border Padding="10" Background="{DynamicResource App.Background}">
-        <Grid Background="{DynamicResource App.Background}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="1*"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-            </Grid.RowDefinitions>
+   Title="Add Window" MinHeight="450" MaxHeight="450" MinWidth="400" MaxWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="_File">
+                <MenuItem Header="Open" />
+                <MenuItem Header="Save" />
+            </MenuItem>
+            <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
+        </Menu>
+        <Border Padding="10" Background="{DynamicResource App.Background}" Grid.Row="1">
+            <Grid Background="{DynamicResource App.Background}">
 
-            <!-- Title -->
-            <TextBlock Text="Add Expense" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Column="0" Grid.Row="0" FontSize="20" FontWeight="Bold"/>
-
-            <Border CornerRadius="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource Backdrop}" Padding="10">
-                <!--Name-->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-
-                    <!--Category-->
-                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Category" Grid.Row="0" Grid.Column="0"/>
-                    <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>
-
-                    <!--Date-->
-                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Date" Grid.Row="1" Grid.Column="0"/>
-                    <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="datePicker"/>
-
-                    <!--Quantity-->
-                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Description" Grid.Row="3" Grid.Column="0"/>
-                    <TextBox Background="{DynamicResource Alternation1}" BorderBrush="{DynamicResource TextColor}" Foreground="{DynamicResource TextColor}" Margin="0,5,5,5" Grid.Row="3" Grid.Column="1" x:Name="txtDescription"></TextBox>
-
-                    <!--Amount-->
-                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Amount" Grid.Row="4" Grid.Column="0"/>
-                    <TextBox Background="{DynamicResource Alternation1}" BorderBrush="{DynamicResource TextColor}" Foreground="{DynamicResource TextColor}" Margin="0,5,5,5" Grid.Row="4" Grid.Column="1" x:Name="txtAmount"></TextBox>
-
-                    <!--Check Box-->
-                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Credit" Grid.Row="5" Grid.Column="0"/>
-                    <CheckBox Margin="0,5,5,5" Grid.Row="5" Grid.Column="1" x:Name="checkCredit" HorizontalAlignment="Right" ></CheckBox>
-
-                </Grid>
-            </Border>
-            <!-- Last input -->
-            <Grid  Grid.Row="2" Grid.Column="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <!-- Last Input Title -->
-                <TextBlock Text="Last Input" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Row="0" FontSize="15" FontWeight="Bold"/>
-                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="1" x:Name="previousCategory" FontSize="10"/>
-                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="3" x:Name="previousDescription" FontSize="10"/>
-                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="2" x:Name="previousDate" FontSize="10"/>
-                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="4" x:Name="previousAmount" FontSize="10"/>
-                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="5" x:Name="isCredit" FontSize="10" />
+
+                <!-- Title -->
+                <TextBlock Text="Add Expense" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Column="0" Grid.Row="0" FontSize="20" FontWeight="Bold"/>
+
+                <Border CornerRadius="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource Backdrop}" Padding="10">
+                    <!--Name-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+
+                        <!--Category-->
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Category" Grid.Row="0" Grid.Column="0"/>
+                        <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>
+
+                        <!--Date-->
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Date" Grid.Row="1" Grid.Column="0"/>
+                        <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="datePicker"/>
+
+                        <!--Quantity-->
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Description" Grid.Row="3" Grid.Column="0"/>
+                        <TextBox Background="{DynamicResource Alternation1}" BorderBrush="{DynamicResource TextColor}" Foreground="{DynamicResource TextColor}" Margin="0,5,5,5" Grid.Row="3" Grid.Column="1" x:Name="txtDescription"></TextBox>
+
+                        <!--Amount-->
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Amount" Grid.Row="4" Grid.Column="0"/>
+                        <TextBox Background="{DynamicResource Alternation1}" BorderBrush="{DynamicResource TextColor}" Foreground="{DynamicResource TextColor}" Margin="0,5,5,5" Grid.Row="4" Grid.Column="1" x:Name="txtAmount"></TextBox>
+
+                        <!--Check Box-->
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Credit" Grid.Row="5" Grid.Column="0"/>
+                        <CheckBox Margin="0,5,5,5" Grid.Row="5" Grid.Column="1" x:Name="checkCredit" HorizontalAlignment="Right" ></CheckBox>
+
+                    </Grid>
+                </Border>
+                <!-- Last input -->
+                <Grid  Grid.Row="2" Grid.Column="0" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <!-- Last Input Title -->
+                    <TextBlock Text="Last Input" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Row="0" FontSize="15" FontWeight="Bold"/>
+                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="1" x:Name="previousCategory" FontSize="10"/>
+                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="3" x:Name="previousDescription" FontSize="10"/>
+                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="2" x:Name="previousDate" FontSize="10"/>
+                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="4" x:Name="previousAmount" FontSize="10"/>
+                    <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="5" x:Name="isCredit" FontSize="10" />
+                </Grid>
+
+                <!--Buttons-->
+                <!--Add Button-->
+                <Button Style="{DynamicResource RoundedButton}" Content="Add" Grid.Row="8" Grid.Column="0" x:Name="btnAdd" Click="btnAdd_Click"/>
+
+                <!--Clear Button-->
+                <Button Style="{DynamicResource RoundedButton}" Content="Clear" Grid.Row="8" Grid.Column="1" x:Name="btnClear" Click="btnClear_Click"/>
             </Grid>
-
-            <!--Buttons-->
-            <!--Add Button-->
-            <Button Style="{DynamicResource RoundedButton}" Content="Add" Grid.Row="8" Grid.Column="0" x:Name="btnAdd" Click="btnAdd_Click"/>
-
-            <!--Clear Button-->
-            <Button Style="{DynamicResource RoundedButton}" Content="Clear" Grid.Row="8" Grid.Column="1" x:Name="btnClear" Click="btnClear_Click"/>
-        </Grid>
-    </Border>
+        </Border>
+    </Grid>
+    
 </Window>
