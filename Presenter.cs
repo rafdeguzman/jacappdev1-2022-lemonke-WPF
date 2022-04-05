@@ -35,19 +35,17 @@ namespace HomeBudgetWPF
         public void AddExpense(DateTime dt, int catID, double amount, string desc, bool? isChecked)
         {
 
-            model.categories.
+            Category categoryType = model.categories.GetCategoryFromId(catID+1);
             if (isChecked == false)
             {
-                if ( == credit || catID == saving)
+                if (categoryType.Type == Category.CategoryType.Credit || categoryType.Type == Category.CategoryType.Savings)
                 {
-                    model.expenses.Add(dt, catID, amount*-1, desc);
+                    model.expenses.Add(dt, catID, amount * -1, desc);
                 }
                 else
                 {
                     model.expenses.Add(dt, catID, amount, desc);
                 }
-            
-                
             }
             else
             {
