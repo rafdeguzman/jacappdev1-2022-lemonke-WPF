@@ -13,5 +13,8 @@
 </StackPanel>
         <ComboBox Width="125" Grid.Column="0" HorizontalAlignment="Center" Name="cmbCategories" IsEditable="True" KeyDown="cmbCategories_KeyDown" Text="Categories">
         </ComboBox>
+        <ComboBox Width="125" Grid.Column="0" HorizontalAlignment="Center" Name="cmbCategoryTypes" IsEditable="True" SelectedIndex="0">
+        </ComboBox>
+        <Button Width="90" Content="Add Category" Click="btnAdd_Click"/>
     </StackPanel>
 </Window>

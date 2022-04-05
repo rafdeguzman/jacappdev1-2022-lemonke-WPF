@@ -10,5 +10,6 @@ namespace HomeBudgetWPF
     {
         string GetStringInput();
         void DisplayCategories(List<string> categories);
+        void DisplayCategoryTypes(List<string> categoryTypes);
     }
 }
