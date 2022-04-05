@@ -35,5 +35,11 @@ namespace HomeBudgetWPF
             
             
         }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddExpenseWindow aew = new AddExpenseWindow();
+            aew.Show();
+        }
     }
 }
