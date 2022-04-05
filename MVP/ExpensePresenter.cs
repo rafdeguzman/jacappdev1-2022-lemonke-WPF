@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using Budget;
 
 namespace HomeBudgetWPF
@@ -14,6 +15,11 @@ namespace HomeBudgetWPF
         private readonly ExpenseInterface view;
         private readonly HomeBudget model;
 
+        const string DEFAULT_PATH = "\\Documents\\BudgetFiles\\";
+        //const string DEFAULT_FILENAME = "budget.db";
+        //const string DEFAULT_FILEPATH = DEFAULT_PATH + DEFAULT_FILENAME;
+        const string DEFAULT_FILENAME = "./budget.db";
+
         //private static int previousCategory;
         //private static DateTime previousDate;
         //private static double previousAmount;
@@ -21,7 +27,11 @@ namespace HomeBudgetWPF
         //private static bool previousIsCredit;
         public ExpensePresenter(ExpenseInterface v)
         {
-            model = new HomeBudget("testDB");
+            if (!Directory.Exists(DEFAULT_PATH))
+                Directory.CreateDirectory(DEFAULT_PATH);
+
+            model = new HomeBudget(DEFAULT_FILENAME, !File.Exists(DEFAULT_FILENAME));
+
             view = v;
 
             view.DisplayCategories(PopulateCategories());
