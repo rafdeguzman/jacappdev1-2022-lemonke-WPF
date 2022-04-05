@@ -37,10 +37,13 @@ namespace HomeBudgetWPF
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightRed.xaml");
         private Uri lightGreenUri =
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightGreen.xaml");
-        private Uri baseRDUri =
-            new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/BaseRD.xaml");
-        private Uri emptyUri =
-            new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/");
+
+        private Uri tbUri =
+            new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/TextBlockDictionary.xaml");
+        private Uri buttonUri =
+            new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/ButtonDictionary.xaml");
+        private Uri ListOfColorsUri =
+            new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/ListOfColors.xaml");
         #endregion
 
         #region PROPERTIES
@@ -115,9 +118,11 @@ namespace HomeBudgetWPF
             //Get the selected option
             CurrentTheme(color);
 
-            var app = (App)Application.Current;
-            app.ChangeTheme(currentTheme);
-
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add( new ResourceDictionary() { Source = tbUri});
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = buttonUri});
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = ListOfColorsUri});
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = currentTheme});
         }
 
         // Gets Blue / Red / Green for the CurrentTheme method
