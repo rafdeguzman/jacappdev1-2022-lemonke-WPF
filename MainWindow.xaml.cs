@@ -13,6 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using Path = System.IO.Path;
 
 namespace HomeBudgetWPF
 {
@@ -106,6 +108,20 @@ namespace HomeBudgetWPF
             previousAmount.Text = amount;
             previousDescription.Text = description;
             isCredit.Text = creditFlag;
+        }
+
+        private void MenuOpen_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void MenuSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow sw = new SettingsWindow();
+            sw.Show();
         }
     }
 }
