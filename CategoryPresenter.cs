@@ -9,7 +9,7 @@ using Budget;
 namespace HomeBudgetWPF
 {
     //document here
-    class Presenter
+    class CategoryPresenter
     {
         const string DEFAULT_PATH = "\\Documents\\BudgetFiles\\";
         //const string DEFAULT_FILENAME = "budget.db";
@@ -18,7 +18,7 @@ namespace HomeBudgetWPF
         HomeBudget model;
         IView view;
 
-        public Presenter(IView v)
+        public CategoryPresenter(IView v)
         {
             if (!Directory.Exists(DEFAULT_PATH))
                 Directory.CreateDirectory(DEFAULT_PATH);

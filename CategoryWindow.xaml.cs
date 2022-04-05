@@ -16,21 +16,21 @@ using System.Windows.Shapes;
 namespace HomeBudgetWPF
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CategoryWindow.xaml
     /// </summary>
 
-    public partial class MainWindow : Window, IView
+    public partial class CategoryWindow : Window, IView
     {
         private string category;
-        private readonly Presenter presenter;
+        private readonly CategoryPresenter presenter;
         //for use with combo box items
         private List<string> categories = new List<string>();
         private List<string> categoryTypes = new List<string>();
 
-        public MainWindow()
+        public CategoryWindow()
         {
             InitializeComponent();
-            presenter = new Presenter(this);
+            presenter = new CategoryPresenter(this);
         }
 
         public string GetStringInput()
