@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-   Title="AddWindow" MinHeight="400" MaxHeight="400" MinWidth="350" MaxWidth="350">
+   Title="AddWindow" MinHeight="450" MaxHeight="450" MinWidth="400" MaxWidth="400">
     <Border Padding="10" Background="{DynamicResource App.Background}">
         <Grid Background="{DynamicResource App.Background}">
             <Grid.ColumnDefinitions>
@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
 
             <!-- Title -->
-            <TextBlock Text="Add Expense" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Column="0" Grid.Row="0" FontSize="25" FontWeight="Bold"/>
+            <TextBlock Text="Add Expense" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Column="0" Grid.Row="0" FontSize="20" FontWeight="Bold"/>
 
             <Border CornerRadius="10" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Background="{DynamicResource Backdrop}" Padding="10">
                 <!--Name-->
@@ -58,9 +58,27 @@
                     <!--Check Box-->
                     <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Credit" Grid.Row="5" Grid.Column="0"/>
                     <CheckBox Margin="0,5,5,5" Grid.Row="5" Grid.Column="1" x:Name="checkCredit" HorizontalAlignment="Right" ></CheckBox>
+
                 </Grid>
             </Border>
-
+            <!-- Last input -->
+            <Grid  Grid.Row="2" Grid.Column="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <!-- Last Input Title -->
+                <TextBlock Text="Last Input" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Row="0" FontSize="15" FontWeight="Bold"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="1" x:Name="previousCategory" FontSize="10"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="3" x:Name="previousDescription" FontSize="10"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="2" x:Name="previousDate" FontSize="10"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="4" x:Name="previousAmount" FontSize="10"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="" Grid.Row="5" x:Name="isCredit" FontSize="10" />
+            </Grid>
 
             <!--Buttons-->
             <!--Add Button-->

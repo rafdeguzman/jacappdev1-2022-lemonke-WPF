@@ -43,10 +43,6 @@ namespace HomeBudgetWPF
                 cmbCategory.Items.Add(Displaycategories);
             }
         }
-        public void LastInput(string categories, DateTime date, double amount, string description, bool creditFlag)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool CheckUserInput()
         {
@@ -101,6 +97,15 @@ namespace HomeBudgetWPF
             txtAmount.Text = string.Empty;
             txtDescription.Text = string.Empty;
             checkCredit.IsChecked = false;
+        }
+
+        public void LastInput(string categories, string date, string amount, string description, string creditFlag)
+        {
+            previousCategory.Text = categories;
+            previousDate.Text = date;
+            previousAmount.Text = amount;
+            previousDescription.Text = description;
+            isCredit.Text = creditFlag;
         }
     }
 }

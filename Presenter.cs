@@ -34,7 +34,7 @@ namespace HomeBudgetWPF
 
         public void AddExpense(DateTime dt, int catID, double amount, string desc, bool? isChecked)
         {
-
+            string isCredit = "";
             Category categoryType = model.categories.GetCategoryFromId(catID+1);
             if (isChecked == false)
             {
@@ -46,12 +46,15 @@ namespace HomeBudgetWPF
                 {
                     model.expenses.Add(dt, catID, amount, desc);
                 }
+                isCredit = "Credit Unchecked";
             }
             else
             {
                 model.expenses.Add(dt, catID, amount * -1, desc);
                 model.expenses.Add(dt, catID, amount, desc);
+                isCredit = "Credit Checked";
             }
+            view.LastInput(categoryType.Type.ToString(), dt.ToString(),amount.ToString(), desc,isCredit);
         }
     }
 
