@@ -22,6 +22,7 @@
                 <MenuItem Header="Save" />
             </MenuItem>
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
+            <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
         </Menu>
         <TextBlock Style="{DynamicResource TextBlockDefault}" Grid.Row="1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20">Add Category</TextBlock>
         <TextBlock Foreground="{DynamicResource TextColor}" Grid.Row="2" HorizontalAlignment="Center">Budget Items</TextBlock>

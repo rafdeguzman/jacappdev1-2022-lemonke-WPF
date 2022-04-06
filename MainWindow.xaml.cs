@@ -69,5 +69,10 @@ namespace HomeBudgetWPF
             
             return false;
         }
+
+        private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }

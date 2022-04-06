@@ -135,5 +135,10 @@ namespace HomeBudgetWPF
             SettingsWindow sw = new SettingsWindow();
             sw.Show();
         }
+
+        private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }

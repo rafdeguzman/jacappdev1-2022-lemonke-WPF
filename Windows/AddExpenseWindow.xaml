@@ -17,6 +17,7 @@
                 <MenuItem Header="Save" />
             </MenuItem>
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
+            <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
         </Menu>
         <Border Padding="10" Background="{DynamicResource App.Background}" Grid.Row="1">
             <Grid Background="{DynamicResource App.Background}">

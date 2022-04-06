@@ -13,6 +13,7 @@
                 <MenuItem Header="Save" />
             </MenuItem>
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
+            <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
         </Menu>
         <TextBlock Foreground="{DynamicResource MainColor}" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" TextAlignment="Center" FontFamily="Comic Sans MS" />
         <TextBlock Foreground="{DynamicResource TextColor}" Text="Expenses" HorizontalAlignment="Center" FontWeight="Bold"/>
