@@ -13,4 +13,6 @@
     <SolidColorBrush x:Key="Alternation1" Color="{DynamicResource LightAlt1}"></SolidColorBrush>
     <SolidColorBrush x:Key="Alternation2" Color="{DynamicResource LightAlt2}"></SolidColorBrush>
     <SolidColorBrush x:Key="Backdrop" Color="{DynamicResource LightBackdrop}"></SolidColorBrush>
+    <BitmapImage x:Key="openImage" UriSource="Images/openLight.png"/>
+    <BitmapImage x:Key="newImage" UriSource="Images/newLight.png"/>
 </ResourceDictionary>

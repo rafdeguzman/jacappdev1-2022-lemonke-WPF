@@ -56,10 +56,10 @@ namespace HomeBudgetWPF
                 currentTheme = value;
             }
         }
-        private static bool DarkMode
+        public static bool DarkMode
         {
             get { return darkMode; }
-            set
+            private set
             {
                 darkMode = value;
             }
