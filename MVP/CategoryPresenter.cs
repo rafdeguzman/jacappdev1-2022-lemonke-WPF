@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Budget;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace HomeBudgetWPF
 {
@@ -26,7 +28,7 @@ namespace HomeBudgetWPF
             model = new HomeBudget(DEFAULT_FILENAME, !File.Exists(DEFAULT_FILENAME));
             view = v;
 
-            view.DisplayCategories(PopulateCategories());
+            view.DisplayCategories(CategoryPopulateCategories());
             view.DisplayCategoryTypes(PopulateCategoryTypes());
             
         }
@@ -35,7 +37,7 @@ namespace HomeBudgetWPF
             model.categories.Add(view.GetStringInput(), (Category.CategoryType)categoryType + 1);
         }
 
-        public List<string> PopulateCategories()
+        public List<string> CategoryPopulateCategories()
         {
             List<Category> categoriesList = new();
             foreach (Category categories in model.categories.List())

@@ -12,28 +12,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Configuration;
+using System.Collections.Specialized;
+using System.IO;
 
 namespace HomeBudgetWPF
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, ViewInterface
     {
         //encapsulate each in presenter view etc after.
 
         //IF BUDGET.DB DOESNT EXIST IT MEANS IT'S A FIRST TIME USER
         //show messagebox window and ask if they want to create using DEFAULT PATH
         //or select the directory
-        const string DEFAULT_DIRECTORY = "\\Documents\\BudgetFiles\\";
+        //const string DEFAULT_DIRECTORY = "\\Documents\\BudgetFiles\\";
         //const string DEFAULT_FILENAME = "budget.db";
         //const string DEFAULT_FILEPATH = DEFAULT_DIRECTORY + DEFAULT_FILENAME
-        const string DEFAULT_FILENAME = "./budget.db";
+        private readonly Presenter presenter;
         public MainWindow()
         {
             InitializeComponent();
-            
-            
+            presenter = new Presenter(this);
         }
 
         private void Expense_Click(object sender, RoutedEventArgs e)
@@ -51,6 +53,21 @@ namespace HomeBudgetWPF
         {
             SettingsWindow sw = new SettingsWindow();
             sw.Show();
+        }
+        public bool ShowFirstTimeMessage()
+        {
+            string messageBoxText = "Would you like to create default budget files? If no, specify file location.";
+            string caption = "First Time User";
+            MessageBoxButton button = MessageBoxButton.YesNoCancel;
+            MessageBoxImage icon = MessageBoxImage.Question;
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            if (result == MessageBoxResult.Yes)
+                return true;
+            
+            else if(result == MessageBoxResult.No)
+                return false;
+            
+            return false;
         }
     }
 }

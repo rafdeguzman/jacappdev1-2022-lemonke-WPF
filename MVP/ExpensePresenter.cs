@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using Budget;
+using System.Configuration;
+using System.Collections.Specialized;
 
 namespace HomeBudgetWPF
 {
@@ -34,11 +36,11 @@ namespace HomeBudgetWPF
 
             view = v;
 
-            view.DisplayCategories(PopulateCategories());
+            view.DisplayCategories(ExpensePopulateCategories());
             
         }
 
-        public List<Category> PopulateCategories()
+        public List<Category> ExpensePopulateCategories()
         {
             List<Category> categoriesList = new();
             foreach (Category categories in model.categories.List())
