@@ -129,5 +129,16 @@ namespace HomeBudgetWPF
         {
             Environment.Exit(0);
         }
+
+        private void cmbCategory_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Return)
+            {
+                CategoryWindow cw = new CategoryWindow();
+                cw.Show();
+                TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;
+                cw.categoryCBText = tb.Text;
+            }            
+        }
     }
 }

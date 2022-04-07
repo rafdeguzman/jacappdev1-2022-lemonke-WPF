@@ -55,7 +55,7 @@
 
                         <!--Category-->
                         <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Category" Grid.Row="0" Grid.Column="0"/>
-                        <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>
+                        <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True" KeyDown="cmbCategory_KeyDown"/>
 
                         <!--Date-->
                         <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Date" Grid.Row="1" Grid.Column="0"/>
