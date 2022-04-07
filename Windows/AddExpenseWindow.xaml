@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
    Title="Add Window" Height="Auto" SizeToContent="Height" MinWidth="450" MaxWidth="450">
-    <Grid>
+    <Grid Background="{DynamicResource App.Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>

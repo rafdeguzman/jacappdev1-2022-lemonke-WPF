@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-        Title="SettingsWindow" MinHeight="200" MaxHeight="200" Width="350" MaxWidth="350">
-    <Grid>
+        Title="SettingsWindow" MinHeight="200" MaxHeight="200" MinWidth="350" MaxWidth="350">
+    <Grid Background="{DynamicResource App.Background}">
         <Border Padding="10" Background="{DynamicResource App.Background}">
             <Grid Background="{DynamicResource App.Background}">
                 <Grid.ColumnDefinitions>
