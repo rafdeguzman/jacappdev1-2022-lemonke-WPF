@@ -20,18 +20,23 @@ namespace HomeBudgetWPF
             set
             {
                 ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["lastUsedFilePath"].Value = value;
+                saveConfig();
             }
         }
 
         public static string currentFile
         {
             get { return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["currentFile"].Value; }
-            set { ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["currentFile"].Value = value; }
+            set { ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["currentFile"].Value = value;
+                saveConfig();
+            }
         }
         public static string firstTimeUser 
         {
             get { return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["firstTimeUser"].Value; }
-            set { ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["firstTimeUser"].Value = value; }    
+            set { ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["firstTimeUser"].Value = value;
+                saveConfig();
+            }
         }
 
         public static void saveConfig()
