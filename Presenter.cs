@@ -24,19 +24,30 @@ namespace HomeBudgetWPF
             {
                 if (v.ShowFirstTimeMessage())
                 {
+                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
                     //set firstTimeUser to false
-                    ConfigurationManager.AppSettings.Set("firstTimeUser", "false");
-                    //set lastUsedFilePath to \\Documents\\BudgetFiles\\budget.db
-                    ConfigurationManager.AppSettings.Set("lastUsedFilePath", defaultDirectory + defaultFileName);
+                    config.AppSettings.Settings["firstTimeUser"].Value = "false";
                     //create directory
                     string newDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + defaultDirectory;
                     Directory.CreateDirectory(newDirectory);
                     string newFilePath = newDirectory + defaultFileName;
-                    model = new HomeBudget(newFilePath, !File.Exists(newFilePath));
+                    model = new HomeBudget(newFilePath, true);
                     view = v;
+                    //set lastUsedFilePath to \\Documents\\BudgetFiles\\budget.db
+                    config.AppSettings.Settings["lastUsedFilePath"].Value = newFilePath;
+                    config.AppSettings.Settings["currentFile"].Value = config.AppSettings.Settings["defaultFileName"].Value;
+                    config.Save(ConfigurationSaveMode.Modified);
                 }
-
+                else
+                {
+                    //do stuff
+                }
             }
+        }
+        public HomeBudget GetPresenterModel()
+        {
+            return model;
         }
 
     }

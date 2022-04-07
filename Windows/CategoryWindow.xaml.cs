@@ -98,8 +98,8 @@ namespace HomeBudgetWPF
             //textbox part of editable combo box
             TextBox tb = cmbCategories.Template.FindName("PART_EditableTextBox", cmbCategories) as TextBox;
 
-            //dont run if tb.Text is empty
-            if (!(tb.Text == String.Empty || tb.Text == " "))
+            //dont run if tb.Text is empty and if tb.Text has default values
+            if (!(tb.Text == String.Empty || tb.Text == " " || tb.Text == "Categories" || tb.Text == "Category Type"))
             {
                 AddCategoriesToList();
 

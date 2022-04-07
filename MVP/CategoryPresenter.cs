@@ -10,22 +10,17 @@ using System.Collections.Specialized;
 
 namespace HomeBudgetWPF
 {
-    //document here
     class CategoryPresenter
     {
-        const string DEFAULT_PATH = "\\Documents\\BudgetFiles\\";
-        //const string DEFAULT_FILENAME = "budget.db";
-        //const string DEFAULT_FILEPATH = DEFAULT_PATH + DEFAULT_FILENAME;
-        const string DEFAULT_FILENAME = "./budget.db";
+        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         HomeBudget model;
         CategoryInterface view;
 
         public CategoryPresenter(CategoryInterface v)
         {
-            if (!Directory.Exists(DEFAULT_PATH))
-                Directory.CreateDirectory(DEFAULT_PATH);
-
-            model = new HomeBudget(DEFAULT_FILENAME, !File.Exists(DEFAULT_FILENAME));
+            var settings = config.AppSettings.Settings;
+            string filePath = settings["lastUsedFilePath"].Value;
+            model = new HomeBudget(filePath, !File.Exists(filePath));
             view = v;
 
             view.DisplayCategories(CategoryPopulateCategories());
@@ -39,10 +34,9 @@ namespace HomeBudgetWPF
 
         public List<string> CategoryPopulateCategories()
         {
-            List<Category> categoriesList = new();
+            List<Category> categoriesList = new List<Category>();
             foreach (Category categories in model.categories.List())
                 categoriesList.Add(categories);
-            
 
             List<string> categoriesListString = new List<string>();
             foreach (var category in categoriesList)

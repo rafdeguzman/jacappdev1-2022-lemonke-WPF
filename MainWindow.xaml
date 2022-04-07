@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="Auto" SizeToContent="Height"  Width="500">
+        Title="Le Monke" Height="Auto" SizeToContent="Height"  Width="500">
     <StackPanel Background="{DynamicResource App.Background}">
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
@@ -16,7 +16,7 @@
             <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
         </Menu>
         <TextBlock Foreground="{DynamicResource MainColor}" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" TextAlignment="Center" FontFamily="Comic Sans MS" />
-        <TextBlock Foreground="{DynamicResource TextColor}" Text="Expenses" HorizontalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock Foreground="{DynamicResource TextColor}" Text="Expenses" HorizontalAlignment="Center" FontWeight="Bold" x:Name="fileName"/>
         <DataGrid Margin="20, 10, 20, 10" Height="250">
             <!--For Styling-->
             <DataGrid.Resources>

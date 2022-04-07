@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-        Title="Window1" Height="Auto" SizeToContent="Height" MinWidth="300" MaxWidth="300">
+        Title="Add Category" Height="Auto" SizeToContent="Height" MinWidth="300" MaxWidth="300">
     <Grid Background="{DynamicResource App.Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>

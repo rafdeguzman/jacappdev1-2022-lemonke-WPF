@@ -31,11 +31,15 @@ namespace HomeBudgetWPF
         //const string DEFAULT_DIRECTORY = "\\Documents\\BudgetFiles\\";
         //const string DEFAULT_FILENAME = "budget.db";
         //const string DEFAULT_FILEPATH = DEFAULT_DIRECTORY + DEFAULT_FILENAME
+        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+
         private readonly Presenter presenter;
         public MainWindow()
         {
             InitializeComponent();
             presenter = new Presenter(this);
+            string configFileName = config.AppSettings.Settings["currentFile"].Value;
+            fileName.Text = "Current file: " + configFileName.Remove(configFileName.Length - 3);
         }
 
         private void Expense_Click(object sender, RoutedEventArgs e)

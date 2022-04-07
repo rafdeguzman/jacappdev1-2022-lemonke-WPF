@@ -12,32 +12,22 @@ namespace HomeBudgetWPF
 {
     class ExpensePresenter
     {
+        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
 
-        private static Dictionary<string, int> coordinate = new Dictionary<string, int>();
         private readonly ExpenseInterface view;
         private readonly HomeBudget model;
 
-        const string DEFAULT_PATH = "\\Documents\\BudgetFiles\\";
-        //const string DEFAULT_FILENAME = "budget.db";
-        //const string DEFAULT_FILEPATH = DEFAULT_PATH + DEFAULT_FILENAME;
-        const string DEFAULT_FILENAME = "./budget.db";
+        string filePath = ConfigurationManager.AppSettings.Get("lastUsedFilePath");
 
-        //private static int previousCategory;
-        //private static DateTime previousDate;
-        //private static double previousAmount;
-        //private static string previousDescristion;
-        //private static bool previousIsCredit;
         public ExpensePresenter(ExpenseInterface v)
         {
-            if (!Directory.Exists(DEFAULT_PATH))
-                Directory.CreateDirectory(DEFAULT_PATH);
-
-            model = new HomeBudget(DEFAULT_FILENAME, !File.Exists(DEFAULT_FILENAME));
+            var settings = config.AppSettings.Settings;
+            string filePath = settings["lastUsedFilePath"].Value;
+            model = new HomeBudget(filePath, !File.Exists(filePath));
 
             view = v;
 
             view.DisplayCategories(ExpensePopulateCategories());
-            
         }
 
         public List<Category> ExpensePopulateCategories()
