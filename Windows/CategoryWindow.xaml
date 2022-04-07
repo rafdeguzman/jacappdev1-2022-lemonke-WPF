@@ -17,10 +17,6 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
-            <MenuItem Header="_File">
-                <MenuItem Header="Open" />
-                <MenuItem Header="Save" />
-            </MenuItem>
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
             <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
         </Menu>

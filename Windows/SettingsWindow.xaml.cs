@@ -46,7 +46,7 @@ namespace HomeBudgetWPF
         private Uri buttonUri =
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/ButtonDictionary.xaml");
         private Uri ListOfColorsUri =
-            new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/ListOfColors.xaml");
+            new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/ListOfColors.xaml");
         #endregion
 
         #region PROPERTIES
