@@ -11,7 +11,6 @@ namespace HomeBudgetWPF
     {
         bool CheckUserInput();
         void GetUserInput();
-        void ResetText();
         void LastInput (string categories, string date, string amount, string description, string creditFlag);
         void DisplayCategories(List <Category> categories);
 

@@ -38,9 +38,13 @@ namespace HomeBudgetWPF
             view.DisplayCategories(ExpensePopulateCategories());
         }
 
+        /// <summary>
+        /// Populate the combox box with list of categories
+        /// </summary>
+        /// <returns>List of the Categories</returns>
         public List<Category> ExpensePopulateCategories()
         {
-            List<Category> categoriesList = new();
+            List<Category> categoriesList = new List<Category>();
             foreach (Category categories in model.categories.List())
             {
                 categoriesList.Add(categories);
@@ -48,6 +52,14 @@ namespace HomeBudgetWPF
             return categoriesList;
         }
 
+        /// <summary>
+        /// Add the expense to the database
+        /// </summary>
+        /// <param name="dt">Date when the was bought </param>
+        /// <param name="catID"> Category Id</param>
+        /// <param name="amount">the amount of the expense </param>
+        /// <param name="desc">Description of the expense </param>
+        /// <param name="isChecked">If credit was user for the expense</param>
         public void AddExpense(DateTime dt, int catID, double amount, string desc, bool isChecked)
         {
             string isCredit = "";
@@ -75,9 +87,18 @@ namespace HomeBudgetWPF
                 view.LastInput(categoryType.Type.ToString(), dt.ToString("yyyy-MM-dd"),amount.ToString(), desc,isCredit);
             }
         }
-
+        /// <summary>
+        /// Check if the user want expense in the database
+        /// </summary>
+        /// <param name="dt">Date when the was bought </param>
+        /// <param name="catID"> Category Id</param>
+        /// <param name="amount">the amount of the expense </param>
+        /// <param name="desc">Description of the expense </param>
+        /// <param name="isChecked">If credit was user for the expense</param>
+        /// <returns></returns>
         private bool SameInputAsLastInput(DateTime dt, int catID, double amount, string desc, bool isChecked)
         {
+            
             if (previousAmount == amount && previousDate == dt && previousCategoryID == catID && previousDescription == desc && previousIsChecked == isChecked)
             {
                 view.DisplaySameAsLastInput();
@@ -92,6 +113,7 @@ namespace HomeBudgetWPF
             }
             else
             {
+                
                 previousDate = dt;
                 previousCategoryID = catID;
                 previousAmount = amount;
@@ -100,7 +122,12 @@ namespace HomeBudgetWPF
                 return true;
             }
         }
-        public void setUserInputFromDuplicateExpense(bool response)
+
+        /// <summary>
+        /// Set the userInputFromDuplicateExpense 
+        /// </summary>
+        /// <param name="response"> This is the user input </param>
+        public void SetUserInputFromDuplicateExpense(bool response)
         {
             userInputFromDuplicateExpense = response;
         }

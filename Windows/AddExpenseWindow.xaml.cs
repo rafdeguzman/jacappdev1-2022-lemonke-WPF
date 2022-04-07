@@ -31,12 +31,12 @@ namespace HomeBudgetWPF
             presenter = new ExpensePresenter(this);
             checkCredit.IsChecked = false;
         }
+        
 
-
-        public void ResetText()
-        {
-            throw new NotImplementedException();
-        }
+        /// <summary>
+        /// Display the categories to the user 
+        /// </summary>
+        /// <param name="categories"> list of categories</param>
         public void DisplayCategories(List<Category> categories)
         {
             cmbCategory.DisplayMemberPath = "Description";
@@ -46,6 +46,10 @@ namespace HomeBudgetWPF
             }
         }
 
+        /// <summary>
+        /// Validate the user input
+        /// </summary>
+        /// <returns>true if everything ok or else false</returns>
         public bool CheckUserInput()
         {
             StringBuilder msg = new StringBuilder();
@@ -76,11 +80,19 @@ namespace HomeBudgetWPF
             return false;
         }
 
+
+        /// <summary>
+        /// Get user input
+        /// </summary>
         public void GetUserInput()
         {
             presenter.AddExpense(Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex, double.Parse(txtAmount.Text), txtDescription.Text, checkCredit.IsChecked.Value);
         }
-
+        /// <summary>
+        /// Add the expense information to the presente
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (CheckUserInput())
@@ -102,6 +114,14 @@ namespace HomeBudgetWPF
             checkCredit.IsChecked = false;
         }
 
+        /// <summary>
+        /// Display the last expense information
+        /// </summary>
+        /// <param name="categories"></param>
+        /// <param name="date"></param>
+        /// <param name="amount"></param>
+        /// <param name="description"></param>
+        /// <param name="creditFlag"></param>
         public void LastInput(string categories, string date, string amount, string description, string creditFlag)
         {
             previousCategory.Text = categories;
@@ -110,21 +130,23 @@ namespace HomeBudgetWPF
             previousDescription.Text = description;
             isCredit.Text = creditFlag;
         }
-
-        private void MenuOpen_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void MenuSave_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        /// <summary>
+        /// Type of theme available for the window 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow sw = new SettingsWindow();
             sw.Show();
         }
 
+
+        /// <summary>
+        /// Close all the windows
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want close app!!!",
@@ -136,6 +158,7 @@ namespace HomeBudgetWPF
             }
         }
 
+        
         private void cmbCategory_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.Key == Key.Return)
@@ -147,6 +170,9 @@ namespace HomeBudgetWPF
             }            
         }
 
+        /// <summary>
+        /// Display the last warning message for duplicate expense 
+        /// </summary>
         public void DisplaySameAsLastInput()
         {
             if (MessageBox.Show("Current input is the same as the last input, would you like sill add? ",
@@ -154,11 +180,11 @@ namespace HomeBudgetWPF
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                presenter.setUserInputFromDuplicateExpense(true);
+                presenter.SetUserInputFromDuplicateExpense(true);
             }
             else
             {
-                presenter.setUserInputFromDuplicateExpense(false);
+                presenter.SetUserInputFromDuplicateExpense(false);
             }
         }
     }
