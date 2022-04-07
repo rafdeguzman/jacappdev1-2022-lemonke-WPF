@@ -16,11 +16,13 @@ namespace HomeBudgetWPF
 {
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
+    /// Used to change the apps Theme
     /// </summary>
     public partial class SettingsWindow : Window
     {
         #region BACKING FIELDS
 
+        // Holds the current Theme
         private static Uri currentTheme;
 
         private static bool darkMode = true;
@@ -37,6 +39,7 @@ namespace HomeBudgetWPF
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightRed.xaml");
         private Uri lightGreenUri =
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightGreen.xaml");
+
 
         private Uri tbUri =
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/TextBlockDictionary.xaml");
@@ -56,10 +59,10 @@ namespace HomeBudgetWPF
                 currentTheme = value;
             }
         }
-        public static bool DarkMode
+        private static bool DarkMode
         {
             get { return darkMode; }
-            private set
+            set
             {
                 darkMode = value;
             }
@@ -67,13 +70,23 @@ namespace HomeBudgetWPF
         #endregion
 
         #region CONSTRUCTORS
+
+        /// <summary>
+        /// Settings Window constructor 
+        /// Makes sure all the correct checkboxes are checked
+        /// </summary>
         public SettingsWindow()
         {
             InitializeComponent();
+            // Makes sure Dark Mode cb is correctly checked
             if (darkMode)
                 cbDarkMode.IsChecked = true;
+
+            // Sets a base theme if there is none
             if (Theme is null)
                 Theme = lightRedUri;
+
+            // Sets the correct Theme
             switch (GetCurrentColor())
             {
                 case "Red":
