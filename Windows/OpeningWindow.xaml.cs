@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+using System.Configuration;
 
 namespace HomeBudgetWPF.Windows
 {
@@ -26,13 +28,22 @@ namespace HomeBudgetWPF.Windows
 
         private void btnNewDB_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mw = new MainWindow();            
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["newDB"].Value = "true";
+            ConfigurationManager.AppSettings.Set("newDB", "true");
+            config.Save(ConfigurationSaveMode.Modified);
+            MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
         }
 
         private void btnOpenDB_Click(object sender, RoutedEventArgs e)
         {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["newDB"].Value = "false";
+            ConfigurationManager.AppSettings.Set("newDB", "false");
+            config.Save(ConfigurationSaveMode.Modified);
+            //work here
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();

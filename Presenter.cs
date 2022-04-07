@@ -7,6 +7,8 @@ using System.IO;
 using Budget;
 using System.Configuration;
 using System.Collections.Specialized;
+using System.Windows;
+using Microsoft.Win32;
 
 
 namespace HomeBudgetWPF
@@ -15,17 +17,16 @@ namespace HomeBudgetWPF
     {
         ViewInterface view;
         HomeBudget model;
-        public Presenter(ViewInterface v)
+        public Presenter(ViewInterface v, bool newDB = false)
         {
             string defaultDirectory = ConfigurationManager.AppSettings.Get("defaultFileDirectory");
             string defaultFileName = ConfigurationManager.AppSettings.Get("defaultFileName");
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             //if firstTimeUser
-            if (bool.Parse(ConfigurationManager.AppSettings.Get("firstTimeUser")))
+            if (bool.Parse(ConfigurationManager.AppSettings.Get("newDB")))
             {
                 if (v.ShowFirstTimeMessage())
                 {
-                    Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
                     //set firstTimeUser to false
                     config.AppSettings.Settings["firstTimeUser"].Value = "false";
                     //create directory
@@ -41,7 +42,45 @@ namespace HomeBudgetWPF
                 }
                 else
                 {
-                    //do stuff
+                    //lastindexof reference: https://stackoverflow.com/questions/21733756/best-way-to-split-string-by-last-occurrence-of-character
+
+                    //create budget file using SaveFileDialog
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    if (saveFileDialog.ShowDialog() == true)
+                    {
+                        //set firstTimeUser to false
+                        config.AppSettings.Settings["firstTimeUser"].Value = "false";
+                        //initialize new db with chosen filename
+                        string filePath = saveFileDialog.FileName;
+                        int index = filePath.LastIndexOf('\\') + 1;
+                        model = new HomeBudget(filePath, true);
+                        config.AppSettings.Settings["lastUsedFilePath"].Value = filePath;
+                        config.AppSettings.Settings["currentFile"].Value = filePath.Substring(index);
+                        config.Save(ConfigurationSaveMode.Modified);
+                    }
+                }
+            }
+            else
+            {
+                //newDB is false (opening file)
+
+                //ask for budget folder location
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+
+                openFileDialog.Filter = "Database Files (*.db)|*.db|All files (*.*)|*.*";
+                //open file window
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    //work here
+                    //if true, set first time user to false
+                    config.AppSettings.Settings["firstTimeUser"].Value = "false";
+                    //initialize db using filename
+                    string filePath = openFileDialog.FileName;
+                    int index = filePath.LastIndexOf('\\') + 1;
+                    model = new HomeBudget(filePath);
+                    config.AppSettings.Settings["lastUsedFilePath"].Value = filePath;
+                    config.AppSettings.Settings["currentFile"].Value = filePath.Substring(index);
+                    config.Save(ConfigurationSaveMode.Modified);
                 }
             }
         }
