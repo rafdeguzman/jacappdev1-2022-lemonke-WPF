@@ -143,7 +143,13 @@ namespace HomeBudgetWPF
 
         private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            if (MessageBox.Show("Are you sure you want to close app!!!",
+                    "Close App",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
