@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Active colors-->
+    <SolidColorBrush x:Key="App.Background" Color="{DynamicResource DarkBackground}"/>
+    <SolidColorBrush x:Key="MainColor" Color="{DynamicResource LightRed}"/>
+    <SolidColorBrush x:Key="OppositeRed" Color="{DynamicResource LightRed}"/>
+    <SolidColorBrush x:Key="OppositeGreen" Color="{DynamicResource LightGreen}"/>
+    <SolidColorBrush x:Key="OppositeBlue" Color="{DynamicResource LightBlue}"/>
+    <SolidColorBrush x:Key="Button.OnMouseOver" Color="{DynamicResource MouseOverLightRed}"/>
+    <SolidColorBrush x:Key="Button.TextColor" Color="{DynamicResource Black}"/>
+    <SolidColorBrush x:Key="TextColor" Color="{DynamicResource White}"/>
+    <SolidColorBrush x:Key="Alternation1" Color="{DynamicResource DarkAlt1}"/>
+    <SolidColorBrush x:Key="Alternation2" Color="{DynamicResource DarkAlt2}"/>
+    <SolidColorBrush x:Key="Backdrop" Color="{DynamicResource DarkBackdrop}"/>
+    <BitmapImage x:Key="openImage" UriSource="Images/openDark.png"/>
+    <BitmapImage x:Key="newImage" UriSource="Images/newDark.png"/>
+</ResourceDictionary>
