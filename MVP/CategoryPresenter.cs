@@ -27,24 +27,31 @@ namespace HomeBudgetWPF
             view.DisplayCategoryTypes(PopulateCategoryTypes());
             
         }
+        /// <summary>
+        /// Adds categories from model to local categories list.
+        /// </summary>
+        /// <param name="categoryType">Integer taken from CategoryType enum</param>
         public void AddCategory(int categoryType)
         {
             model.categories.Add(view.GetStringInput(), (Category.CategoryType)categoryType + 1);
         }
-
+        /// <summary>
+        /// Takes all categories from model.categories.List() output, and stores it in local categories list.
+        /// This list is used to convert into string.
+        /// </summary>
+        /// <returns></returns>
         public List<string> CategoryPopulateCategories()
         {
-            List<Category> categoriesList = new List<Category>();
-            foreach (Category categories in model.categories.List())
-                categoriesList.Add(categories);
-
             List<string> categoriesListString = new List<string>();
-            foreach (var category in categoriesList)
+            foreach (var category in model.categories.List())
                 categoriesListString.Add(category.ToString());
 
             return categoriesListString;
         }
-        
+        /// <summary>
+        /// Converts from CategoryTypes enum to string and stores in categoryTypes list.
+        /// </summary>
+        /// <returns></returns>
         public List<string> PopulateCategoryTypes()
         {
             List<string> categoryTypes = new List<string>();

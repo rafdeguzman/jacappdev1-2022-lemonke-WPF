@@ -28,6 +28,7 @@ namespace HomeBudgetWPF
 
         public ExpensePresenter(ExpenseInterface v)
         {
+            //get config settings and read database filepath
             var settings = config.AppSettings.Settings;
             string filePath = settings["lastUsedFilePath"].Value;
             model = new HomeBudget(filePath, !File.Exists(filePath));

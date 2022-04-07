@@ -23,8 +23,6 @@ namespace HomeBudgetWPF
     /// </summary>
     public partial class MainWindow : Window, ViewInterface
     {
-        //encapsulate each in presenter view etc after.
-
         const int EXTENSION_LENGTH = 3;
         private readonly Presenter presenter;
         public MainWindow()
@@ -57,6 +55,10 @@ namespace HomeBudgetWPF
             SettingsWindow sw = new SettingsWindow();
             sw.Show();
         }
+        /// <summary>
+        /// Shows a Message Box asking to create default files or to choose where and what to name budget file.
+        /// </summary>
+        /// <returns>True if result is yes, false otherwise.</returns>
         public bool ShowFirstTimeMessage()
         {
             string messageBoxText = "Would you like to create default budget files? If no, specify file location.";
@@ -69,10 +71,25 @@ namespace HomeBudgetWPF
             
             else if(result == MessageBoxResult.No)
                 return false;
+
+            else if(result == MessageBoxResult.Cancel)
+                Environment.Exit(0);
             
             return false;
         }
-
+        /// <summary>
+        /// Shows a message box when called.
+        /// </summary>
+        /// <param name="path">File path showing where file is created</param>
+        public void ShowFilesCreated(string path)
+        {
+            string messageBoxText = "Files created! \nFiles located in " + path;
+            string caption = "Create Files Success";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Information;
+            MessageBoxResult result;
+            result = MessageBox.Show(messageBoxText, caption, button, icon);
+        }
         private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to close app!!!",
@@ -90,7 +107,6 @@ namespace HomeBudgetWPF
             config.AppSettings.Settings["newDB"].Value = "false";
             ConfigurationManager.AppSettings.Set("newDB", "false");
             config.Save(ConfigurationSaveMode.Modified);
-            //work here
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
