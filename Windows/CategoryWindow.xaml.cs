@@ -27,6 +27,10 @@ namespace HomeBudgetWPF
         private List<string> categories = new List<string>();
         private List<string> categoryTypes = new List<string>();
 
+
+        /// <summary>
+        /// Sets Category combo box text to a specific value
+        /// </summary>
         public String categoryCBText
         {
             set { cmbCategories.Text = value; }
@@ -37,12 +41,19 @@ namespace HomeBudgetWPF
             InitializeComponent();
             presenter = new CategoryPresenter(this);
         }
-
+        /// <summary>
+        /// Returns the current value of category string.
+        /// </summary>
+        /// <returns>String category.</returns>
         public string GetStringInput()
         {
             return category;
         }
-
+        /// <summary>
+        /// Adds current category string to categories list.
+        /// Adds category string to Combo box.
+        /// </summary>
+        /// <param name="categories">List of string that holds all categories.</param>
         public void DisplayCategories(List<string> categories)
         {
             foreach (string category in categories)
@@ -51,7 +62,11 @@ namespace HomeBudgetWPF
                 cmbCategories.Items.Add(category);
             }
         }
-
+        /// <summary>
+        /// Adds category types to categoryTypes list.
+        /// Also adds categoryTypes to comboBox.
+        /// </summary>
+        /// <param name="categoryTypes">List of Strings</param>
         public void DisplayCategoryTypes(List<string> categoryTypes)
         {
             foreach (string categoryType in categoryTypes)
@@ -102,9 +117,10 @@ namespace HomeBudgetWPF
         {
             //textbox part of editable combo box
             TextBox tb = cmbCategories.Template.FindName("PART_EditableTextBox", cmbCategories) as TextBox;
-
+            TextBox tbTypes = cmbCategoryTypes.Template.FindName("PART_EditableTextBox", cmbCategoryTypes) as TextBox;
+            
             //dont run if tb.Text is empty and if tb.Text has default values
-            if (!(tb.Text == String.Empty || tb.Text == " " || tb.Text == "Categories" || tb.Text == "Category Type"))
+            if (!(tb.Text == String.Empty || tb.Text == " " || tb.Text == "Categories" || tbTypes.Text == "Category Type" || !categoryTypes.Contains(tbTypes.Text)))
             {
                 AddCategoriesToList();
 
@@ -121,9 +137,9 @@ namespace HomeBudgetWPF
         {
             //textbox part of editable combo box
             TextBox tb = cmbCategories.Template.FindName("PART_EditableTextBox", cmbCategories) as TextBox;
-
+            TextBox tbTypes = cmbCategoryTypes.Template.FindName("PART_EditableTextBox", cmbCategoryTypes) as TextBox;
             //dont run if tb.Text is empty
-            if (!(tb.Text == "Categories" || tb.Text == "Category Type"))
+            if (!(tb.Text == "Categories" || tbTypes.Text == "Category Type" || !categoryTypes.Contains(tbTypes.Text)))
             {
                 AddCategoriesToList();
 
@@ -151,7 +167,6 @@ namespace HomeBudgetWPF
                 Environment.Exit(0);
             }
         }
-
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();

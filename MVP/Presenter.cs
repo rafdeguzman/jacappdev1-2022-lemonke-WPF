@@ -10,7 +10,6 @@ using System.Collections.Specialized;
 using System.Windows;
 using Microsoft.Win32;
 
-
 namespace HomeBudgetWPF
 {
     class Presenter
@@ -71,8 +70,12 @@ namespace HomeBudgetWPF
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 string initialPath = config.AppSettings.Settings["lastUsedFilePath"].Value;
                 int index = initialPath.LastIndexOf('\\') + 1;
-                openFileDialog.Filter = "Database Files (*.db)|*.db|All files (*.*)|*.*";
-                openFileDialog.InitialDirectory = initialPath.Remove(index);
+                if (initialPath.Length != 0)
+                {
+                    index = 0;
+                    openFileDialog.Filter = "Database Files (*.db)|*.db|All files (*.*)|*.*";
+                    openFileDialog.InitialDirectory = initialPath.Remove(index);
+                }
                 //open file window
                 if (openFileDialog.ShowDialog() == true)
                 {
