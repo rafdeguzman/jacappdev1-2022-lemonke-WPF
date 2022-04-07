@@ -31,7 +31,7 @@ namespace HomeBudgetWPF
         //const string DEFAULT_DIRECTORY = "\\Documents\\BudgetFiles\\";
         //const string DEFAULT_FILENAME = "budget.db";
         //const string DEFAULT_FILEPATH = DEFAULT_DIRECTORY + DEFAULT_FILENAME
-
+        const int EXTENSION_LENGTH = 3;
         private readonly Presenter presenter;
         public MainWindow()
         {
@@ -43,7 +43,9 @@ namespace HomeBudgetWPF
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             string configFileName = config.AppSettings.Settings["currentFile"].Value;
-            fileName.Text = "Current file: " + configFileName.Remove(configFileName.Length - 3);
+            int index = configFileName.LastIndexOf('\\') + 1;
+            configFileName.Substring(index);
+            fileName.Text = "Current file: " + configFileName.Remove(configFileName.Length - EXTENSION_LENGTH);
         }
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
@@ -86,6 +88,29 @@ namespace HomeBudgetWPF
             {
                 Environment.Exit(0);
             }
+        }
+
+        private void btnOpenFile(object sender, RoutedEventArgs e)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["newDB"].Value = "false";
+            ConfigurationManager.AppSettings.Set("newDB", "false");
+            config.Save(ConfigurationSaveMode.Modified);
+            //work here
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
+        }
+
+        private void btnSaveFile(object sender, RoutedEventArgs e)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            config.AppSettings.Settings["newDB"].Value = "true";
+            ConfigurationManager.AppSettings.Set("newDB", "true");
+            config.Save(ConfigurationSaveMode.Modified);
+            MainWindow mw = new MainWindow();
+            mw.Show();
+            this.Close();
         }
     }
 }

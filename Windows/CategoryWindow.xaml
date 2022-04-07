@@ -27,7 +27,7 @@
         <TextBlock Style="{DynamicResource TextBlockDefault}" Grid.Row="1" HorizontalAlignment="Center" FontWeight="Bold" FontSize="20">Add Category</TextBlock>
         <TextBlock Foreground="{DynamicResource TextColor}" Grid.Row="2" HorizontalAlignment="Center">Budget Items</TextBlock>
         <ComboBox Margin="10" Grid.Row="3" Width="125" Grid.Column="0" HorizontalAlignment="Center" Name="cmbCategories" IsEditable="True" KeyDown="cmbCategories_KeyDown" Text="Categories"/>
-        <ComboBox Grid.Row="4" Width="125" Grid.Column="0" HorizontalAlignment="Center" Name="cmbCategoryTypes" IsEditable="True" Text="Category Type"/>
+        <ComboBox Grid.Row="4" Width="125" Grid.Column="0" HorizontalAlignment="Center" Name="cmbCategoryTypes" IsEditable="False" Text="Category Type"/>
         <Grid Grid.Row="6" Margin="10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>

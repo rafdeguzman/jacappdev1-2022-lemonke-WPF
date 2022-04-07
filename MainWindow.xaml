@@ -9,7 +9,7 @@
     <StackPanel Background="{DynamicResource App.Background}">
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
-                <MenuItem Header="Open" />
+                <MenuItem Header="Open" Click="btnOpenFile"/>
                 <MenuItem Header="Save" />
             </MenuItem>
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>

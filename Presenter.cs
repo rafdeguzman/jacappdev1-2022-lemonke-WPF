@@ -46,6 +46,7 @@ namespace HomeBudgetWPF
 
                     //create budget file using SaveFileDialog
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     if (saveFileDialog.ShowDialog() == true)
                     {
                         //set firstTimeUser to false
@@ -66,8 +67,10 @@ namespace HomeBudgetWPF
 
                 //ask for budget folder location
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-
+                string initialPath = config.AppSettings.Settings["lastUsedFilePath"].Value;
+                int index = initialPath.LastIndexOf('\\') + 1;
                 openFileDialog.Filter = "Database Files (*.db)|*.db|All files (*.*)|*.*";
+                openFileDialog.InitialDirectory = initialPath.Remove(index);
                 //open file window
                 if (openFileDialog.ShowDialog() == true)
                 {
@@ -76,7 +79,7 @@ namespace HomeBudgetWPF
                     config.AppSettings.Settings["firstTimeUser"].Value = "false";
                     //initialize db using filename
                     string filePath = openFileDialog.FileName;
-                    int index = filePath.LastIndexOf('\\') + 1;
+                    index = filePath.LastIndexOf('\\') + 1;
                     model = new HomeBudget(filePath);
                     config.AppSettings.Settings["lastUsedFilePath"].Value = filePath;
                     config.AppSettings.Settings["currentFile"].Value = filePath.Substring(index);
