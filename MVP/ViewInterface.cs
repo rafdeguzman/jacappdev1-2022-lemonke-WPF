@@ -8,6 +8,8 @@ namespace HomeBudgetWPF
 {
     interface ViewInterface
     {
+
         public bool ShowFirstTimeMessage();
+        public void ShowFilesCreated(string path);
     }
 }

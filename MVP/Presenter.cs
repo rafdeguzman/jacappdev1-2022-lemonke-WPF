@@ -18,10 +18,12 @@ namespace HomeBudgetWPF
         HomeBudget model;
         public Presenter(ViewInterface v, bool newDB = false)
         {
+            //config file setup
             string defaultDirectory = ConfigurationManager.AppSettings.Get("defaultFileDirectory");
             string defaultFileName = ConfigurationManager.AppSettings.Get("defaultFileName");
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            //if firstTimeUser
+            view = v;
+            //if newDB
             if (bool.Parse(ConfigurationManager.AppSettings.Get("newDB")))
             {
                 if (v.ShowFirstTimeMessage())
@@ -33,11 +35,11 @@ namespace HomeBudgetWPF
                     Directory.CreateDirectory(newDirectory);
                     string newFilePath = newDirectory + defaultFileName;
                     model = new HomeBudget(newFilePath, true);
-                    view = v;
                     //set lastUsedFilePath to \\Documents\\BudgetFiles\\budget.db
                     config.AppSettings.Settings["lastUsedFilePath"].Value = newFilePath;
                     config.AppSettings.Settings["currentFile"].Value = config.AppSettings.Settings["defaultFileName"].Value;
                     config.Save(ConfigurationSaveMode.Modified);
+                    view.ShowFilesCreated(config.AppSettings.Settings["lastUsedFilePath"].Value);
                 }
                 else
                 {
@@ -59,6 +61,7 @@ namespace HomeBudgetWPF
                         config.AppSettings.Settings["lastUsedFilePath"].Value = filePath;
                         config.AppSettings.Settings["currentFile"].Value = filePath.Substring(index);
                         config.Save(ConfigurationSaveMode.Modified);
+                        view.ShowFilesCreated(config.AppSettings.Settings["lastUsedFilePath"].Value);
                     }
                 }
             }
@@ -91,10 +94,6 @@ namespace HomeBudgetWPF
                     config.Save(ConfigurationSaveMode.Modified);
                 }
             }
-        }
-        public HomeBudget GetPresenterModel()
-        {
-            return model;
         }
 
     }
