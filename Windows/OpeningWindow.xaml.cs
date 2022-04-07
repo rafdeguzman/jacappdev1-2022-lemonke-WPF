@@ -48,5 +48,21 @@ namespace HomeBudgetWPF.Windows
             mw.Show();
             this.Close();
         }
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow sw = new SettingsWindow();
+            sw.Show();
+        }
+
+        private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Are you sure you want to close app!!!",
+                    "Close App",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+        }
     }
 }

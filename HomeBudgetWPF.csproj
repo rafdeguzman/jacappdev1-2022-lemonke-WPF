@@ -19,5 +19,28 @@
   <ItemGroup>
     <Folder Include="Images\" />
   </ItemGroup>
+	
+	<ItemGroup>
+		<None Remove="Images\newDark.png" />
+		<None Remove="Images\newLight.png" />
+		<None Remove="Images\openDark.png" />
+		<None Remove="Images\openLight.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Images\newDark.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Images\newLight.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Images\openDark.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Images\openLight.png">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
 
 </Project>

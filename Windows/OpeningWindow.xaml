@@ -7,30 +7,49 @@
         mc:Ignorable="d"
         Title="Chose DB File" Height="300" Width="400">
     <Grid Background="{DynamicResource App.Background}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
+            <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
+        </Menu>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
 
-        <Button x:Name="btnNewDB" Click="btnNewDB_Click" Width="auto" Background="{DynamicResource Alternation1}" Grid.Column="1" Grid.Row="1">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="50" Height="50" x:Name="NewImage" Source="{DynamicResource newImage}"/>
-                <TextBlock Style="{DynamicResource TextBlockDefault}" VerticalAlignment="Center" Text="New Budget File"/>
-            </StackPanel>                        
-        </Button>
-        <Button x:Name="btnOpenDB" Click="btnOpenDB_Click" Background="{DynamicResource Alternation1}"  Grid.Column="1" Grid.Row="2">
-            <StackPanel Orientation="Horizontal">
-                <Image Width="50" Height="50" x:Name="ExistingImage" Source="{DynamicResource openImage}"/>
-                <TextBlock Style="{DynamicResource TextBlockDefault}" VerticalAlignment="Center" Text="Existing Budget File"/>
-            </StackPanel>            
-        </Button>
-        
+            <Button Margin="5" x:Name="btnNewDB" BorderBrush="{DynamicResource Backdrop}" HorizontalContentAlignment="Stretch" Click="btnNewDB_Click" Width="250" Background="{DynamicResource Alternation1}" Grid.Column="1" Grid.Row="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Width="30" Height="30" Margin="5" x:Name="NewImage" Source="{DynamicResource newImage}"/>
+                    <TextBlock Grid.Column="1" TextAlignment="Right" Style="{DynamicResource TextBlockDefault}" VerticalAlignment="Center" Text="New Budget File"/>
+                </Grid>
+            </Button>
+            <Button Margin="5" x:Name="btnOpenDB" BorderBrush="{DynamicResource Backdrop}" HorizontalContentAlignment="Stretch" Click="btnOpenDB_Click" Background="{DynamicResource Alternation1}"  Grid.Column="1" Grid.Row="2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Width="30" Height="30" Margin="5" x:Name="ExistingImage" Source="{DynamicResource openImage}"/>
+                    <TextBlock Grid.Column="1" TextAlignment="Right" Style="{DynamicResource TextBlockDefault}" VerticalAlignment="Center" Text="Existing Budget File"/>
+                </Grid>
+            </Button>
+
+        </Grid>
     </Grid>
+    
 </Window>
