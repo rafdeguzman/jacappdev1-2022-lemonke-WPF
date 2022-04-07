@@ -62,11 +62,11 @@ namespace HomeBudgetWPF
             try
             {
                 if (double.Parse(txtAmount.Text) <= 0)
-                    msg.AppendLine("Invalid Quantity");
+                    msg.AppendLine("Invalid Amount");
             }
             catch
             {
-                msg.AppendLine("Invalid Quantity");
+                msg.AppendLine("Invalid Amount");
             }
 
             if (string.IsNullOrEmpty(msg.ToString()))
@@ -78,7 +78,7 @@ namespace HomeBudgetWPF
 
         public void GetUserInput()
         {
-            presenter.AddExpense(Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex, double.Parse(txtAmount.Text), txtDescription.Text, checkCredit.IsChecked);
+            presenter.AddExpense(Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex, double.Parse(txtAmount.Text), txtDescription.Text, checkCredit.IsChecked.Value);
         }
 
         public void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -145,6 +145,21 @@ namespace HomeBudgetWPF
                 TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;
                 cw.categoryCBText = tb.Text;
             }            
+        }
+
+        public void DisplaySameAsLastInput()
+        {
+            if (MessageBox.Show("Current input is the same as the last input, would you like sill add? ",
+                    "Same Input",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                presenter.setUserInputFromDuplicateExpense(true);
+            }
+            else
+            {
+                presenter.setUserInputFromDuplicateExpense(false);
+            }
         }
     }
 }

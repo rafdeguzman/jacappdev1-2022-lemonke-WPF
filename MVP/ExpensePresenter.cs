@@ -17,6 +17,13 @@ namespace HomeBudgetWPF
         private readonly ExpenseInterface view;
         private readonly HomeBudget model;
 
+        private static DateTime previousDate ;
+        private static int previousCategoryID;
+        private static double previousAmount;
+        private static string previousDescription;
+        private static bool previousIsChecked;
+        private static bool userInputFromDuplicateExpense;
+
         string filePath = ConfigurationManager.AppSettings.Get("lastUsedFilePath");
 
         public ExpensePresenter(ExpenseInterface v)
@@ -40,31 +47,65 @@ namespace HomeBudgetWPF
             return categoriesList;
         }
 
-        public void AddExpense(DateTime dt, int catID, double amount, string desc, bool? isChecked)
+        public void AddExpense(DateTime dt, int catID, double amount, string desc, bool isChecked)
         {
-            
             string isCredit = "";
-            Category categoryType = model.categories.GetCategoryFromId(catID+1);
-            if (isChecked == false)
+            if (SameInputAsLastInput(dt, catID, amount, desc, isChecked))
             {
-                if (categoryType.Type == Category.CategoryType.Credit || categoryType.Type == Category.CategoryType.Savings)
+                Category categoryType = model.categories.GetCategoryFromId(catID + 1);
+                if (isChecked == false)
                 {
-                    model.expenses.Add(dt, catID, amount * -1, desc);
+                    if (categoryType.Type == Category.CategoryType.Credit || categoryType.Type == Category.CategoryType.Savings)
+                    {
+                        model.expenses.Add(dt, catID, amount * -1, desc);
+                    }
+                    else
+                    {
+                        model.expenses.Add(dt, catID, amount, desc);
+                    }
+                    isCredit = "Credit Unchecked";
                 }
                 else
                 {
+                    model.expenses.Add(dt, catID, amount * -1, desc);
                     model.expenses.Add(dt, catID, amount, desc);
+                    isCredit = "Credit Checked";
                 }
-                isCredit = "Credit Unchecked";
+                view.LastInput(categoryType.Type.ToString(), dt.ToString("yyyy-MM-dd"),amount.ToString(), desc,isCredit);
+            }
+        }
+
+        private bool SameInputAsLastInput(DateTime dt, int catID, double amount, string desc, bool isChecked)
+        {
+            if (previousAmount == amount && previousDate == dt && previousCategoryID == catID && previousDescription == desc && previousIsChecked == isChecked)
+            {
+                view.DisplaySameAsLastInput();
+                if (GetUserInputFromDuplicateExpense())
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
             else
             {
-                model.expenses.Add(dt, catID, amount * -1, desc);
-                model.expenses.Add(dt, catID, amount, desc);
-                isCredit = "Credit Checked";
+                previousDate = dt;
+                previousCategoryID = catID;
+                previousAmount = amount;
+                previousDescription = desc;
+                previousIsChecked = isChecked;
+                return true;
             }
-
-            view.LastInput(categoryType.Type.ToString(), dt.ToString(),amount.ToString(), desc,isCredit);
+        }
+        public void setUserInputFromDuplicateExpense(bool response)
+        {
+            userInputFromDuplicateExpense = response;
+        }
+        private bool GetUserInputFromDuplicateExpense()
+        {
+            return userInputFromDuplicateExpense;
         }
     }
 
