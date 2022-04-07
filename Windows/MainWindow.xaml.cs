@@ -28,7 +28,8 @@ namespace HomeBudgetWPF
         public MainWindow()
         {
             InitializeComponent();
-            presenter = new Presenter(this);
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            presenter = new Presenter(this, bool.Parse(config.AppSettings.Settings["newDB"].Value));
             SetCurrentFile();
         }
         private void SetCurrentFile()

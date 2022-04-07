@@ -10,7 +10,7 @@ using System.Collections.Specialized;
 
 namespace HomeBudgetWPF
 {
-    class CategoryPresenter
+    public class CategoryPresenter
     {
         Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         HomeBudget model;

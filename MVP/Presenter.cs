@@ -12,7 +12,7 @@ using Microsoft.Win32;
 
 namespace HomeBudgetWPF
 {
-    class Presenter
+    public class Presenter
     {
         ViewInterface view;
         HomeBudget model;
@@ -24,7 +24,7 @@ namespace HomeBudgetWPF
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             view = v;
             //if newDB
-            if (bool.Parse(ConfigurationManager.AppSettings.Get("newDB")))
+            if (newDB)
             {
                 if (v.ShowFirstTimeMessage())
                 {

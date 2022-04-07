@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HomeBudgetWPF
 {
-    interface ViewInterface
+    public interface ViewInterface
     {
 
         public bool ShowFirstTimeMessage();
