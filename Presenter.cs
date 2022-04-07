@@ -46,6 +46,8 @@ namespace HomeBudgetWPF
 
                     //create budget file using SaveFileDialog
                     SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.DefaultExt = "db";
+                    saveFileDialog.Filter = "Database files (*.db)|*.db|All files (*.*)|*.*";
                     saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                     if (saveFileDialog.ShowDialog() == true)
                     {
