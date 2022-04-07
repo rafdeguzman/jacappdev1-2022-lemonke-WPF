@@ -13,6 +13,6 @@
     <SolidColorBrush x:Key="Alternation1" Color="{DynamicResource DarkAlt1}"/>
     <SolidColorBrush x:Key="Alternation2" Color="{DynamicResource DarkAlt2}"/>
     <SolidColorBrush x:Key="Backdrop" Color="{DynamicResource DarkBackdrop}"/>
-    <BitmapImage x:Key="openImage" UriSource="Images/openDark.png"/>
-    <BitmapImage x:Key="newImage" UriSource="Images/newDark.png"/>
+    <BitmapImage x:Key="openImage" UriSource="/HomeBudgetWPF;component/Images/openDark.png"/>
+    <BitmapImage x:Key="newImage" UriSource="/HomeBudgetWPF;component/Images/newDark.png"/>
 </ResourceDictionary>
