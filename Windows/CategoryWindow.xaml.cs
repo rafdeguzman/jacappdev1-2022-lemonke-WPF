@@ -27,6 +27,11 @@ namespace HomeBudgetWPF
         private List<string> categories = new List<string>();
         private List<string> categoryTypes = new List<string>();
 
+        public String categoryCBText
+        {
+            set { cmbCategories.Text = value; }
+        }
+
         public CategoryWindow()
         {
             InitializeComponent();
@@ -138,7 +143,18 @@ namespace HomeBudgetWPF
 
         private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            if (MessageBox.Show("Are you sure you want to close app!!!",
+                    "Close App",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

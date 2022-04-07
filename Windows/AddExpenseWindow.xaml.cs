@@ -127,7 +127,24 @@ namespace HomeBudgetWPF
 
         private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
         {
-            Environment.Exit(0);
+            if (MessageBox.Show("Are you sure you want close app!!!",
+                    "Close App",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                Environment.Exit(0);
+            }
+        }
+
+        private void cmbCategory_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Return)
+            {
+                CategoryWindow cw = new CategoryWindow();
+                cw.Show();
+                TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;
+                cw.categoryCBText = tb.Text;
+            }            
         }
     }
 }

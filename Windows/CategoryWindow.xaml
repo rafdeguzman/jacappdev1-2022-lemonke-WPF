@@ -34,7 +34,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Style="{DynamicResource RoundedButton}" Width="115" Content="Add Category" Click="btnAdd_Click"/>
-            <Button Grid.Column="1" Style="{DynamicResource RoundedButton}" Width="115" Content="Cancel" IsCancel="True"/>
+            <Button Grid.Column="1" Style="{DynamicResource RoundedButton}" Width="115" Content="Cancel" IsCancel="True" Click="btnCancel_Click"/>
         </Grid>        
     </Grid>
 </Window>

@@ -15,5 +15,4 @@
     <SolidColorBrush x:Key="Backdrop" Color="{DynamicResource LightBackdrop}"/>
     <BitmapImage x:Key="openImage" UriSource="Images/openLight.png"/>
     <BitmapImage x:Key="newImage" UriSource="Images/newLight.png"/>
-
 </ResourceDictionary>
