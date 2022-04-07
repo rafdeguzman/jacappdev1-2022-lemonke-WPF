@@ -3,18 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace HomeBudgetWPF
 {
     public interface ConfigInterface
     {
-        string getDirectory { get; }
-        string getFileName { get; }
-        string lastUsedFilePath { get; }
-        string currentFile { get; }
+        static string getDirectory { get; set; }
+        static string getFileName { get; set; }
+        static string lastUsedFilePath { get; set; }
+        static string currentFile { get; set; }
 
-        string firstTimeUser { get; }
-
-        void saveConfig();
+        static string firstTimeUser { get; set; }
     }
 }
