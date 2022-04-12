@@ -31,6 +31,9 @@ namespace HomeBudgetWPF
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             presenter = new Presenter(this, bool.Parse(config.AppSettings.Settings["newDB"].Value));
             SetCurrentFile();
+
+            //get expenses
+
         }
         private void SetCurrentFile()
         {
