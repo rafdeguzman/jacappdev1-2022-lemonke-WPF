@@ -38,6 +38,7 @@ namespace HomeBudgetWPF
         }
         private void SetCurrentFile()
         {
+            config.refresh();
             string configFileName = config.currentFile;
             int index = configFileName.LastIndexOf('\\') + 1;
             configFileName.Substring(index);

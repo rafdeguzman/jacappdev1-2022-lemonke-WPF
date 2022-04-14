@@ -21,6 +21,10 @@ namespace HomeBudgetWPF
         {
             config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         }
+        public void refresh()
+        {
+            ConfigurationManager.RefreshSection("appSettings");
+        }
 
         public string lastUsedFilePath {
             get
@@ -57,6 +61,7 @@ namespace HomeBudgetWPF
         public void saveConfig()
         {
             config.Save(ConfigurationSaveMode.Modified);
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }
