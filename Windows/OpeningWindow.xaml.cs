@@ -21,17 +21,17 @@ namespace HomeBudgetWPF.Windows
     /// </summary>
     public partial class OpeningWindow : Window
     {
+        Config config;
         public OpeningWindow()
         {
             InitializeComponent();
+            config = new Config();
         }
 
         private void btnNewDB_Click(object sender, RoutedEventArgs e)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["newDB"].Value = "true";
-            ConfigurationManager.AppSettings.Set("newDB", "true");
-            config.Save(ConfigurationSaveMode.Modified);
+
+            config.newDB = true;
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();

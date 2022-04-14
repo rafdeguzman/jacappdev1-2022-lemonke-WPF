@@ -14,10 +14,11 @@ namespace HomeBudgetWPF
     {
         HomeBudget model;
         CategoryInterface view;
-
+        Config config;
         public CategoryPresenter(CategoryInterface v)
         {
-            string filePath = GetConfig.lastUsedFilePath;
+            config = new Config();
+            string filePath = config.lastUsedFilePath;
             model = new HomeBudget(filePath, !File.Exists(filePath));
             view = v;
 

@@ -12,46 +12,51 @@ using Microsoft.Win32;
 
 namespace HomeBudgetWPF
 {
-    public class GetConfig : ConfigInterface
+    public class Config : ConfigInterface
     {
-        public static string getDirectory => ConfigurationManager.AppSettings.Get("defaultFileDirectory");
-        public static string getFileName => ConfigurationManager.AppSettings.Get("defaultFileName");
+        public string getDirectory => ConfigurationManager.AppSettings.Get("defaultFileDirectory");
+        public string getFileName => ConfigurationManager.AppSettings.Get("defaultFileName");
+        Configuration config;
+        public Config()
+        {
+            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        }
 
-        public static string lastUsedFilePath {
+        public string lastUsedFilePath {
             get
             {
-                return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["lastUsedFilePath"].Value;
+                return config.AppSettings.Settings["lastUsedFilePath"].Value;
             }
             set
             {
-                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["lastUsedFilePath"].Value = value;
+                config.AppSettings.Settings["lastUsedFilePath"].Value = value;
                 saveConfig();
             }
         }
 
-        public static string currentFile
+        public string currentFile
         {
-            get { return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["currentFile"].Value; }
-            set { ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["currentFile"].Value = value;
+            get { return config.AppSettings.Settings["currentFile"].Value; }
+            set { config.AppSettings.Settings["currentFile"].Value = value;
                 saveConfig();
             }
         }
-        public static string firstTimeUser 
+        public string firstTimeUser 
         {
-            get { return ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["firstTimeUser"].Value; }
-            set { ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["firstTimeUser"].Value = value;
+            get { return config.AppSettings.Settings["firstTimeUser"].Value; }
+            set { config.AppSettings.Settings["firstTimeUser"].Value = value;
                 saveConfig();
             }
         }
-        public static bool newDB
+        public bool newDB
         {
-            get { return bool.Parse(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["newDB"].Value); }
-            set { ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["newDB"].Value = value.ToString(); saveConfig(); }
+            get { return bool.Parse(config.AppSettings.Settings["newDB"].Value); }
+            set { config.AppSettings.Settings["newDB"].Value = value.ToString(); saveConfig(); }
         }
 
-        public static void saveConfig()
+        public void saveConfig()
         {
-            ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).Save(ConfigurationSaveMode.Modified);
+            config.Save(ConfigurationSaveMode.Modified);
         }
     }
 }

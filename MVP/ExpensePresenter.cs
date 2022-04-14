@@ -12,7 +12,7 @@ namespace HomeBudgetWPF
 {
     public class ExpensePresenter
     {
-
+        Config config;
 
         private readonly ExpenseInterface view;
         private readonly HomeBudget model;
@@ -28,7 +28,8 @@ namespace HomeBudgetWPF
 
         public ExpensePresenter(ExpenseInterface v)
         {
-            string filePath = GetConfig.lastUsedFilePath;
+            config = new Config();
+            string filePath = config.lastUsedFilePath;
             model = new HomeBudget(filePath, !File.Exists(filePath));
 
             view = v;

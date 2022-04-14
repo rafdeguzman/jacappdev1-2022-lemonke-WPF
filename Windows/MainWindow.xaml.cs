@@ -25,10 +25,12 @@ namespace HomeBudgetWPF
     {
         const int EXTENSION_LENGTH = 3;
         private readonly Presenter presenter;
+        Config config;
         public MainWindow()
         {
             InitializeComponent();
-            presenter = new Presenter(this, GetConfig.newDB);
+            config = new Config();
+            presenter = new Presenter(this, config.newDB);
             SetCurrentFile();
 
             //get expenses
@@ -36,7 +38,7 @@ namespace HomeBudgetWPF
         }
         private void SetCurrentFile()
         {
-            string configFileName = GetConfig.currentFile;
+            string configFileName = config.currentFile;
             int index = configFileName.LastIndexOf('\\') + 1;
             configFileName.Substring(index);
             fileName.Text = "Current file: " + configFileName.Remove(configFileName.Length -    EXTENSION_LENGTH);
@@ -105,7 +107,7 @@ namespace HomeBudgetWPF
 
         private void btnOpenFile(object sender, RoutedEventArgs e)
         {
-            GetConfig.newDB = false;
+            config.newDB = false;
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
@@ -113,7 +115,7 @@ namespace HomeBudgetWPF
 
         private void btnSaveFile(object sender, RoutedEventArgs e)
         {
-            GetConfig.newDB = true;
+            config.newDB = true;
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
