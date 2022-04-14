@@ -43,6 +43,11 @@ namespace HomeBudgetWPF
                 saveConfig();
             }
         }
+        public static bool newDB
+        {
+            get { return bool.Parse(ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["newDB"].Value); }
+            set { ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).AppSettings.Settings["newDB"].Value = value.ToString(); saveConfig(); }
+        }
 
         public static void saveConfig()
         {

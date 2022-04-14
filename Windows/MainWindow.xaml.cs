@@ -28,8 +28,7 @@ namespace HomeBudgetWPF
         public MainWindow()
         {
             InitializeComponent();
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            presenter = new Presenter(this, bool.Parse(config.AppSettings.Settings["newDB"].Value));
+            presenter = new Presenter(this, GetConfig.newDB);
             SetCurrentFile();
 
             //get expenses
@@ -37,11 +36,10 @@ namespace HomeBudgetWPF
         }
         private void SetCurrentFile()
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            string configFileName = config.AppSettings.Settings["currentFile"].Value;
+            string configFileName = GetConfig.currentFile;
             int index = configFileName.LastIndexOf('\\') + 1;
             configFileName.Substring(index);
-            fileName.Text = "Current file: " + configFileName.Remove(configFileName.Length - EXTENSION_LENGTH);
+            fileName.Text = "Current file: " + configFileName.Remove(configFileName.Length -    EXTENSION_LENGTH);
         }
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
@@ -107,10 +105,7 @@ namespace HomeBudgetWPF
 
         private void btnOpenFile(object sender, RoutedEventArgs e)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["newDB"].Value = "false";
-            ConfigurationManager.AppSettings.Set("newDB", "false");
-            config.Save(ConfigurationSaveMode.Modified);
+            GetConfig.newDB = false;
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
@@ -118,10 +113,7 @@ namespace HomeBudgetWPF
 
         private void btnSaveFile(object sender, RoutedEventArgs e)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["newDB"].Value = "true";
-            ConfigurationManager.AppSettings.Set("newDB", "true");
-            config.Save(ConfigurationSaveMode.Modified);
+            GetConfig.newDB = true;
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
