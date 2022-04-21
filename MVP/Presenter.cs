@@ -18,9 +18,11 @@ namespace HomeBudgetWPF
         HomeBudget model;
         public Presenter(ViewInterface v, bool newDB = false)
         {
+
+            string defaultDirectory;
             Config config = new Config();
             //config file setup
-            string defaultDirectory = config.getDirectory;
+            defaultDirectory = config.getDirectory;
             string defaultFileName = config.getFileName;
             view = v;
             //if newDB
