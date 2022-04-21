@@ -38,7 +38,7 @@ namespace HomeBudgetWPF
         }
         private void SetCurrentFile()
         {
-            config.refresh();
+            config = new Config();  //call new config to "refresh" the data
             string configFileName = config.currentFile;
             int index = configFileName.LastIndexOf('\\') + 1;
             configFileName.Substring(index);
@@ -67,7 +67,7 @@ namespace HomeBudgetWPF
         public bool ShowFirstTimeMessage()
         {
             string messageBoxText = "Would you like to create default budget files? If no, specify file location.";
-            string caption = "First Time User";
+            string caption = "New Database File";
             MessageBoxButton button = MessageBoxButton.YesNoCancel;
             MessageBoxImage icon = MessageBoxImage.Question;
             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
@@ -97,7 +97,7 @@ namespace HomeBudgetWPF
         }
         private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to close app!!!",
+            if (MessageBox.Show("Do you really want to force-close the app? Changes are automatically saved.",
                     "Close App",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)

@@ -10,7 +10,7 @@
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
                 <MenuItem Header="Open" Click="btnOpenFile"/>
-                <MenuItem Header="Save" />
+                <MenuItem Header="Save" Click="btnSaveFile" />
             </MenuItem>
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
             <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
