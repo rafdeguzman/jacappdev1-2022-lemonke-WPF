@@ -37,12 +37,7 @@ namespace HomeBudgetWPF
 
         public List<Category> ExpensePopulateCategories()
         {
-            List<Category> categoriesList = new();
-            foreach (Category categories in model.categories.List())
-            {
-                categoriesList.Add(categories);
-            }
-            return categoriesList;
+            return model.categories.List();
         }
 
         public void AddExpense(DateTime dt, int catID, double amount, string desc, bool isChecked)
@@ -71,6 +66,10 @@ namespace HomeBudgetWPF
                 }
                 view.LastInput(categoryType.Type.ToString(), dt.ToString("yyyy-MM-dd"),amount.ToString(), desc,isCredit);
             }
+        }
+        public void UpdateExpense(int id, DateTime dt, int catID, double amount, string desc)
+        {
+            model.expenses.UpdateProperties(id, dt, catID, amount, desc);
         }
 
         private bool SameInputAsLastInput(DateTime dt, int catID, double amount, string desc, bool isChecked)

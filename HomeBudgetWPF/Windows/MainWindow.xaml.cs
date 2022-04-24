@@ -50,7 +50,7 @@ namespace HomeBudgetWPF
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
             AddExpenseWindow aew = new AddExpenseWindow();
-            aew.ShowDialog();
+            aew.Show();
             presenter.BudgetItemsList(null, null);
         }
 
@@ -64,6 +64,14 @@ namespace HomeBudgetWPF
             SettingsWindow sw = new SettingsWindow();
             sw.Show();
         }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            dynamic selectedItem = dataBudgetLists.SelectedItem;
+            UpdateWindow.CallUpdateWindow(selectedItem.ExpenseID, selectedItem.CategoryID - 1, selectedItem.ShortDescription, selectedItem.Amount, selectedItem.Date);
+            dataBudgetLists.Items.Refresh();
+        }
+
         /// <summary>
         /// Shows a Message Box asking to create default files or to choose where and what to name budget file.
         /// </summary>
@@ -129,28 +137,6 @@ namespace HomeBudgetWPF
         public void ShowBudgetItems(List<BudgetItem> budgetItems)
         {
             dataBudgetLists.ItemsSource = budgetItems;
-
-            dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
-            var column1 = new DataGridTextColumn(); // Create a text column object
-            column1.Header = "Amount";
-            column1.Binding = new Binding("Amount"); // Bind to an object propery
-            dataBudgetLists.Columns.Add(column1);
-            var column2 = new DataGridTextColumn();
-            column2.Header = "Category";
-            column2.Binding = new Binding("Category");
-            dataBudgetLists.Columns.Add(column2);// Bind to an object propery
-            var column3 = new DataGridTextColumn();
-            column3.Header = "Data";
-            column3.Binding = new Binding("Date");
-            dataBudgetLists.Columns.Add(column3);
-            var column4 = new DataGridTextColumn();
-            column4.Header = "ShortDescription";
-            column4.Binding = new Binding("ShortDescription"); // Bind to an object propery
-            dataBudgetLists.Columns.Add(column4);
-            var column5 = new DataGridTextColumn();
-            column5.Header = "Balance";
-            column5.Binding = new Binding("Balance"); // Bind to an object propery
-            dataBudgetLists.Columns.Add(column5);
         }
 
 

@@ -21,15 +21,35 @@ namespace HomeBudgetWPF
     /// <summary>
     /// Interaction logic for AddExpense.xaml
     /// </summary>
-    public partial class AddExpenseWindow : Window, ExpenseInterface
+    public partial class UpdateWindow : Window, ExpenseInterface
     {
+        private int id;
         private readonly ExpensePresenter presenter;
-        public AddExpenseWindow()
+        public UpdateWindow(int id, int catId, string desc, double amount, DateTime dt)
         {
             InitializeComponent();
-            datePicker.SelectedDate = DateTime.Today;
+            // Set the properties
+            ExpenseId = id;
+
+            // Set the fields
+            cmbCategory.SelectedIndex = catId;
+            txtDescription.Text = desc;
+            txtAmount.Text = amount.ToString();
+            datePicker.SelectedDate = dt;
             presenter = new ExpensePresenter(this);
             checkCredit.IsChecked = false;
+        }
+
+        public static void CallUpdateWindow(int id, int catId, string desc, double amount, DateTime dt)
+        {
+            UpdateWindow uw = new UpdateWindow(id, catId, desc, amount, dt);
+            uw.ShowDialog();
+        }
+
+        public int ExpenseId
+        {
+            get { return id; }
+            private set { id = value; }
         }
 
         public void ResetText()
@@ -60,8 +80,7 @@ namespace HomeBudgetWPF
             //Quantity
             try
             {
-                if (double.Parse(txtAmount.Text) <= 0)
-                    msg.AppendLine("Invalid Amount");
+                double i = double.Parse(txtAmount.Text);
             }
             catch
             {
@@ -77,8 +96,7 @@ namespace HomeBudgetWPF
 
         public void GetUserInput()
         {
-            presenter.AddExpense(Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex, double.Parse(txtAmount.Text), txtDescription.Text, checkCredit.IsChecked.Value);
-            
+            presenter.UpdateExpense(ExpenseId ,Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex, double.Parse(txtAmount.Text), txtDescription.Text);
         }
 
         public void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -88,6 +106,7 @@ namespace HomeBudgetWPF
                 GetUserInput();
                 clear();
                 blastInput.Visibility = Visibility.Visible;
+                this.Close();
             }
         }
 
@@ -100,15 +119,6 @@ namespace HomeBudgetWPF
             txtAmount.Text = string.Empty;
             txtDescription.Text = string.Empty;
             checkCredit.IsChecked = false;
-        }
-
-        public void LastInput(string categories, string date, string amount, string description, string creditFlag)
-        {
-            previousCategory.Text = categories;
-            previousDate.Text = date;
-            previousAmount.Text = amount;
-            previousDescription.Text = description;
-            isCredit.Text = creditFlag;
         }
 
         private void MenuOpen_Click(object sender, RoutedEventArgs e)
@@ -147,19 +157,14 @@ namespace HomeBudgetWPF
             }            
         }
 
+        // Both of these wont be used here
+        public void LastInput(string categories, string date, string amount, string description, string creditFlag)
+        {
+            throw new NotImplementedException();
+        }
         public void DisplaySameAsLastInput()
         {
-            if (MessageBox.Show("Current input is the same as the last input, would you like sill add? ",
-                    "Same Input",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            {
-                presenter.setUserInputFromDuplicateExpense(true);
-            }
-            else
-            {
-                presenter.setUserInputFromDuplicateExpense(false);
-            }
+            throw new NotImplementedException();
         }
     }
 }
