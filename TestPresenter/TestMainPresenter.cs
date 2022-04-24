@@ -1,12 +1,16 @@
 using System;
 using Xunit;
 using HomeBudgetWPF;
+using System.Collections.Generic;
+using Budget;
+
 namespace TestPresenter
 {
     public class TestView : ViewInterface
     {
         public bool calledShowFilesCreated;
         public bool calledShowFirstTimeMessage;
+        public bool calledShowBudgetItems;
         Config config;
         public void ShowFilesCreated(string path)
         {
@@ -18,6 +22,12 @@ namespace TestPresenter
             calledShowFirstTimeMessage = true;
             return true;
         }
+
+        public void ShowBudgetItems(List<BudgetItem> budgetItemsList)
+        {
+            calledShowBudgetItems = true;
+        }
+
         public TestView()
         {
             config = new Config();
