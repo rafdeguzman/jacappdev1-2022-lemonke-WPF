@@ -24,8 +24,6 @@ namespace HomeBudgetWPF
         private static bool previousIsChecked;
         private static bool userInputFromDuplicateExpense;
 
-        string filePath = ConfigurationManager.AppSettings.Get("lastUsedFilePath");
-
         public ExpensePresenter(ExpenseInterface v)
         {
             config = new Config();

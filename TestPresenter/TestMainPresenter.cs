@@ -24,7 +24,7 @@ namespace TestPresenter
         }
 
     }
-    public class UnitTest
+    public class TestPresenter
     {
         [Fact]
         public void TestConstructor()
@@ -32,6 +32,8 @@ namespace TestPresenter
             TestView view = new TestView();
             Presenter p = new Presenter(view, true);
             Assert.IsType<Presenter>(p);
+            Assert.True(view.calledShowFilesCreated);
+            Assert.True(view.calledShowFirstTimeMessage);
         }
     }
     
