@@ -100,7 +100,7 @@ jobs:
 
     # Set up vstest and add to PATH
     - name: Setup vstest
-      uses: darnem/Setup-VSTest@v1
+      uses: darenm/Setup-VSTest@v1
       
     # Execute all unit tests in the solution
     - name: Execute unit tests
