@@ -12,20 +12,18 @@ namespace HomeBudgetWPF
 {
     public class CategoryPresenter
     {
-        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
         HomeBudget model;
         CategoryInterface view;
-
+        Config config;
         public CategoryPresenter(CategoryInterface v)
         {
-            var settings = config.AppSettings.Settings;
-            string filePath = settings["lastUsedFilePath"].Value;
+            config = new Config();
+            string filePath = config.lastUsedFilePath;
             model = new HomeBudget(filePath, !File.Exists(filePath));
             view = v;
 
             view.DisplayCategories(CategoryPopulateCategories());
             view.DisplayCategoryTypes(PopulateCategoryTypes());
-
         }
         /// <summary>
         /// Adds categories from model to local categories list.

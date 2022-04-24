@@ -25,20 +25,24 @@ namespace HomeBudgetWPF
     {
         const int EXTENSION_LENGTH = 3;
         private readonly Presenter presenter;
+        Config config;
         public MainWindow()
         {
             InitializeComponent();
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            presenter = new Presenter(this, bool.Parse(config.AppSettings.Settings["newDB"].Value));
+            config = new Config();
+            presenter = new Presenter(this, config.newDB);
             SetCurrentFile();
+
+            //get expenses
+
         }
         private void SetCurrentFile()
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            string configFileName = config.AppSettings.Settings["currentFile"].Value;
+            config = new Config();  //call new config to "refresh" the data
+            string configFileName = config.currentFile;
             int index = configFileName.LastIndexOf('\\') + 1;
             configFileName.Substring(index);
-            fileName.Text = "Current file: " + configFileName.Remove(configFileName.Length - EXTENSION_LENGTH);
+            fileName.Text = "Current file: " + configFileName.Remove(configFileName.Length -    EXTENSION_LENGTH);
         }
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
@@ -63,7 +67,7 @@ namespace HomeBudgetWPF
         public bool ShowFirstTimeMessage()
         {
             string messageBoxText = "Would you like to create default budget files? If no, specify file location.";
-            string caption = "First Time User";
+            string caption = "New Database File";
             MessageBoxButton button = MessageBoxButton.YesNoCancel;
             MessageBoxImage icon = MessageBoxImage.Question;
             MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
@@ -93,7 +97,7 @@ namespace HomeBudgetWPF
         }
         private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to close app!!!",
+            if (MessageBox.Show("Do you really want to force-close the app? Changes are automatically saved.",
                     "Close App",
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
@@ -104,10 +108,7 @@ namespace HomeBudgetWPF
 
         private void btnOpenFile(object sender, RoutedEventArgs e)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["newDB"].Value = "false";
-            ConfigurationManager.AppSettings.Set("newDB", "false");
-            config.Save(ConfigurationSaveMode.Modified);
+            config.newDB = false;
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
@@ -115,10 +116,7 @@ namespace HomeBudgetWPF
 
         private void btnSaveFile(object sender, RoutedEventArgs e)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["newDB"].Value = "true";
-            ConfigurationManager.AppSettings.Set("newDB", "true");
-            config.Save(ConfigurationSaveMode.Modified);
+            config.newDB = true;
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();

@@ -12,7 +12,7 @@ namespace HomeBudgetWPF
 {
     public class ExpensePresenter
     {
-        Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        Config config;
 
         private readonly ExpenseInterface view;
         private readonly HomeBudget model;
@@ -24,12 +24,10 @@ namespace HomeBudgetWPF
         private static bool previousIsChecked;
         private static bool userInputFromDuplicateExpense;
 
-        string filePath = ConfigurationManager.AppSettings.Get("lastUsedFilePath");
-
         public ExpensePresenter(ExpenseInterface v)
         {
-            var settings = config.AppSettings.Settings;
-            string filePath = settings["lastUsedFilePath"].Value;
+            config = new Config();
+            string filePath = config.lastUsedFilePath;
             model = new HomeBudget(filePath, !File.Exists(filePath));
 
             view = v;

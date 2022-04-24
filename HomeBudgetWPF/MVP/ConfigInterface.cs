@@ -13,7 +13,6 @@ namespace HomeBudgetWPF
         static string getFileName { get; set; }
         static string lastUsedFilePath { get; set; }
         static string currentFile { get; set; }
-
         static string firstTimeUser { get; set; }
     }
 }
