@@ -78,7 +78,6 @@ namespace HomeBudgetWPF
         public void GetUserInput()
         {
             presenter.AddExpense(Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex, double.Parse(txtAmount.Text), txtDescription.Text, checkCredit.IsChecked.Value);
-            
         }
 
         public void btnAdd_Click(object sender, RoutedEventArgs e)

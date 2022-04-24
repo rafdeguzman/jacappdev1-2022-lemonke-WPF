@@ -71,7 +71,6 @@ namespace HomeBudgetWPF
         {
             model.expenses.UpdateProperties(id, dt, catID, amount, desc);
         }
-
         private bool SameInputAsLastInput(DateTime dt, int catID, double amount, string desc, bool isChecked)
         {
             if (previousAmount == amount && previousDate == dt && previousCategoryID == catID && previousDescription == desc && previousIsChecked == isChecked)

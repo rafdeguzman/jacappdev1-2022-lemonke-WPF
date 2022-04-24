@@ -69,7 +69,22 @@ namespace HomeBudgetWPF
         {
             dynamic selectedItem = dataBudgetLists.SelectedItem;
             UpdateWindow.CallUpdateWindow(selectedItem.ExpenseID, selectedItem.CategoryID - 1, selectedItem.ShortDescription, selectedItem.Amount, selectedItem.Date);
-            dataBudgetLists.Items.Refresh();
+            presenter.BudgetItemsList(null, null);
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            int ExpenseId = (dataBudgetLists.SelectedItem as dynamic).ExpenseID;
+            string deleteWarning = $"Are you sure you want to delete expense #{ExpenseId}?";
+            string caption = $"Delete Expense #{ExpenseId}";
+            MessageBoxButton button = MessageBoxButton.YesNo;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBoxResult result = MessageBox.Show(deleteWarning, caption, button, icon);
+            if(result == MessageBoxResult.Yes)
+            {
+                presenter.DeleteExpense(ExpenseId);
+                presenter.BudgetItemsList(null, null);
+            }
         }
 
         /// <summary>

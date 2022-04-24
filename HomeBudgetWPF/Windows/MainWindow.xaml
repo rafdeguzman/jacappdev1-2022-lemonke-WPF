@@ -22,11 +22,11 @@
                 <RowDefinition Height="0*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="auto" MaxWidth="516px"/>
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dataBudgetLists" RowHeaderWidth="0" Margin="20, 10, 20, 10" Height="250" AutoGenerateColumns="False" Grid.Column="0">
-                <!--For Styling-->
+            <DataGrid x:Name="dataBudgetLists" AutoGenerateColumns="False" IsReadOnly="True" AlternationCount="2" Foreground="{DynamicResource TextColor}"  AlternatingRowBackground="{DynamicResource Alternation2}" RowBackground="{DynamicResource Alternation1}" RowHeaderWidth="0" GridLinesVisibility="Horizontal" BorderBrush="Transparent" Margin="20">
+                <!--For Styling The Headers-->
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
                         <!--Colors-->
@@ -45,10 +45,29 @@
                         <Setter Property="BorderBrush" Value="{DynamicResource Backdrop}"/>
                     </Style>
                 </DataGrid.Resources>
+
+                <!--This just adds padding to the cells-->
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                    <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.CellStyle>
+                
                 <!--For the Update/Copy/Delete Options-->
                 <DataGrid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Update" Click="btnUpdate_Click"></MenuItem>
+                        <MenuItem Header="Update" Click="btnUpdate_Click"/>
+                        <MenuItem Header="Delete" Click="btnDelete_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
                 

@@ -96,7 +96,7 @@ namespace HomeBudgetWPF
 
         public void GetUserInput()
         {
-            presenter.UpdateExpense(ExpenseId ,Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex, double.Parse(txtAmount.Text), txtDescription.Text);
+            presenter.UpdateExpense(ExpenseId ,Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex + 1, double.Parse(txtAmount.Text), txtDescription.Text);
         }
 
         public void btnAdd_Click(object sender, RoutedEventArgs e)
