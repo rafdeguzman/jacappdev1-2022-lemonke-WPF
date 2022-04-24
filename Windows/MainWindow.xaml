@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-        Title="Le Monke" Height="Auto" SizeToContent="Height"  Width="500">
+        Title="Le Monke" MinHeight="425" MaxHeight="425" MinWidth="700" MaxWidth="700">
     <StackPanel Background="{DynamicResource App.Background}">
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
@@ -17,34 +17,53 @@
         </Menu>
         <TextBlock Foreground="{DynamicResource MainColor}" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" TextAlignment="Center" FontFamily="Comic Sans MS" />
         <TextBlock Foreground="{DynamicResource TextColor}" Text="Expenses" HorizontalAlignment="Center" FontWeight="Bold" x:Name="fileName"/>
-        <DataGrid Margin="20, 10, 20, 10" Height="250">
-            <!--For Styling-->
-            <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                    <!--Colors-->
-                    <Setter Property="Background" Value="{DynamicResource Backdrop}" />
-                    <Setter Property="Foreground" Value="{DynamicResource MainColor}"/>
-
-                    <!--Text-->
-                    <Setter Property="FontWeight" Value="Bold"/>
-
-                    <!--Text Placement-->
-                    <Setter Property="Padding" Value="5"></Setter>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-
-                    <!--Separators-->
-                    <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
-                    <Setter Property="BorderBrush" Value="{DynamicResource Backdrop}"/>
-                </Style>
-            </DataGrid.Resources>
-        </DataGrid>
-        <Grid Height="25" Margin="20, 5, 20, 10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{DynamicResource RoundedButton}" Grid.Column="0" Width="150" Content="Show Categories" Click="Category_Click"/>
-            <Button Style="{DynamicResource RoundedButton}" Grid.Column="1" Width="150" Content="Add Expense" Click="Expense_Click"/>
+            <DataGrid x:Name="dataBudgetLists"  Margin="20, 10, 20, 10" Height="250" AutoGenerateColumns="False" Grid.Column="0">
+                <!--For Styling-->
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <!--Colors-->
+                        <Setter Property="Background" Value="{DynamicResource Backdrop}" />
+                        <Setter Property="Foreground" Value="{DynamicResource MainColor}"/>
+
+                        <!--Text-->
+                        <Setter Property="FontWeight" Value="Bold"/>
+
+                        <!--Text Placement-->
+                        <Setter Property="Padding" Value="5"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+                        <!--Separators-->
+                        <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+                        <Setter Property="BorderBrush" Value="{DynamicResource Backdrop}"/>
+                    </Style>
+                </DataGrid.Resources>
+            </DataGrid>
+
+            <Grid>
+                
+            </Grid>
+        </Grid>
+        <Grid Height="27" Margin="15, 5, 15, 10" Width="658">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="0*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="244*"/>
+                <ColumnDefinition Width="231*" />
+                <ColumnDefinition Width="195*"/>
+            </Grid.ColumnDefinitions>
+            <Button Style="{DynamicResource RoundedButton}" Grid.Column="0" Content="Show Categories" Click="Category_Click" Margin="5,0,5,0" />
+            <Button Style="{DynamicResource RoundedButton}" Grid.Column="1" Content="Add Expense" Click="Expense_Click" Margin="5,0,5,0" />
+            <Button Style="{DynamicResource RoundedButton}" Grid.Column="2" Content="Filter" Click="Expense_Click" Margin="30,0,20,0"  />
         </Grid>
     </StackPanel>
 </Window>

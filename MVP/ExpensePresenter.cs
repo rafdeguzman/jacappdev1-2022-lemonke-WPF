@@ -26,6 +26,13 @@ namespace HomeBudgetWPF
 
         string filePath = ConfigurationManager.AppSettings.Get("lastUsedFilePath");
 
+        public ExpensePresenter()
+        {
+            config = new Config();
+            string filePath = config.lastUsedFilePath;
+            model = new HomeBudget(filePath, !File.Exists(filePath));
+
+        }
         public ExpensePresenter(ExpenseInterface v)
         {
             config = new Config();
@@ -106,6 +113,14 @@ namespace HomeBudgetWPF
         private bool GetUserInputFromDuplicateExpense()
         {
             return userInputFromDuplicateExpense;
+        }
+
+        public List<BudgetItem> BudgetItemsList()
+        {
+             List<BudgetItem> budgetItemsList =model.GetBudgetItems(null,null,false , -1 );
+
+            return budgetItemsList;
+            
         }
     }
 

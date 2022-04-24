@@ -97,6 +97,10 @@ namespace HomeBudgetWPF
                 }
             }
         }
-
+        public void BudgetItemsList(DateTime? start, DateTime? end, bool filterFlag = false, int categoryID = -1)
+        {
+            List<BudgetItem> budgetItemsList = model.GetBudgetItems(start, end, filterFlag, categoryID);
+            view.ShowBudgetItems(budgetItemsList);
+        }
     }
 }
