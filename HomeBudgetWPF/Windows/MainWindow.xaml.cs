@@ -51,6 +51,7 @@ namespace HomeBudgetWPF
         {
             AddExpenseWindow aew = new AddExpenseWindow();
             aew.ShowDialog();
+            presenter.BudgetItemsList(null, null);
         }
 
         private void Category_Click(object sender, RoutedEventArgs e)
