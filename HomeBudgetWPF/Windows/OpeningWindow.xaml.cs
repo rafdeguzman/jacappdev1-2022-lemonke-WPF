@@ -21,7 +21,15 @@ namespace HomeBudgetWPF.Windows
     /// </summary>
     public partial class OpeningWindow : Window
     {
+        #region Backing Fields
         Config config;
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// The first window the user sees, there are two options.
+        /// One opens up a new db and the other opens up an existing db file
+        /// </summary>
         public OpeningWindow()
         {
             InitializeComponent();
@@ -30,16 +38,27 @@ namespace HomeBudgetWPF.Windows
             // This sets the correct color
             SettingsWindow sw = new SettingsWindow();
         }
+        #endregion
 
+        #region Methods
+        /// <summary>
+        /// Logic for opening new db file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNewDB_Click(object sender, RoutedEventArgs e)
         {
-
             config.newDB = true;
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
         }
 
+        /// <summary>
+        /// Logic for opening an existing db file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOpenDB_Click(object sender, RoutedEventArgs e)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
@@ -51,12 +70,22 @@ namespace HomeBudgetWPF.Windows
             mw.Show();
             this.Close();
         }
+        /// <summary>
+        /// Displays the settings window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow sw = new SettingsWindow();
             sw.Show();
         }
 
+        /// <summary>
+        /// Closes all the open windows
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to close app!!!",
@@ -67,5 +96,6 @@ namespace HomeBudgetWPF.Windows
                 System.Windows.Application.Current.Shutdown();
             }
         }
+        #endregion
     }
 }
