@@ -169,7 +169,6 @@ namespace HomeBudgetWPF
         }
         public void Refresh()
         {
-            DisplayCategories(presenter.GetCategories());
             bool fbc = FilterByCategory.IsChecked.Value;
             bool fbd = FilterByDate.IsChecked.Value;
             if (fbc && fbd)
@@ -258,6 +257,8 @@ namespace HomeBudgetWPF
             {
                 presenter.BudgetItemsList(null, null);
             }
+            DisplayCategories(presenter.GetCategories());
+            cmbCategory.Text = "Category";
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
