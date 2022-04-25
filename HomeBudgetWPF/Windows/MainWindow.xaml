@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-        Title="Le Monke" MinHeight="425" MaxHeight="425" MinWidth="700" MaxWidth="700">
+        Title="Le Monke" MinHeight="400" MaxHeight="400" MinWidth="750" MaxWidth="750">
     <StackPanel Background="{DynamicResource App.Background}">
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
@@ -15,17 +15,17 @@
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
             <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
         </Menu>
-        <TextBlock Foreground="{DynamicResource MainColor}" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" TextAlignment="Center" FontFamily="Comic Sans MS" />
+        <TextBlock Foreground="{DynamicResource MainColor}" Margin="0,15,0,0" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" TextAlignment="Center" FontFamily="Comic Sans MS" />
         <TextBlock Foreground="{DynamicResource TextColor}" Text="Expenses" HorizontalAlignment="Center" FontWeight="Bold" x:Name="fileName"/>
-        <Grid>
+        <Grid Margin="0,0,20,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto" MaxWidth="516px"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dataBudgetLists" AutoGenerateColumns="False" IsReadOnly="True" AlternationCount="2" Foreground="{DynamicResource TextColor}"  AlternatingRowBackground="{DynamicResource Alternation2}" RowBackground="{DynamicResource Alternation1}" RowHeaderWidth="0" GridLinesVisibility="Horizontal" BorderBrush="Transparent" Margin="20">
+            <DataGrid x:Name="dataBudgetLists" AutoGenerateColumns="False" IsReadOnly="True" Background="{DynamicResource Alternation2}" AlternationCount="2" Foreground="{DynamicResource TextColor}"  AlternatingRowBackground="{DynamicResource Alternation2}" RowBackground="{DynamicResource Alternation1}" RowHeaderWidth="0" GridLinesVisibility="Horizontal" BorderBrush="Transparent" Margin="20">
                 <!--For Styling The Headers-->
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
@@ -86,11 +86,17 @@
             <StackPanel Grid.Column="1">
             <TextBlock Foreground="{DynamicResource TextColor}" Text="Filter" HorizontalAlignment="Center" FontWeight="Bold"/>
                 <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Date" Grid.Row="5" Grid.Column="0"/>
-                <CheckBox Margin="0,5,5,5" Grid.Row="5" Grid.Column="1" x:Name="FilterByDate" HorizontalAlignment="Right"></CheckBox>
+                <Grid Grid.Row="5" Grid.Column="1">
+                    <TextBlock Text="Filter by date" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
+                    <CheckBox Margin="0,5,5,5" x:Name="FilterByDate" HorizontalAlignment="Right"></CheckBox>
+                </Grid>                
                 <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="StartDate"/>
                 <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="EndDate"/>
                 <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Category" Grid.Row="5" Grid.Column="0"/>
-                <CheckBox Margin="0,5,5,5" Grid.Row="5" Grid.Column="1" x:Name="FilterByCategory" HorizontalAlignment="Right"></CheckBox>
+                <Grid Grid.Row="5" Grid.Column="1" >
+                    <TextBlock Text="Filter by categories" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
+                    <CheckBox Margin="0,5,5,5" x:Name="FilterByCategory" HorizontalAlignment="Right"></CheckBox>
+                </Grid>
                 <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>
             </StackPanel>
         </Grid>

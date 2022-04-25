@@ -131,7 +131,7 @@ namespace HomeBudgetWPF
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                Application.Current.Shutdown();
+                System.Windows.Application.Current.Shutdown();
             }
         }
 
@@ -164,32 +164,86 @@ namespace HomeBudgetWPF
         {
             bool fbc = FilterByCategory.IsChecked.Value;
             bool fbd = FilterByDate.IsChecked.Value;
-            if (fbc && fbc)
+            if (fbc && fbd)
             {
-                int result = DateTime.Compare(Convert.ToDateTime(StartDate.SelectedDate), Convert.ToDateTime(EndDate.SelectedDate));
-                if (result < 0)
+                try
                 {
-                    presenter.BudgetItemsList(Convert.ToDateTime(StartDate.SelectedDate), Convert.ToDateTime(EndDate.SelectedDate), cmbCategory.SelectedIndex);
+                    DateTime sdt = Convert.ToDateTime(StartDate.SelectedDate);
+                    DateTime edt = Convert.ToDateTime(EndDate.SelectedDate);
+                    if(DateTime.Compare(sdt, edt) < 0)
+                    {
+                        if(cmbCategory.SelectedIndex == -1)
+                        {
+                            string caption = "Invalid Category";
+                            string warning = $"Please select a category";
+                            MessageBoxButton button = MessageBoxButton.OK;
+                            MessageBoxImage icon = MessageBoxImage.Warning;
+                            MessageBox.Show(warning, caption, button, icon);
+                        }
+                        else
+                        {
+                            presenter.BudgetItemsList(sdt, edt, cmbCategory.SelectedIndex + 1, true);
+                        }                        
+                    }
+                    else
+                    {
+                        string caption = "Error with filter dates";
+                        string warning = $"End date cannot be after the first date";
+                        MessageBoxButton button = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Warning;
+                        MessageBox.Show(warning, caption, button, icon);
+                    }
                 }
-                else
+                catch
                 {
-                    //error
+                    string caption = "Invalid dates";
+                    string warning = $"Please select start and end dates";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    MessageBox.Show(warning, caption, button, icon);                    
                 }
             }
             else if (fbc)
             {
-                presenter.BudgetItemsList(null, null, cmbCategory.SelectedIndex, true);
-            }
-            else if (fbd)
-            {
-                int result = DateTime.Compare(Convert.ToDateTime(StartDate.SelectedDate), Convert.ToDateTime(EndDate.SelectedDate));
-                if (result < 0)
+                if (cmbCategory.SelectedIndex == -1)
                 {
-                    presenter.BudgetItemsList(Convert.ToDateTime(StartDate.SelectedDate), Convert.ToDateTime(EndDate.SelectedDate), cmbCategory.SelectedIndex);
+                    string caption = "Invalid Category";
+                    string warning = $"Please select a category";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    MessageBox.Show(warning, caption, button, icon);
                 }
                 else
                 {
-                    //error
+                    presenter.BudgetItemsList(null, null, cmbCategory.SelectedIndex + 1, true);
+                }
+            }
+            else if (fbd)
+            {
+                try
+                {
+                    DateTime sdt = Convert.ToDateTime(StartDate.SelectedDate);
+                    DateTime edt = Convert.ToDateTime(EndDate.SelectedDate);
+                    if (DateTime.Compare(sdt, edt) < 0)
+                    {
+                        presenter.BudgetItemsList(sdt, edt);
+                    }
+                    else
+                    {
+                        string caption = "Error with filter dates";
+                        string warning = $"End date cannot be after the first date";
+                        MessageBoxButton button = MessageBoxButton.OK;
+                        MessageBoxImage icon = MessageBoxImage.Warning;
+                        MessageBox.Show(warning, caption, button, icon);
+                    }
+                }
+                catch
+                {
+                    string caption = "Invalid dates";
+                    string warning = $"Please select start and end dates";
+                    MessageBoxButton button = MessageBoxButton.OK;
+                    MessageBoxImage icon = MessageBoxImage.Warning;
+                    MessageBox.Show(warning, caption, button, icon);
                 }
             }
             else
