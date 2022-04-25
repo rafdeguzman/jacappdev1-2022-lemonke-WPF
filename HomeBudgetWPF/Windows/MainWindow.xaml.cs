@@ -36,9 +36,16 @@ namespace HomeBudgetWPF
             FilterByCategory.IsChecked = false;
             FilterByDate.IsChecked = false;
             //get expenses
-
             Refresh();
-
+        }
+        private void DisplayCategories(List<Category> categories)
+        {
+            cmbCategory.DisplayMemberPath = "Description";
+            cmbCategory.Items.Clear();
+            foreach (var category in categories)
+            {
+                cmbCategory.Items.Add(category);
+            }
         }
         private void SetCurrentFile()
         {
@@ -46,7 +53,7 @@ namespace HomeBudgetWPF
             string configFileName = config.currentFile;
             int index = configFileName.LastIndexOf('\\') + 1;
             configFileName.Substring(index);
-            fileName.Text = "Current file: " + configFileName.Remove(configFileName.Length -    EXTENSION_LENGTH);
+            fileName.Text = "Current file: " + configFileName.Remove(configFileName.Length - EXTENSION_LENGTH);
         }
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
@@ -162,6 +169,7 @@ namespace HomeBudgetWPF
         }
         public void Refresh()
         {
+            DisplayCategories(presenter.GetCategories());
             bool fbc = FilterByCategory.IsChecked.Value;
             bool fbd = FilterByDate.IsChecked.Value;
             if (fbc && fbd)
