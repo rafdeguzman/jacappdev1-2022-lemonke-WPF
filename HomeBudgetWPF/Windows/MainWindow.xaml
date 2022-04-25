@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-        Title="Le Monke" MinHeight="400" MaxHeight="400" MinWidth="750" MaxWidth="750">
+        Title="Le Monke" MinHeight="400" MaxHeight="400" MinWidth="750" MaxWidth="750" Closing="Window_Closing">
     <StackPanel Background="{DynamicResource App.Background}">
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dataBudgetLists" AutoGenerateColumns="False" IsReadOnly="True" Background="{DynamicResource Alternation2}" AlternationCount="2" Foreground="{DynamicResource TextColor}"  AlternatingRowBackground="{DynamicResource Alternation2}" RowBackground="{DynamicResource Alternation1}" RowHeaderWidth="0" GridLinesVisibility="Horizontal" BorderBrush="Transparent" Margin="20">
+            <DataGrid x:Name="dataBudgetLists" MaxHeight="190" AutoGenerateColumns="False" IsReadOnly="True" Background="{DynamicResource Alternation2}" AlternationCount="2" Foreground="{DynamicResource TextColor}"  AlternatingRowBackground="{DynamicResource Alternation2}" RowBackground="{DynamicResource Alternation1}" RowHeaderWidth="0" GridLinesVisibility="Horizontal" BorderBrush="Transparent" Margin="20">
                 <!--For Styling The Headers-->
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
@@ -84,17 +84,15 @@
 
             <!-- filter -->
             <StackPanel Grid.Column="1">
-            <TextBlock Foreground="{DynamicResource TextColor}" Text="Filter" HorizontalAlignment="Center" FontWeight="Bold"/>
-                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Date" Grid.Row="5" Grid.Column="0"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Filter" Grid.Row="5" Grid.Column="0"/>
                 <Grid Grid.Row="5" Grid.Column="1">
-                    <TextBlock Text="Filter by date" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
+                    <TextBlock Text="By date" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
                     <CheckBox Margin="0,5,5,5" x:Name="FilterByDate" HorizontalAlignment="Right"></CheckBox>
                 </Grid>                
                 <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="StartDate"/>
                 <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="EndDate"/>
-                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Category" Grid.Row="5" Grid.Column="0"/>
-                <Grid Grid.Row="5" Grid.Column="1" >
-                    <TextBlock Text="Filter by categories" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
+                <Grid Grid.Row="5" Grid.Column="1">
+                    <TextBlock Text="By category" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
                     <CheckBox Margin="0,5,5,5" x:Name="FilterByCategory" HorizontalAlignment="Right"></CheckBox>
                 </Grid>
                 <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>

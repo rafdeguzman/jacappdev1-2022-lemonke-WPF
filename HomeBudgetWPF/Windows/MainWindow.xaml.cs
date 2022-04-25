@@ -251,5 +251,9 @@ namespace HomeBudgetWPF
                 presenter.BudgetItemsList(null, null);
             }
         }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
     }
 }

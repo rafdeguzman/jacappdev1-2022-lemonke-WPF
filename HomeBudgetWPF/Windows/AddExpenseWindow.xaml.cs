@@ -39,6 +39,7 @@ namespace HomeBudgetWPF
         public void DisplayCategories(List<Category> categories)
         {
             cmbCategory.DisplayMemberPath = "Description";
+            cmbCategory.Items.Clear();
             foreach (Category Displaycategories in categories)
             {
                 cmbCategory.Items.Add(Displaycategories);
