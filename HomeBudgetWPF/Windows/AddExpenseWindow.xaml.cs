@@ -136,6 +136,7 @@ namespace HomeBudgetWPF
                 cw.Show();
                 TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;
                 cw.categoryCBText = tb.Text;
+                DisplayCategories(presenter.ExpensePopulateCategories());
             }            
         }
 

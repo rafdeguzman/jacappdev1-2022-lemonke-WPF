@@ -35,7 +35,6 @@ namespace HomeBudgetWPF
             SetCurrentFile();
             FilterByCategory.IsChecked = false;
             FilterByDate.IsChecked = false;
-
             //get expenses
 
             Refresh();
