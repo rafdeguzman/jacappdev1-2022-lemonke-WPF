@@ -46,7 +46,7 @@ namespace HomeBudgetWPF
             catID++;
             if (SameInputAsLastInput(dt, catID, amount, desc, isChecked))
             {
-                Category categoryType = model.categories.GetCategoryFromId(catID + 1);
+                Category categoryType = model.categories.GetCategoryFromId(catID);
                 if (isChecked == false)
                 {
                     if (categoryType.Type == Category.CategoryType.Credit || categoryType.Type == Category.CategoryType.Savings)

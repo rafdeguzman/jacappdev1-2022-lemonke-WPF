@@ -153,6 +153,7 @@ namespace HomeBudgetWPF
 
         public void ShowBudgetItems(List<BudgetItem> budgetItems)
         {
+            dataBudgetLists.ItemsSource = null;
             dataBudgetLists.ItemsSource = budgetItems;
         }
 
