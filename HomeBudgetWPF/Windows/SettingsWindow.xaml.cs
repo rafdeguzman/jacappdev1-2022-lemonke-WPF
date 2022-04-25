@@ -24,6 +24,7 @@ namespace HomeBudgetWPF
 
         // Holds the current Theme
         private static Uri currentTheme;
+        private Config config;
 
         private static bool darkMode = true;
         // URI's to the different themes
@@ -59,14 +60,6 @@ namespace HomeBudgetWPF
                 currentTheme = value;
             }
         }
-        private static bool DarkMode
-        {
-            get { return darkMode; }
-            set
-            {
-                darkMode = value;
-            }
-        }
         #endregion
 
         #region CONSTRUCTORS
@@ -78,43 +71,23 @@ namespace HomeBudgetWPF
         public SettingsWindow()
         {
             InitializeComponent();
-            // Makes sure Dark Mode cb is correctly checked
-            if (darkMode)
-                cbDarkMode.IsChecked = true;
+            config = new Config();
 
-            // Sets a base theme if there is none
-            if (Theme is null)
-                Theme = lightRedUri;
-
-            // Sets the correct Theme
-            switch (GetCurrentColor())
-            {
-                case "Red":
-                    cbRedOption.IsChecked = true;
-                    break;
-                case "Blue":
-                    cbNavyOption.IsChecked = true;
-                    break;
-                case "Green":
-                    cbGreenOption.IsChecked = true;
-                    break;
-                default:
-                    Theme = lightRedUri;
-                    cbRedOption.IsChecked = true;
-                    break;
-            }
-
+            CurrentTheme();
+            ChangeDictionaries();
         }
         #endregion
 
         #region METHODS
+
+
         // When Dark Mode checkbox is checked
         private void CbDarkMode_OnClick(object sender, RoutedEventArgs e)
         {
             if (cbDarkMode.IsChecked == true)
-                darkMode = true;
+                config.darkMode = "true";
             else
-                darkMode = false;
+                config.darkMode = "false";
             // Calls ChangeDarkTheme
             ChangeThemeColor(GetCurrentColor());
         }
@@ -128,34 +101,44 @@ namespace HomeBudgetWPF
         // Sets the old theme color, then calls CurrentTheme to get the color to switch to, then switch to the new theme
         private void ChangeThemeColor(string color)
         {
-            //Get the selected option
-            CurrentTheme(color);
+            SetCurrentColor(color);
 
+            //Get the selected option
+            CurrentTheme();
+
+            ChangeDictionaries();
+        }
+        private void ChangeDictionaries()
+        {
             Application.Current.Resources.MergedDictionaries.Clear();
-            Application.Current.Resources.MergedDictionaries.Add( new ResourceDictionary() { Source = tbUri});
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = buttonUri});
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = ListOfColorsUri});
-            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = currentTheme});
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = tbUri });
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = buttonUri });
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = ListOfColorsUri });
+            Application.Current.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = currentTheme });
         }
 
         // Gets Blue / Red / Green for the CurrentTheme method
         private string GetCurrentColor()
         {
-            if (currentTheme.Equals(lightBlueUri) || currentTheme.Equals(NavyUri))
-                return "Navy";
-            if (currentTheme.Equals(lightGreenUri) || currentTheme.Equals(GreenUri))
-                return "Green";
-            return "Crimson";
+            return config.themeColor;
+        }
+        private void SetCurrentColor(string color)
+        {
+            config.themeColor = color;
+        }
+        private bool GetDarkMode()
+        {
+            return bool.Parse(config.darkMode);
         }
 
         // Goes over the new color and sets the theme according to the Dark Mode button clicked or not
         // Unchecks all checkboxes other than the one it is setting the color to
-        private void CurrentTheme(string color)
+        private void CurrentTheme()
         {
-            switch (color)
+            switch (GetCurrentColor())
             {
-                case "Navy":
-                    if (DarkMode)
+                case "Blue":
+                    if (GetDarkMode())
                         currentTheme = lightBlueUri;
                     else
                         currentTheme = NavyUri;
@@ -163,8 +146,8 @@ namespace HomeBudgetWPF
                     cbGreenOption.IsChecked = false;
                     cbRedOption.IsChecked = false;
                     break;
-                case "Crimson":
-                    if (DarkMode)
+                case "Red":
+                    if (GetDarkMode())
                         currentTheme = lightRedUri;
                     else
                         currentTheme = CrimsonUri;
@@ -173,7 +156,7 @@ namespace HomeBudgetWPF
                     cbRedOption.IsChecked = true;
                     break;
                 case "Green":
-                    if (DarkMode)
+                    if (GetDarkMode())
                         currentTheme = lightGreenUri;
                     else
                         currentTheme = GreenUri;
@@ -182,6 +165,8 @@ namespace HomeBudgetWPF
                     cbRedOption.IsChecked = false;
                     break;
             }
+            if (GetDarkMode())
+                cbDarkMode.IsChecked = true;
         }
 
         #endregion

@@ -21,13 +21,15 @@ namespace HomeBudgetWPF
 
     public partial class CategoryWindow : Window, CategoryInterface
     {
+        #region Backing Fields
         private string category;
         private readonly CategoryPresenter presenter;
         //for use with combo box items
         private List<string> categories = new List<string>();
         private List<string> categoryTypes = new List<string>();
+        #endregion
 
-
+        #region Properties
         /// <summary>
         /// Sets Category combo box text to a specific value
         /// </summary>
@@ -35,12 +37,20 @@ namespace HomeBudgetWPF
         {
             set { cmbCategories.Text = value; }
         }
+        #endregion
 
+        #region Contructors
+        /// <summary>
+        /// Used to add a category
+        /// </summary>
         public CategoryWindow()
         {
             InitializeComponent();
             presenter = new CategoryPresenter(this);
         }
+        #endregion
+
+        #region Methods
         /// <summary>
         /// Returns the current value of category string.
         /// </summary>
@@ -49,6 +59,7 @@ namespace HomeBudgetWPF
         {
             return category;
         }
+        
         /// <summary>
         /// Adds current category string to categories list.
         /// Adds category string to Combo box.
@@ -62,6 +73,7 @@ namespace HomeBudgetWPF
                 cmbCategories.Items.Add(category);
             }
         }
+        
         /// <summary>
         /// Adds category types to categoryTypes list.
         /// Also adds categoryTypes to comboBox.
@@ -76,11 +88,19 @@ namespace HomeBudgetWPF
             }
         }
 
+        /// <summary>
+        /// Fills out the combobox with the preexisting expenses
+        /// </summary>
         private void AddCategoriesToList()
         {
             foreach (var item in cmbCategories.Items)
                 categories.Add(item.ToString());
         }
+
+        /// <summary>
+        /// Adds the category to the db
+        /// </summary>
+        /// <param name="categoryName">The name of the category being added to the db</param>
         private void AddCategoryToDB(string categoryName)
         {
             //verify that user wants to add
@@ -100,6 +120,11 @@ namespace HomeBudgetWPF
                 //do nothing
             }
         }
+
+        /// <summary>
+        /// Displays an error message if the category is already on the list
+        /// </summary>
+        /// <param name="categoryName"></param>
         private void ShowCategoryError(string categoryName)
         {
             //taken from https://docs.microsoft.com/en-us/dotnet/desktop/wpf/windows/how-to-open-message-box?view=netdesktop-6.0
@@ -112,6 +137,11 @@ namespace HomeBudgetWPF
             result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
         }
 
+        /// <summary>
+        /// Allows the user to press enter on any of the comboxes, and if both have content, then add it to db
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         //Stackoverflow references: https://stackoverflow.com/questions/4609847/wpf-combobox-with-iseditable-true-how-can-i-indicate-that-no-match-was-found
         private void cmbCategories_KeyDown(object sender, KeyEventArgs e)
         {
@@ -133,6 +163,12 @@ namespace HomeBudgetWPF
             }
         }
 
+        /// <summary>
+        /// Main logic after the Add button is clicked
+        /// Checks if the inputs are valid and adds to db
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             //textbox part of editable combo box
@@ -151,12 +187,22 @@ namespace HomeBudgetWPF
                     ShowCategoryError(tb.Text);
             }
         }
+        /// <summary>
+        /// Displays the settings window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow sw = new SettingsWindow();
             sw.Show();
         }
 
+        /// <summary>
+        /// Closes all the windows
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to close app!!!",
@@ -164,12 +210,19 @@ namespace HomeBudgetWPF
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                Environment.Exit(0);
+                System.Windows.Application.Current.Shutdown();
             }
         }
+        
+        /// <summary>
+        /// Closes the app
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
+        #endregion
     }
 }

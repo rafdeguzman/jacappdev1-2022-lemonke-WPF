@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-        Title="Le Monke" Height="Auto" SizeToContent="Height"  Width="500">
+        Title="Le Monke" MinHeight="400" MaxHeight="400" MinWidth="750" MaxWidth="750" Closing="Window_Closing">
     <StackPanel Background="{DynamicResource App.Background}">
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
@@ -15,36 +15,94 @@
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
             <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
         </Menu>
-        <TextBlock Foreground="{DynamicResource MainColor}" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" TextAlignment="Center" FontFamily="Comic Sans MS" />
+        <TextBlock Foreground="{DynamicResource MainColor}" Margin="0,15,0,0" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" TextAlignment="Center" FontFamily="Comic Sans MS" />
         <TextBlock Foreground="{DynamicResource TextColor}" Text="Expenses" HorizontalAlignment="Center" FontWeight="Bold" x:Name="fileName"/>
-        <DataGrid Margin="20, 10, 20, 10" Height="250">
-            <!--For Styling-->
-            <DataGrid.Resources>
-                <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                    <!--Colors-->
-                    <Setter Property="Background" Value="{DynamicResource Backdrop}" />
-                    <Setter Property="Foreground" Value="{DynamicResource MainColor}"/>
-
-                    <!--Text-->
-                    <Setter Property="FontWeight" Value="Bold"/>
-
-                    <!--Text Placement-->
-                    <Setter Property="Padding" Value="5"></Setter>
-                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
-
-                    <!--Separators-->
-                    <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
-                    <Setter Property="BorderBrush" Value="{DynamicResource Backdrop}"/>
-                </Style>
-            </DataGrid.Resources>
-        </DataGrid>
-        <Grid Height="25" Margin="20, 5, 20, 10">
+        <Grid Margin="0,0,20,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-            <Button Style="{DynamicResource RoundedButton}" Grid.Column="0" Width="150" Content="Show Categories" Click="Category_Click"/>
-            <Button Style="{DynamicResource RoundedButton}" Grid.Column="1" Width="150" Content="Add Expense" Click="Expense_Click"/>
+            <DataGrid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" x:Name="dataBudgetLists" MaxHeight="190" AutoGenerateColumns="False" IsReadOnly="True" Background="{DynamicResource Alternation2}" AlternationCount="2" Foreground="{DynamicResource TextColor}"  AlternatingRowBackground="{DynamicResource Alternation2}" RowBackground="{DynamicResource Alternation1}" RowHeaderWidth="0" GridLinesVisibility="Horizontal" BorderBrush="{DynamicResource Backdrop}" Margin="10">
+                <!--For Styling The Headers-->
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
+                        <!--Colors-->
+                        <Setter Property="Background" Value="{DynamicResource Backdrop}" />
+                        <Setter Property="Foreground" Value="{DynamicResource MainColor}"/>
+
+                        <!--Text-->
+                        <Setter Property="FontWeight" Value="Bold"/>
+
+                        <!--Text Placement-->
+                        <Setter Property="Padding" Value="5"></Setter>
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+                        <!--Separators-->
+                        <Setter Property="BorderThickness" Value="0,0,0,1"></Setter>
+                        <Setter Property="BorderBrush" Value="{DynamicResource Backdrop}"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <!--This just adds padding to the cells-->
+                <DataGrid.CellStyle>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                    <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </DataGrid.CellStyle>
+
+                <!--For the Update/Copy/Delete Options-->
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Update" Click="btnUpdate_Click"/>
+                        <MenuItem Header="Delete" Click="btnDelete_Click"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+
+                <!-- Defines all the Columns -->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding ExpenseID}" MinWidth="40"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" MinWidth="60"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" MinWidth="75"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=d}" MinWidth="80"/>
+                    <DataGridTextColumn Header="Description" Binding="{Binding ShortDescription}" MinWidth="75"/>
+                    <DataGridTextColumn Header="Balance" Binding="{Binding Balance}" MinWidth="66"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- filter -->
+            <StackPanel Grid.Column="2" Margin="20, 0 , 0, 0">
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Filter" Grid.Row="5" Grid.Column="0"/>
+                <Grid Grid.Row="5" Grid.Column="1">
+                    <TextBlock Text="By date" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
+                    <CheckBox Margin="0,5,5,5" x:Name="FilterByDate" HorizontalAlignment="Right"></CheckBox>
+                </Grid>
+                <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="StartDate"/>
+                <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="EndDate"/>
+                <Grid Grid.Row="5" Grid.Column="1">
+                    <TextBlock Text="By category" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
+                    <CheckBox Margin="0,5,5,5" x:Name="FilterByCategory" HorizontalAlignment="Right"></CheckBox>
+                </Grid>
+                <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>
+            </StackPanel>
+
+            <Button Style="{DynamicResource RoundedButton}" Grid.Column="0" Grid.Row="4" Content="Show Categories" Click="Category_Click" Margin="5,0,5,0" />
+            <Button Style="{DynamicResource RoundedButton}" Grid.Column="1" Grid.Row="4" Content="Add Expense" Click="Expense_Click" Margin="5,0,5,0" />
+            <Button Style="{DynamicResource RoundedButton}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" Content="Filter" Click="Filter_Click" Margin="5,0,5,0"/>
         </Grid>
     </StackPanel>
 </Window>

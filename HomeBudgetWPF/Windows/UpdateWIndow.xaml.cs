@@ -19,31 +19,68 @@ using Path = System.IO.Path;
 namespace HomeBudgetWPF
 {
     /// <summary>
-    /// Interaction logic for AddExpense.xaml
+    /// Interaction logic for UpdateExpense.xaml
     /// </summary>
-    public partial class AddExpenseWindow : Window, ExpenseInterface
+    public partial class UpdateWindow : Window, ExpenseInterface
     {
         #region Backing Fields
+        private int id;
         private readonly ExpensePresenter presenter;
         #endregion
 
-        #region Constructors
+        #region Constructor
         /// <summary>
-        /// Adds an expense to the database from input fields
+        /// Used to update an expense
         /// </summary>
-        public AddExpenseWindow()
+        /// <param name="id">The id of the expense that is to be updated</param>
+        /// <param name="catId">The new category Id of the expense</param>
+        /// <param name="desc">The new description of the expense</param>
+        /// <param name="amount">The new amount of the expense</param>
+        /// <param name="dt">The new DateTime of the expense</param>
+        public UpdateWindow(int id, int catId, string desc, double amount, DateTime dt)
         {
             InitializeComponent();
-            datePicker.SelectedDate = DateTime.Today;
+            // Set the properties
+            ExpenseId = id;
+
+            // Set the fields
+            cmbCategory.SelectedIndex = catId;
+            txtDescription.Text = desc;
+            txtAmount.Text = amount.ToString();
+            datePicker.SelectedDate = dt;
             presenter = new ExpensePresenter(this);
             checkCredit.IsChecked = false;
+        }
+
+        /// <summary>
+        /// Static method that calls the UpdateWindow, used to pass data between windows
+        /// </summary>
+        /// <param name="id">The id of the expense that is to be updated</param>
+        /// <param name="catId">The new category Id of the expense</param>
+        /// <param name="desc">The new description of the expense</param>
+        /// <param name="amount">The new amount of the expense</param>
+        /// <param name="dt">The new DateTime of the expense</param>
+        public static void CallUpdateWindow(int id, int catId, string desc, double amount, DateTime dt)
+        {
+            UpdateWindow uw = new UpdateWindow(id, catId, desc, amount, dt);
+            uw.ShowDialog();
+        }
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Property for the expense id
+        /// </summary>
+        public int ExpenseId
+        {
+            get { return id; }
+            private set { id = value; }
         }
         #endregion
 
         #region Methods
-
         /// <summary>
-        /// Resets the input fields
+        /// Resets the text fields
         /// </summary>
         public void ResetText()
         {
@@ -51,9 +88,9 @@ namespace HomeBudgetWPF
         }
 
         /// <summary>
-        /// Fills out the categories combobox from a provided list of categories
+        /// Updated the categories in the categories combobox
         /// </summary>
-        /// <param name="categories">The list of all the categories</param>
+        /// <param name="categories">The list of categories that will be placed in the combobox</param>
         public void DisplayCategories(List<Category> categories)
         {
             cmbCategory.DisplayMemberPath = "Description";
@@ -65,9 +102,9 @@ namespace HomeBudgetWPF
         }
 
         /// <summary>
-        /// Checks that all the inputs are valid
+        /// Validated that the inputed values are of the good types and within the given ranges
         /// </summary>
-        /// <returns>True if all the inputs are valid and false if they are not</returns>
+        /// <returns>True if the inputs are all valid and false if any of them are not</returns>
         public bool CheckUserInput()
         {
             StringBuilder msg = new StringBuilder();
@@ -83,8 +120,7 @@ namespace HomeBudgetWPF
             //Quantity
             try
             {
-                if (double.Parse(txtAmount.Text) <= 0)
-                    msg.AppendLine("Invalid Amount");
+                double i = double.Parse(txtAmount.Text);
             }
             catch
             {
@@ -99,15 +135,15 @@ namespace HomeBudgetWPF
         }
 
         /// <summary>
-        /// Gets the inputs from the input fields and calls the presenter method that adds the expense
+        /// Calls the presenter method to update the expense
         /// </summary>
         public void GetUserInput()
         {
-            presenter.AddExpense(Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex, double.Parse(txtAmount.Text), txtDescription.Text, checkCredit.IsChecked.Value);
+            presenter.UpdateExpense(ExpenseId ,Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex + 1, double.Parse(txtAmount.Text), txtDescription.Text);
         }
 
         /// <summary>
-        /// The main logic after the add button is clicked, checks if the inputs are valid and if they are calls GetUserInput()
+        /// Updated the Expense if the inputs are valid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -118,11 +154,12 @@ namespace HomeBudgetWPF
                 GetUserInput();
                 clear();
                 blastInput.Visibility = Visibility.Visible;
+                this.Close();
             }
         }
 
         /// <summary>
-        /// Calls Clear(), which clears all the fields
+        /// Calls the clear method, which clears the input fields
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -130,9 +167,8 @@ namespace HomeBudgetWPF
         {
             clear();
         }
-
         /// <summary>
-        /// Clears all the input fields except for the Category and the DateTime
+        /// Clears the input fields
         /// </summary>
         private void clear()
         {
@@ -140,24 +176,7 @@ namespace HomeBudgetWPF
             txtDescription.Text = string.Empty;
             checkCredit.IsChecked = false;
         }
-
-        /// <summary>
-        /// Displays the last inputed expense
-        /// </summary>
-        /// <param name="categories">Category of the last expense</param>
-        /// <param name="date">Date of the last expense</param>
-        /// <param name="amount">Amount of the last expense</param>
-        /// <param name="description">Description of the last expense</param>
-        /// <param name="creditFlag">CreditFlag of the last expense</param>
-        public void LastInput(string categories, string date, string amount, string description, string creditFlag)
-        {
-            previousCategory.Text = categories;
-            previousDate.Text = date;
-            previousAmount.Text = amount;
-            previousDescription.Text = description;
-            isCredit.Text = creditFlag;
-        }
-
+        
         /// <summary>
         /// Displays the settings window
         /// </summary>
@@ -186,38 +205,41 @@ namespace HomeBudgetWPF
         }
 
         /// <summary>
-        /// Calls the Add Category window on enter in the combobox
+        /// Opens the add Category Window when pressing enter in any category combo box
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cmbCategory_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Return)
+            if(e.Key == Key.Return)
             {
                 CategoryWindow cw = new CategoryWindow();
                 cw.Show();
                 TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;
                 cw.categoryCBText = tb.Text;
                 DisplayCategories(presenter.ExpensePopulateCategories());
-            }
+            }            
         }
 
+        // Both of these wont be used in this window, just dont want to make another interface
         /// <summary>
-        /// Warning message saying the input is the same as the last input
+        /// Displays the last input
+        /// </summary>
+        /// <param name="categories">Category of the last input</param>
+        /// <param name="date">DateTime of the last input</param>
+        /// <param name="amount">Amount of the last input</param>
+        /// <param name="description">Description of the last input</param>
+        /// <param name="creditFlag">Credit Flag of the last input</param>
+        public void LastInput(string categories, string date, string amount, string description, string creditFlag)
+        {
+            throw new NotImplementedException();
+        }
+        /// <summary>
+        /// Displays the last input in the fields
         /// </summary>
         public void DisplaySameAsLastInput()
         {
-            if (MessageBox.Show("Current input is the same as the last input, would you like sill add? ",
-                    "Same Input",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
-            {
-                presenter.setUserInputFromDuplicateExpense(true);
-            }
-            else
-            {
-                presenter.setUserInputFromDuplicateExpense(false);
-            }
+            throw new NotImplementedException();
         }
         #endregion
     }
