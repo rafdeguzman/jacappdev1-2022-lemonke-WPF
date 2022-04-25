@@ -19,13 +19,15 @@
         <TextBlock Foreground="{DynamicResource TextColor}" Text="Expenses" HorizontalAlignment="Center" FontWeight="Bold" x:Name="fileName"/>
         <Grid Margin="0,0,20,0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid x:Name="dataBudgetLists" MaxHeight="190" AutoGenerateColumns="False" IsReadOnly="True" Background="{DynamicResource Alternation2}" AlternationCount="2" Foreground="{DynamicResource TextColor}"  AlternatingRowBackground="{DynamicResource Alternation2}" RowBackground="{DynamicResource Alternation1}" RowHeaderWidth="0" GridLinesVisibility="Horizontal" BorderBrush="Transparent" Margin="20">
+            <DataGrid Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" x:Name="dataBudgetLists" MaxHeight="190" AutoGenerateColumns="False" IsReadOnly="True" Background="{DynamicResource Alternation2}" AlternationCount="2" Foreground="{DynamicResource TextColor}"  AlternatingRowBackground="{DynamicResource Alternation2}" RowBackground="{DynamicResource Alternation1}" RowHeaderWidth="0" GridLinesVisibility="Horizontal" BorderBrush="{DynamicResource Backdrop}" Margin="10">
                 <!--For Styling The Headers-->
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
@@ -62,7 +64,7 @@
                         </Setter>
                     </Style>
                 </DataGrid.CellStyle>
-                
+
                 <!--For the Update/Copy/Delete Options-->
                 <DataGrid.ContextMenu>
                     <ContextMenu>
@@ -70,7 +72,7 @@
                         <MenuItem Header="Delete" Click="btnDelete_Click"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
-                
+
                 <!-- Defines all the Columns -->
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding ExpenseID}" MinWidth="40"/>
@@ -83,12 +85,12 @@
             </DataGrid>
 
             <!-- filter -->
-            <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="2" Margin="20, 0 , 0, 0">
                 <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Filter" Grid.Row="5" Grid.Column="0"/>
                 <Grid Grid.Row="5" Grid.Column="1">
                     <TextBlock Text="By date" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
                     <CheckBox Margin="0,5,5,5" x:Name="FilterByDate" HorizontalAlignment="Right"></CheckBox>
-                </Grid>                
+                </Grid>
                 <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="StartDate"/>
                 <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="EndDate"/>
                 <Grid Grid.Row="5" Grid.Column="1">
@@ -97,20 +99,10 @@
                 </Grid>
                 <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>
             </StackPanel>
-        </Grid>
-        <Grid Height="27" Margin="15, 5, 15, 10" Width="658">
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition Height="0*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="244*"/>
-                <ColumnDefinition Width="231*" />
-                <ColumnDefinition Width="195*"/>
-            </Grid.ColumnDefinitions>
-            <Button Style="{DynamicResource RoundedButton}" Grid.Column="0" Content="Show Categories" Click="Category_Click" Margin="5,0,5,0" />
-            <Button Style="{DynamicResource RoundedButton}" Grid.Column="1" Content="Add Expense" Click="Expense_Click" Margin="5,0,5,0" />
-            <Button Style="{DynamicResource RoundedButton}" Grid.Column="2" Content="Filter" Click="Filter_Click" Margin="30,0,20,0"  />
+
+            <Button Style="{DynamicResource RoundedButton}" Grid.Column="0" Grid.Row="4" Content="Show Categories" Click="Category_Click" Margin="5,0,5,0" />
+            <Button Style="{DynamicResource RoundedButton}" Grid.Column="1" Grid.Row="4" Content="Add Expense" Click="Expense_Click" Margin="5,0,5,0" />
+            <Button Style="{DynamicResource RoundedButton}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" Content="Filter" Click="Filter_Click" Margin="5,0,5,0"/>
         </Grid>
     </StackPanel>
 </Window>
