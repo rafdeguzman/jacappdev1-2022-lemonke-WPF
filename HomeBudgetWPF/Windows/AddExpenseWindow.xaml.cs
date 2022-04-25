@@ -23,7 +23,14 @@ namespace HomeBudgetWPF
     /// </summary>
     public partial class AddExpenseWindow : Window, ExpenseInterface
     {
+        #region Backing Fields
         private readonly ExpensePresenter presenter;
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Adds an expense to the database from input fields
+        /// </summary>
         public AddExpenseWindow()
         {
             InitializeComponent();
@@ -31,11 +38,22 @@ namespace HomeBudgetWPF
             presenter = new ExpensePresenter(this);
             checkCredit.IsChecked = false;
         }
+        #endregion
 
+        #region Methods
+
+        /// <summary>
+        /// Resets the input fields
+        /// </summary>
         public void ResetText()
         {
             throw new NotImplementedException();
         }
+
+        /// <summary>
+        /// Fills out the categories combobox from a provided list of categories
+        /// </summary>
+        /// <param name="categories">The list of all the categories</param>
         public void DisplayCategories(List<Category> categories)
         {
             cmbCategory.DisplayMemberPath = "Description";
@@ -46,6 +64,10 @@ namespace HomeBudgetWPF
             }
         }
 
+        /// <summary>
+        /// Checks that all the inputs are valid
+        /// </summary>
+        /// <returns>True if all the inputs are valid and false if they are not</returns>
         public bool CheckUserInput()
         {
             StringBuilder msg = new StringBuilder();
@@ -76,11 +98,19 @@ namespace HomeBudgetWPF
             return false;
         }
 
+        /// <summary>
+        /// Gets the inputs from the input fields and calls the presenter method that adds the expense
+        /// </summary>
         public void GetUserInput()
         {
             presenter.AddExpense(Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex, double.Parse(txtAmount.Text), txtDescription.Text, checkCredit.IsChecked.Value);
         }
 
+        /// <summary>
+        /// The main logic after the add button is clicked, checks if the inputs are valid and if they are calls GetUserInput()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             if (CheckUserInput())
@@ -91,10 +121,19 @@ namespace HomeBudgetWPF
             }
         }
 
+        /// <summary>
+        /// Calls Clear(), which clears all the fields
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             clear();
         }
+
+        /// <summary>
+        /// Clears all the input fields except for the Category and the DateTime
+        /// </summary>
         private void clear()
         {
             txtAmount.Text = string.Empty;
@@ -102,6 +141,14 @@ namespace HomeBudgetWPF
             checkCredit.IsChecked = false;
         }
 
+        /// <summary>
+        /// Displays the last inputed expense
+        /// </summary>
+        /// <param name="categories">Category of the last expense</param>
+        /// <param name="date">Date of the last expense</param>
+        /// <param name="amount">Amount of the last expense</param>
+        /// <param name="description">Description of the last expense</param>
+        /// <param name="creditFlag">CreditFlag of the last expense</param>
         public void LastInput(string categories, string date, string amount, string description, string creditFlag)
         {
             previousCategory.Text = categories;
@@ -111,12 +158,22 @@ namespace HomeBudgetWPF
             isCredit.Text = creditFlag;
         }
 
+        /// <summary>
+        /// Displays the settings window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow sw = new SettingsWindow();
             sw.Show();
         }
 
+        /// <summary>
+        /// Closes all the windows
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Are you sure you want close app!!!",
@@ -128,18 +185,26 @@ namespace HomeBudgetWPF
             }
         }
 
+        /// <summary>
+        /// Calls the Add Category window on enter in the combobox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbCategory_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Return)
+            if (e.Key == Key.Return)
             {
                 CategoryWindow cw = new CategoryWindow();
                 cw.Show();
                 TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;
                 cw.categoryCBText = tb.Text;
                 DisplayCategories(presenter.ExpensePopulateCategories());
-            }            
+            }
         }
 
+        /// <summary>
+        /// Warning message saying the input is the same as the last input
+        /// </summary>
         public void DisplaySameAsLastInput()
         {
             if (MessageBox.Show("Current input is the same as the last input, would you like sill add? ",
@@ -154,5 +219,6 @@ namespace HomeBudgetWPF
                 presenter.setUserInputFromDuplicateExpense(false);
             }
         }
+        #endregion
     }
 }
