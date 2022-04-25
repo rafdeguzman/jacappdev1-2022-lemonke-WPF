@@ -110,14 +110,6 @@ namespace HomeBudgetWPF
             isCredit.Text = creditFlag;
         }
 
-        private void MenuOpen_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void MenuSave_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             SettingsWindow sw = new SettingsWindow();

@@ -97,11 +97,12 @@ namespace HomeBudgetWPF
                 }
             }
         }
-        public void BudgetItemsList(DateTime? start, DateTime? end, bool filterFlag = false, int categoryID = -1)
+        public void BudgetItemsList(DateTime? start, DateTime? end, int categoryID = -1 , bool FilterFlag = false)
         {
-            List<BudgetItem> budgetItemsList = model.GetBudgetItems(start, end, filterFlag, categoryID);
-            view.ShowBudgetItems(budgetItemsList);
+                List<BudgetItem> budgetItemsList = model.GetBudgetItems(start, end, FilterFlag, categoryID);
+                view.ShowBudgetItems(budgetItemsList);
         }
+
         public void DeleteExpense(int id)
         {
             model.expenses.Delete(id);

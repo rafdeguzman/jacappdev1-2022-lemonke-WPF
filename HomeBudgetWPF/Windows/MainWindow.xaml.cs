@@ -33,10 +33,12 @@ namespace HomeBudgetWPF
             config = new Config();
             presenter = new Presenter(this, config.newDB);
             SetCurrentFile();
+            FilterByCategory.IsChecked = false;
+            FilterByDate.IsChecked = false;
 
             //get expenses
 
-            presenter.BudgetItemsList(null, null);
+            Refresh();
 
         }
         private void SetCurrentFile()
@@ -50,8 +52,8 @@ namespace HomeBudgetWPF
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
             AddExpenseWindow aew = new AddExpenseWindow();
-            aew.Show();
-            presenter.BudgetItemsList(null, null);
+            aew.ShowDialog();
+            Refresh();
         }
 
         private void Category_Click(object sender, RoutedEventArgs e)
@@ -69,7 +71,7 @@ namespace HomeBudgetWPF
         {
             dynamic selectedItem = dataBudgetLists.SelectedItem;
             UpdateWindow.CallUpdateWindow(selectedItem.ExpenseID, selectedItem.CategoryID - 1, selectedItem.ShortDescription, selectedItem.Amount, selectedItem.Date);
-            presenter.BudgetItemsList(null, null);
+            Refresh();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -83,7 +85,7 @@ namespace HomeBudgetWPF
             if(result == MessageBoxResult.Yes)
             {
                 presenter.DeleteExpense(ExpenseId);
-                presenter.BudgetItemsList(null, null);
+                Refresh();
             }
         }
 
@@ -154,6 +156,46 @@ namespace HomeBudgetWPF
             dataBudgetLists.ItemsSource = budgetItems;
         }
 
-
+        private void Filter_Click(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+        public void Refresh()
+        {
+            bool fbc = FilterByCategory.IsChecked.Value;
+            bool fbd = FilterByDate.IsChecked.Value;
+            if (fbc && fbc)
+            {
+                int result = DateTime.Compare(Convert.ToDateTime(StartDate.SelectedDate), Convert.ToDateTime(EndDate.SelectedDate));
+                if (result < 0)
+                {
+                    presenter.BudgetItemsList(Convert.ToDateTime(StartDate.SelectedDate), Convert.ToDateTime(EndDate.SelectedDate), cmbCategory.SelectedIndex);
+                }
+                else
+                {
+                    //error
+                }
+            }
+            else if (fbc)
+            {
+                presenter.BudgetItemsList(null, null, cmbCategory.SelectedIndex, true);
+            }
+            else if (fbd)
+            {
+                int result = DateTime.Compare(Convert.ToDateTime(StartDate.SelectedDate), Convert.ToDateTime(EndDate.SelectedDate));
+                if (result < 0)
+                {
+                    presenter.BudgetItemsList(Convert.ToDateTime(StartDate.SelectedDate), Convert.ToDateTime(EndDate.SelectedDate), cmbCategory.SelectedIndex);
+                }
+                else
+                {
+                    //error
+                }
+            }
+            else
+            {
+                presenter.BudgetItemsList(null, null);
+            }
+        }
     }
 }

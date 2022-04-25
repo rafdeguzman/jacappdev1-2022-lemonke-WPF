@@ -82,9 +82,17 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <Grid>
-
-            </Grid>
+            <!-- filter -->
+            <StackPanel Grid.Column="1">
+            <TextBlock Foreground="{DynamicResource TextColor}" Text="Filter" HorizontalAlignment="Center" FontWeight="Bold"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Date" Grid.Row="5" Grid.Column="0"/>
+                <CheckBox Margin="0,5,5,5" Grid.Row="5" Grid.Column="1" x:Name="FilterByDate" HorizontalAlignment="Right"></CheckBox>
+                <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="StartDate"/>
+                <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="EndDate"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Category" Grid.Row="5" Grid.Column="0"/>
+                <CheckBox Margin="0,5,5,5" Grid.Row="5" Grid.Column="1" x:Name="FilterByCategory" HorizontalAlignment="Right"></CheckBox>
+                <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>
+            </StackPanel>
         </Grid>
         <Grid Height="27" Margin="15, 5, 15, 10" Width="658">
             <Grid.RowDefinitions>
@@ -98,7 +106,7 @@
             </Grid.ColumnDefinitions>
             <Button Style="{DynamicResource RoundedButton}" Grid.Column="0" Content="Show Categories" Click="Category_Click" Margin="5,0,5,0" />
             <Button Style="{DynamicResource RoundedButton}" Grid.Column="1" Content="Add Expense" Click="Expense_Click" Margin="5,0,5,0" />
-            <Button Style="{DynamicResource RoundedButton}" Grid.Column="2" Content="Filter" Click="Expense_Click" Margin="30,0,20,0"  />
+            <Button Style="{DynamicResource RoundedButton}" Grid.Column="2" Content="Filter" Click="Filter_Click" Margin="30,0,20,0"  />
         </Grid>
     </StackPanel>
 </Window>
