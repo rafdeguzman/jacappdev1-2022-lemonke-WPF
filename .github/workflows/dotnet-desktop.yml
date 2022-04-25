@@ -105,7 +105,7 @@ jobs:
       
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: vstest.console.exe #$env:Test_Project_Directory 
+      run: vstest.console.exe $env:Test_Project_Directory\bin\${{ matrix.configuration }}\net5.0-windows\TestPresenter.dll
       #figure out where to find the dll
         #on windows dll located in \TestPresenter\bin\Debug\net5.0-windows\TestPresenter.dll
         #                          \TestPresenter\bin\Release\net5.0-windows\TestPresenter.dll
