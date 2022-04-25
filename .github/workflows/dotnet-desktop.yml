@@ -58,7 +58,7 @@ jobs:
 
     env:
       Solution_Name: HomeBudgetWPF.sln                          # Replace with your solution name, i.e. MyWpfApp.sln.
-      Test_Project_Directory: \TestPresenter
+      Test_Project_Directory: \TestPresenter\
       Wap_Project_Directory: your-wap-project-directory-name    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
       Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
 
@@ -105,7 +105,7 @@ jobs:
       
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: vstest.console.exe $env:Test_Project_Directory\bin\${{ matrix.configuration }}\net5.0-windows\TestPresenter.dll
+      run: vstest.console.exe $env:Test_Project_Directorybin\${{ matrix.configuration }}\net5.0-windows\TestPresenter.dll
       #figure out where to find the dll
         #on windows dll located in \TestPresenter\bin\Debug\net5.0-windows\TestPresenter.dll
         #                          \TestPresenter\bin\Release\net5.0-windows\TestPresenter.dll
