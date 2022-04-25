@@ -129,7 +129,7 @@ namespace HomeBudgetWPF
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                Environment.Exit(0);
+                Application.Current.Shutdown();
             }
         }
 

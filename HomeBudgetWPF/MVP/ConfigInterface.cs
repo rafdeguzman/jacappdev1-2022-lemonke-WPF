@@ -14,5 +14,8 @@ namespace HomeBudgetWPF
         static string lastUsedFilePath { get; set; }
         static string currentFile { get; set; }
         static string firstTimeUser { get; set; }
+        static string themeColor { get; set; }
+        static string darkMode { get; set; }
+
     }
 }

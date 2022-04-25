@@ -105,7 +105,6 @@ namespace HomeBudgetWPF
         public void DeleteExpense(int id)
         {
             model.expenses.Delete(id);
-
         }
 
     }

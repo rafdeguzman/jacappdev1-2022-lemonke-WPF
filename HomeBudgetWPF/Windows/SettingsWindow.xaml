@@ -39,10 +39,10 @@
                         </Border>
 
                         <!--Navy-->
-                        <CheckBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Content="Navy" Background="#e6e6e6" Foreground="{DynamicResource OppositeBlue}" FontWeight="Bold" BorderBrush="White" x:Name="cbNavyOption" Click="cb_OnClick"></CheckBox>
+                        <CheckBox Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" Content="Blue" Background="#e6e6e6" Foreground="{DynamicResource OppositeBlue}" FontWeight="Bold" BorderBrush="White" x:Name="cbNavyOption" Click="cb_OnClick"></CheckBox>
                         
                         <!--Crimson-->
-                        <CheckBox Content="Crimson" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="{DynamicResource OppositeRed}" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="1" x:Name="cbRedOption" Click="cb_OnClick"></CheckBox>
+                        <CheckBox Content="Red" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="{DynamicResource OppositeRed}" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="1" x:Name="cbRedOption" Click="cb_OnClick"></CheckBox>
 
                         <!--Lime-->
                         <CheckBox Content="Green" Background="#e6e6e6" HorizontalAlignment="Center" Foreground="{DynamicResource OppositeGreen}" FontWeight="Bold" BorderBrush="White" Grid.Row="1" Grid.Column="2" x:Name="cbGreenOption" Click="cb_OnClick"></CheckBox>

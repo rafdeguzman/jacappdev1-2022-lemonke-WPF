@@ -27,35 +27,36 @@ namespace HomeBudgetWPF
         }
 
         public string lastUsedFilePath {
-            get
-            {
-                return config.AppSettings.Settings["lastUsedFilePath"].Value;
-            }
-            set
-            {
-                config.AppSettings.Settings["lastUsedFilePath"].Value = value;
-                saveConfig();
-            }
+            get { return config.AppSettings.Settings["lastUsedFilePath"].Value; }
+            set { config.AppSettings.Settings["lastUsedFilePath"].Value = value; saveConfig(); }
         }
 
         public string currentFile
         {
             get { return config.AppSettings.Settings["currentFile"].Value; }
-            set { config.AppSettings.Settings["currentFile"].Value = value;
-                saveConfig();
-            }
+            set { config.AppSettings.Settings["currentFile"].Value = value; saveConfig(); }
         }
         public string firstTimeUser 
         {
             get { return config.AppSettings.Settings["firstTimeUser"].Value; }
-            set { config.AppSettings.Settings["firstTimeUser"].Value = value;
-                saveConfig();
-            }
+            set { config.AppSettings.Settings["firstTimeUser"].Value = value; saveConfig(); }
         }
         public bool newDB
         {
             get { return bool.Parse(config.AppSettings.Settings["newDB"].Value); }
             set { config.AppSettings.Settings["newDB"].Value = value.ToString(); saveConfig(); }
+        }
+
+        public string themeColor
+        {
+            get { return config.AppSettings.Settings["themeColor"].Value; }
+            set { config.AppSettings.Settings["themeColor"].Value = value.ToString(); saveConfig(); }     
+        }
+
+        public string darkMode
+        {
+            get { return config.AppSettings.Settings["darkMode"].Value; }
+            set { config.AppSettings.Settings["darkMode"].Value = value.ToString(); saveConfig(); }
         }
 
         public void saveConfig()

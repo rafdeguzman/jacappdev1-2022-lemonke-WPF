@@ -164,7 +164,7 @@ namespace HomeBudgetWPF
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                Environment.Exit(0);
+                Application.Current.Shutdown();
             }
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)

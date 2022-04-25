@@ -43,6 +43,7 @@ namespace HomeBudgetWPF
         public void AddExpense(DateTime dt, int catID, double amount, string desc, bool isChecked)
         {
             string isCredit = "";
+            catID++;
             if (SameInputAsLastInput(dt, catID, amount, desc, isChecked))
             {
                 Category categoryType = model.categories.GetCategoryFromId(catID + 1);

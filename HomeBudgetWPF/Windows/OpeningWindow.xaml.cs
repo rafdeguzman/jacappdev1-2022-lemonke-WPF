@@ -26,6 +26,9 @@ namespace HomeBudgetWPF.Windows
         {
             InitializeComponent();
             config = new Config();
+
+            // This sets the correct color
+            SettingsWindow sw = new SettingsWindow();
         }
 
         private void btnNewDB_Click(object sender, RoutedEventArgs e)
@@ -61,7 +64,7 @@ namespace HomeBudgetWPF.Windows
                     MessageBoxButton.YesNo,
                     MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                Environment.Exit(0);
+                Application.Current.Shutdown();
             }
         }
     }
