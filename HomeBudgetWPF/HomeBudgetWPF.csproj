@@ -43,7 +43,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Page Update="Windows\UpdateWIndow.xaml">
+	  <Page Update="Windows\UpdateWindow.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
 	</ItemGroup>

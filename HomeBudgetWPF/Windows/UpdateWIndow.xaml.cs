@@ -211,14 +211,28 @@ namespace HomeBudgetWPF
         /// <param name="e"></param>
         private void cmbCategory_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Return)
+            if (e.Key == Key.Return)
             {
                 CategoryWindow cw = new CategoryWindow();
                 cw.Show();
+                cw.Closed += CategoryWindowClosed;
                 TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;
                 cw.categoryCBText = tb.Text;
-                DisplayCategories(presenter.ExpensePopulateCategories());
-            }            
+            }
+        }
+
+        //Code taken from StackOverflow.
+        //https://stackoverflow.com/questions/12106657/check-if-opened-window-has-been-closed
+        /// <summary>
+        /// When the 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CategoryWindowClosed(object sender, EventArgs e)
+        {
+            ((Window)sender).Closed -= CategoryWindowClosed;
+            DisplayCategories(presenter.ExpensePopulateCategories());
+            cmbCategory.SelectedIndex = cmbCategory.Items.Count - 1;
         }
 
         // Both of these wont be used in this window, just dont want to make another interface

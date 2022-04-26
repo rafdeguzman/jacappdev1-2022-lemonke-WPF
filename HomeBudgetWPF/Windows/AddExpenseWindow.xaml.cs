@@ -209,6 +209,7 @@ namespace HomeBudgetWPF
         {
             ((Window)sender).Closed -= CategoryWindowClosed;
             DisplayCategories(presenter.ExpensePopulateCategories());
+            cmbCategory.SelectedIndex = cmbCategory.Items.Count - 1;
         }
 
         /// <summary>
