@@ -76,11 +76,11 @@
                 <!-- Defines all the Columns -->
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding ExpenseID}" MinWidth="40"/>
-                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount}" MinWidth="60"/>
+                    <DataGridTextColumn Header="Amount" Binding="{Binding Amount, StringFormat={}{0:n2}}" MinWidth="60"/>
                     <DataGridTextColumn Header="Category" Binding="{Binding Category}" MinWidth="75"/>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=d}" MinWidth="80"/>
                     <DataGridTextColumn Header="Description" Binding="{Binding ShortDescription}" MinWidth="75"/>
-                    <DataGridTextColumn Header="Balance" Binding="{Binding Balance}" MinWidth="66"/>
+                    <DataGridTextColumn Header="Balance" Binding="{Binding Balance, StringFormat={}{0:n2}}" MinWidth="66"/>
                 </DataGrid.Columns>
             </DataGrid>
 

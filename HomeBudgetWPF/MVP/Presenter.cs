@@ -19,7 +19,6 @@ namespace HomeBudgetWPF
         Config config;
         public Presenter(ViewInterface v, bool newDB = false)
         {
-
             string defaultDirectory;
             config = new Config();
             //config file setup
