@@ -16,11 +16,12 @@ namespace HomeBudgetWPF
     {
         ViewInterface view;
         HomeBudget model;
+        Config config;
         public Presenter(ViewInterface v, bool newDB = false)
         {
 
             string defaultDirectory;
-            Config config = new Config();
+            config = new Config();
             //config file setup
             defaultDirectory = config.getDirectory;
             string defaultFileName = config.getFileName;
@@ -103,8 +104,8 @@ namespace HomeBudgetWPF
         }
         public void BudgetItemsList(DateTime? start, DateTime? end, int categoryID = -1 , bool FilterFlag = false)
         {
-                List<BudgetItem> budgetItemsList = model.GetBudgetItems(start, end, FilterFlag, categoryID);
-                view.ShowBudgetItems(budgetItemsList);
+            List<BudgetItem> budgetItemsList = model.GetBudgetItems(start, end, FilterFlag, categoryID);
+            view.ShowBudgetItems(budgetItemsList);
         }
 
         public void DeleteExpense(int id)

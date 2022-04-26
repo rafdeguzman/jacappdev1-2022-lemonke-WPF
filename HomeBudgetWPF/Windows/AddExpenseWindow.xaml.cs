@@ -196,10 +196,19 @@ namespace HomeBudgetWPF
             {
                 CategoryWindow cw = new CategoryWindow();
                 cw.Show();
+                cw.Closed += CategoryWindowClosed;
                 TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;
                 cw.categoryCBText = tb.Text;
-                DisplayCategories(presenter.ExpensePopulateCategories());
+                
             }
+        }
+
+        //Code taken from StackOverflow.
+        //https://stackoverflow.com/questions/12106657/check-if-opened-window-has-been-closed
+        private void CategoryWindowClosed(object sender, EventArgs e)
+        {
+            ((Window)sender).Closed -= CategoryWindowClosed;
+            DisplayCategories(presenter.ExpensePopulateCategories());
         }
 
         /// <summary>
