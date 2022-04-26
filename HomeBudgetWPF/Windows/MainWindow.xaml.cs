@@ -147,6 +147,7 @@ namespace HomeBudgetWPF
             {
                 presenter.DeleteExpense(ExpenseId);
                 Refresh();
+                //if(ExpenseId >= dataBudgetLists.Items.Count)
             }
         }
 
