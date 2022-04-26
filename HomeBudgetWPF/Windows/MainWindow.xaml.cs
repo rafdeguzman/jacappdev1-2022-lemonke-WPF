@@ -81,9 +81,17 @@ namespace HomeBudgetWPF
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
             AddExpenseWindow aew = new AddExpenseWindow();
-            aew.ShowDialog();
-            Refresh();
+            aew.Show();
+            aew.Closed += AddExpenseWindowClosed;
         }
+        private void AddExpenseWindowClosed(object sender, EventArgs e)
+        {
+            ((Window)sender).Closed -= AddExpenseWindowClosed;
+            Refresh();
+            dataBudgetLists.SelectedIndex = dataBudgetLists.Items.Count - 1;
+            dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
+        }
+
 
         /// <summary>
         /// Displays the add category window
@@ -117,6 +125,8 @@ namespace HomeBudgetWPF
             dynamic selectedItem = dataBudgetLists.SelectedItem;
             UpdateWindow.CallUpdateWindow(selectedItem.ExpenseID, selectedItem.CategoryID - 1, selectedItem.ShortDescription, selectedItem.Amount, selectedItem.Date);
             Refresh();
+            dataBudgetLists.ScrollIntoView(selectedItem);
+            dataBudgetLists.SelectedIndex = selectedItem.ExpenseID - 1;
         }
 
         /// <summary>
