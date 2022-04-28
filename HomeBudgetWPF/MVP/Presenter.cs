@@ -107,6 +107,41 @@ namespace HomeBudgetWPF
                 view.ShowBudgetItems(budgetItemsList);
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public void BudgetByCategory(DateTime? start, DateTime? end, int categoryID = -1, bool FilterFlag = false )
+        {
+            List<BudgetItemsByCategory> budgetItemsList = model.GetBudgetItemsByCategory(start, end, FilterFlag, categoryID);
+            view.ShowBudgetItemsByCategory(budgetItemsList);
+        }
+        public void BudgetByDate(DateTime? start, DateTime? end, int categoryID = -1, bool FilterFlag = false)
+        {
+            List<BudgetItemsByMonth> budgetItemsList = model.GetBudgetItemsByMonth(start, end, FilterFlag, categoryID);
+            view.ShowBudgetItemsByDate(budgetItemsList);
+        }
+        public void BudgetIByDateandCategory(DateTime? start, DateTime? end, int categoryID = -1, bool FilterFlag = false)
+        {
+            List <Dictionary<string, object>> budgetItemsList = model.GetBudgetDictionaryByCategoryAndMonth(start, end, FilterFlag, categoryID);
+            view.ShowBudgetItemsDateAndCategory(budgetItemsList);
+        }
+
         public void DeleteExpense(int id)
         {
             model.expenses.Delete(id);

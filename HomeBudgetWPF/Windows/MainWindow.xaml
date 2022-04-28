@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
-        Title="Le Monke" MinHeight="400" MaxHeight="400" MinWidth="750" MaxWidth="750" Closing="Window_Closing">
+        Title="Le Monke" MinHeight="400" MaxHeight="400" MinWidth="750" Closing="Window_Closing">
     <StackPanel Background="{DynamicResource App.Background}">
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
@@ -87,22 +87,28 @@
             <!-- filter -->
             <StackPanel Grid.Column="2" Margin="20, 0 , 0, 0">
                 <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Filter" Grid.Row="5" Grid.Column="0"/>
+                <DatePicker Text="Brand" Margin="0,5,5,5" x:Name="StartDate" SelectedDateChanged="Refresh_Event"/>
+                <DatePicker Text="Brand" Margin="0,5,5,5" x:Name="EndDate" SelectedDateChanged="Refresh_Event"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Filter by category" FontSize="12"/>
+                <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" x:Name="cmbCategory" IsEditable="True" TextBoxBase.TextChanged="Refresh_Event" DropDownClosed="Refresh_Event"/>
                 <Grid Grid.Row="5" Grid.Column="1">
-                    <TextBlock Text="By date" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
-                    <CheckBox Margin="0,5,5,5" x:Name="FilterByDate" HorizontalAlignment="Right"></CheckBox>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="23*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Summary by category" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,0,5,0"/>
+                    <CheckBox Margin="179,5,0,5" x:Name="FilterByCategory" HorizontalAlignment="Left" Checked="Refresh_Event" Unchecked="Refresh_Event" Grid.Column="1"></CheckBox>
                 </Grid>
-                <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="StartDate"/>
-                <DatePicker Text="Brand" Margin="0,5,5,5" Grid.Row="1" Grid.Column="1" x:Name="EndDate"/>
                 <Grid Grid.Row="5" Grid.Column="1">
-                    <TextBlock Text="By category" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
-                    <CheckBox Margin="0,5,5,5" x:Name="FilterByCategory" HorizontalAlignment="Right"></CheckBox>
+                    <TextBlock Text="Summary by date" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
+                    <CheckBox Margin="0,5,5,5" x:Name="FilterByDate" HorizontalAlignment="Right" Checked="Refresh_Event" Unchecked="Refresh_Event"></CheckBox>
                 </Grid>
-                <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>
+
             </StackPanel>
 
             <Button Style="{DynamicResource RoundedButton}" Grid.Column="0" Grid.Row="4" Content="Show Categories" Click="Category_Click" Margin="5,0,5,0" />
             <Button Style="{DynamicResource RoundedButton}" Grid.Column="1" Grid.Row="4" Content="Add Expense" Click="Expense_Click" Margin="5,0,5,0" />
-            <Button Style="{DynamicResource RoundedButton}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" Content="Filter" Click="Filter_Click" Margin="5,0,5,0"/>
+            <Button Style="{DynamicResource RoundedButton}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" Content="Default" Click="Filter_Click" Margin="5,0,5,0"/>
         </Grid>
     </StackPanel>
 </Window>

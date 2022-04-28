@@ -44,6 +44,7 @@ namespace HomeBudgetWPF
             FilterByDate.IsChecked = false;
             //get expenses
             Refresh();
+
         }
         #endregion
 
@@ -217,11 +218,42 @@ namespace HomeBudgetWPF
         /// <param name="budgetItems">The list of expenses to bind to the datagrid</param>
         public void ShowBudgetItems(List<BudgetItem> budgetItems)
         {
-            dataBudgetLists.ItemsSource = null;
+
             dataBudgetLists.ItemsSource = budgetItems;
+            dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
+            var column1 = new DataGridTextColumn(); // Create a text column object
+            column1.Header = "Id";
+            column1.Binding = new Binding("ExpenseID"); // Bind to an object propery
+            dataBudgetLists.Columns.Add(column1); // Add the defined column to the
+
+            var column2 = new DataGridTextColumn(); // Create a text column object
+            column2.Header = "Amount";
+            column2.Binding = new Binding("Amount"); // Bind to an object propery
+            dataBudgetLists.Columns.Add(column2);
+
+            var column3 = new DataGridTextColumn(); // Create a text column object
+            column3.Header = "Category";
+            column3.Binding = new Binding("Category"); // Bind to an object propery
+            dataBudgetLists.Columns.Add(column3);
+
+            var column4 = new DataGridTextColumn(); // Create a text column object
+            column4.Header = "Date";
+            column4.Binding = new Binding("Date");
+            column4.Binding.StringFormat = "d";
+            dataBudgetLists.Columns.Add(column4);
+
+            var column5 = new DataGridTextColumn(); // Create a text column object
+            column5.Header = "ShortDescription";
+            column5.Binding = new Binding("ShortDescription");
+            dataBudgetLists.Columns.Add(column5);
+
+            var column6 = new DataGridTextColumn(); // Create a text column object
+            column6.Header = "ShortDescription";
+            column6.Binding = new Binding("ShortDescription");
+            dataBudgetLists.Columns.Add(column6);
         }
 
-        /// <summary>
+        /// <summary
         /// Calls the refresh method that refreshes the data grid with the filter options
         /// </summary>
         /// <param name="sender"></param>
@@ -233,98 +265,62 @@ namespace HomeBudgetWPF
         /// <summary>
         /// Refreshes the data grid with the filter options
         /// </summary>
-        public void Refresh()
+        private void Refresh()
         {
-            bool fbc = FilterByCategory.IsChecked.Value;
-            bool fbd = FilterByDate.IsChecked.Value;
-            if (fbc && fbd)
+            DateTime defaultDate = new DateTime(1, 1, 1);
+            DateTime sdt = Convert.ToDateTime(StartDate.SelectedDate);
+            DateTime edt = Convert.ToDateTime(EndDate.SelectedDate);
+            int categoryIndex = cmbCategory.SelectedIndex;
+            bool filterByCategory = FilterByCategory.IsChecked.Value;
+            bool filterByDate = FilterByDate.IsChecked.Value;
+
+            if (filterByDate || filterByCategory)
             {
-                try
-                {
-                    DateTime sdt = Convert.ToDateTime(StartDate.SelectedDate);
-                    DateTime edt = Convert.ToDateTime(EndDate.SelectedDate);
-                    if(DateTime.Compare(sdt, edt) < 0)
-                    {
-                        if(cmbCategory.SelectedIndex == -1)
-                        {
-                            string caption = "Invalid Category";
-                            string warning = $"Please select a category";
-                            MessageBoxButton button = MessageBoxButton.OK;
-                            MessageBoxImage icon = MessageBoxImage.Warning;
-                            MessageBox.Show(warning, caption, button, icon);
-                        }
-                        else
-                        {
-                            presenter.BudgetItemsList(sdt, edt, cmbCategory.SelectedIndex + 1, true);
-                        }                        
-                    }
-                    else
-                    {
-                        string caption = "Error with filter dates";
-                        string warning = $"End date cannot be after the first date";
-                        MessageBoxButton button = MessageBoxButton.OK;
-                        MessageBoxImage icon = MessageBoxImage.Warning;
-                        MessageBox.Show(warning, caption, button, icon);
-                    }
-                }
-                catch
-                {
-                    string caption = "Invalid dates";
-                    string warning = $"Please select start and end dates";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Warning;
-                    MessageBox.Show(warning, caption, button, icon);                    
-                }
-            }
-            else if (fbc)
-            {
-                if (cmbCategory.SelectedIndex == -1)
-                {
-                    string caption = "Invalid Category";
-                    string warning = $"Please select a category";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Warning;
-                    MessageBox.Show(warning, caption, button, icon);
-                }
-                else
-                {
-                    presenter.BudgetItemsList(null, null, cmbCategory.SelectedIndex + 1, true);
-                }
-            }
-            else if (fbd)
-            {
-                try
-                {
-                    DateTime sdt = Convert.ToDateTime(StartDate.SelectedDate);
-                    DateTime edt = Convert.ToDateTime(EndDate.SelectedDate);
-                    if (DateTime.Compare(sdt, edt) < 0)
-                    {
-                        presenter.BudgetItemsList(sdt, edt);
-                    }
-                    else
-                    {
-                        string caption = "Error with filter dates";
-                        string warning = $"End date cannot be after the first date";
-                        MessageBoxButton button = MessageBoxButton.OK;
-                        MessageBoxImage icon = MessageBoxImage.Warning;
-                        MessageBox.Show(warning, caption, button, icon);
-                    }
-                }
-                catch
-                {
-                    string caption = "Invalid dates";
-                    string warning = $"Please select start and end dates";
-                    MessageBoxButton button = MessageBoxButton.OK;
-                    MessageBoxImage icon = MessageBoxImage.Warning;
-                    MessageBox.Show(warning, caption, button, icon);
-                }
+                Summary(filterByCategory, filterByDate, categoryIndex);
             }
             else
             {
-                presenter.BudgetItemsList(null, null);
+                if (sdt != defaultDate && edt != defaultDate && categoryIndex != -1)
+                {
+                    presenter.BudgetItemsList(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt == defaultDate && edt == defaultDate && categoryIndex != -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetItemsList(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt == defaultDate && edt != defaultDate && categoryIndex == -1)
+                {
+                    presenter.BudgetItemsList(sdt, edt);
+                }
+                else if (sdt == defaultDate && edt != defaultDate && categoryIndex != -1)
+                {
+                    presenter.BudgetItemsList(sdt, edt, categoryIndex, true);
+                }
+                else if (sdt != defaultDate && edt == defaultDate && categoryIndex == -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetItemsList(sdt, edt);
+                }
+                else if (sdt != defaultDate && edt == defaultDate && categoryIndex != -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetItemsList(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt != defaultDate && edt != defaultDate && categoryIndex == -1)
+                {
+                    presenter.BudgetItemsList(sdt, edt);
+                }
+                else
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetItemsList(sdt, edt);
+                }
+                
             }
+
             DisplayCategories(presenter.GetCategories());
-            cmbCategory.Text = "Category";
+            cmbCategory.SelectedIndex = categoryIndex;
         }
         /// <summary>
         /// If you manually close, since the closing settings were changed due to the CloseAllWindows method, calls shutdown to make sure the process ends
@@ -335,5 +331,178 @@ namespace HomeBudgetWPF
         {
             System.Windows.Application.Current.Shutdown();
         }
+
+        private void Summary(bool  filterByCategory, bool filterByDate,int  categoryIndex)
+        {
+            DateTime defaultDate = new DateTime(1, 1, 1);
+            DateTime sdt = Convert.ToDateTime(StartDate.SelectedDate);
+            DateTime edt = Convert.ToDateTime(EndDate.SelectedDate);
+            if(filterByCategory && filterByDate)
+            {
+                if (sdt != defaultDate && edt != defaultDate && categoryIndex != -1)
+                {
+                    presenter.BudgetIByDateandCategory(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt == defaultDate && edt == defaultDate && categoryIndex != -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetIByDateandCategory(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt == defaultDate && edt != defaultDate && categoryIndex == -1)
+                {
+                    presenter.BudgetIByDateandCategory(sdt, edt);
+                }
+                else if (sdt == defaultDate && edt != defaultDate && categoryIndex != -1)
+                {
+                    presenter.BudgetIByDateandCategory(sdt, edt, categoryIndex, true);
+                }
+                else if (sdt != defaultDate && edt == defaultDate && categoryIndex == -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetIByDateandCategory(sdt, edt);
+                }
+                else if (sdt != defaultDate && edt == defaultDate && categoryIndex != -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetIByDateandCategory(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt != defaultDate && edt != defaultDate && categoryIndex == -1)
+                {
+                    presenter.BudgetIByDateandCategory(sdt, edt);
+                }
+                else
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetIByDateandCategory(sdt, edt);
+                }
+            }
+            else if (filterByCategory)
+            {
+                if (sdt != defaultDate && edt != defaultDate && categoryIndex != -1)
+                {
+                    presenter.BudgetByCategory(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt == defaultDate && edt == defaultDate && categoryIndex != -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetByCategory(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt == defaultDate && edt != defaultDate && categoryIndex == -1)
+                {
+                    presenter.BudgetByCategory(sdt, edt);
+                }
+                else if (sdt == defaultDate && edt != defaultDate && categoryIndex != -1)
+                {
+                    presenter.BudgetByCategory(sdt, edt, categoryIndex, true);
+                }
+                else if (sdt != defaultDate && edt == defaultDate && categoryIndex == -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetByCategory(sdt, edt);
+                }
+                else if (sdt != defaultDate && edt == defaultDate && categoryIndex != -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetByCategory(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt != defaultDate && edt != defaultDate && categoryIndex == -1)
+                {
+                    presenter.BudgetByCategory(sdt, edt);
+                }
+                else
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetByCategory(sdt, edt);
+                }
+            }
+            else
+            {
+                if (sdt != defaultDate && edt != defaultDate && categoryIndex != -1)
+                {
+                    presenter.BudgetByDate(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt == defaultDate && edt == defaultDate && categoryIndex != -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetByDate(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt == defaultDate && edt != defaultDate && categoryIndex == -1)
+                {
+                    presenter.BudgetByDate(sdt, edt);
+                }
+                else if (sdt == defaultDate && edt != defaultDate && categoryIndex != -1)
+                {
+                    presenter.BudgetByDate(sdt, edt, categoryIndex, true);
+                }
+                else if (sdt != defaultDate && edt == defaultDate && categoryIndex == -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetByDate(sdt, edt);
+                }
+                else if (sdt != defaultDate && edt == defaultDate && categoryIndex != -1)
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetByDate(sdt, edt, categoryIndex + 1, true);
+                }
+                else if (sdt != defaultDate && edt != defaultDate && categoryIndex == -1)
+                {
+                    presenter.BudgetByDate(sdt, edt);
+                }
+                else
+                {
+                    edt = DateTime.Now;
+                    presenter.BudgetByDate(sdt, edt);
+                }
+            }
+            DisplayCategories(presenter.GetCategories());
+            cmbCategory.SelectedIndex = categoryIndex;
+
+        }
+
+        public void ShowBudgetItemsByDate(List<BudgetItemsByMonth> budgetItemsListByMonth)
+        {
+            dataBudgetLists.ItemsSource = budgetItemsListByMonth;
+            dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
+            var column1 = new DataGridTextColumn(); // Create a text column object
+            column1.Header = "Month";
+            column1.Binding = new Binding("Month"); // Bind to an object propery
+            dataBudgetLists.Columns.Add(column1); // Add the defined column to the
+
+            var column2 = new DataGridTextColumn(); // Create a text column object
+            column2.Header = "Total";
+            column2.Binding = new Binding("Total"); // Bind to an object propery
+            dataBudgetLists.Columns.Add(column2);
+        }
+
+        public void ShowBudgetItemsByCategory(List<BudgetItemsByCategory> budgetItemsListByCategory)
+        {
+            dataBudgetLists.ItemsSource = budgetItemsListByCategory;
+            dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
+            var column1 = new DataGridTextColumn(); // Create a text column object
+            column1.Header = "Category";
+            column1.Binding = new Binding("Category"); // Bind to an object propery
+            dataBudgetLists.Columns.Add(column1); // Add the defined column to the
+
+            var column2 = new DataGridTextColumn(); // Create a text column object
+            column2.Header = "Total";
+            column2.Binding = new Binding("Total"); // Bind to an object propery
+            dataBudgetLists.Columns.Add(column2);
+        }
+
+        public void ShowBudgetItemsDateAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
+        {
+
+            dataBudgetLists.ItemsSource = budgetItemsListByMonthAndCategory;
+            dataBudgetLists.Columns.Clear();
+            for (int i = 0; i < budgetItemsListByMonthAndCategory.Count ; i++)
+            {
+            }
+        }
+
+        private void Refresh_Event(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
     }
 }
