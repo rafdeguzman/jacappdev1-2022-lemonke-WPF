@@ -127,7 +127,7 @@ namespace HomeBudgetWPF
             model.expenses.Delete(id);
         }
 
-        public void Search(string search, string returnType, DateTime Start, DateTime End, bool FilterFlag, int CategoryId)
+        public void Search(string search, string returnType, DateTime? Start, DateTime? End, bool FilterFlag, int CategoryId)
         {
             switch (returnType)
             {

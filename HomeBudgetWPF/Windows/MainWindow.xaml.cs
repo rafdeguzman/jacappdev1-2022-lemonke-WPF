@@ -134,7 +134,7 @@ namespace HomeBudgetWPF
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBoxResult result = MessageBox.Show(deleteWarning, caption, button, icon);
-            if(result == MessageBoxResult.Yes)
+            if (result == MessageBoxResult.Yes)
             {
                 presenter.DeleteExpense(ExpenseId);
                 Refresh();
@@ -275,7 +275,7 @@ namespace HomeBudgetWPF
             {
                 dataBudgetLists.ContextMenu.IsEnabled = false;
                 Summary(filterByCategory, filterByDate, categoryIndex);
-                
+
             }
             else
             {
@@ -316,7 +316,7 @@ namespace HomeBudgetWPF
                     edt = DateTime.Now;
                     presenter.BudgetItemsList(sdt, edt);
                 }
-                
+
             }
 
             DisplayCategories(presenter.GetCategories());
@@ -332,12 +332,12 @@ namespace HomeBudgetWPF
             System.Windows.Application.Current.Shutdown();
         }
 
-        private void Summary(bool  filterByCategory, bool filterByDate,int  categoryIndex)
+        private void Summary(bool filterByCategory, bool filterByDate, int categoryIndex)
         {
             DateTime defaultDate = new DateTime(1, 1, 1);
             DateTime sdt = Convert.ToDateTime(StartDate.SelectedDate);
             DateTime edt = Convert.ToDateTime(EndDate.SelectedDate);
-            if(filterByCategory && filterByDate)
+            if (filterByCategory && filterByDate)
             {
                 if (sdt != defaultDate && edt != defaultDate && categoryIndex != -1)
                 {
@@ -521,7 +521,27 @@ namespace HomeBudgetWPF
 
         private void search_TextChanged(object sender, TextChangedEventArgs e)
         {
-            presenter.Search(search.Text);            
+            displaySearchHint();
+            string searchType = "BudgetItem";
+            if ((bool)FilterByCategory.IsChecked && !(bool)FilterByDate.IsChecked)
+            {
+                searchType = "BudgetItemsByCategory";
+            }
+            else if (!(bool)FilterByCategory.IsChecked && (bool)FilterByDate.IsChecked)
+            {
+                searchType = "BudgetItemsByMonth";
+            }
+            else if ((bool)FilterByCategory.IsChecked && (bool)FilterByDate.IsChecked)
+            {
+                searchType = "budgetItemsByCategoryAndMonth";
+            }
+
+            if(cmbCategory.SelectedIndex == -1)
+                presenter.Search(search.Text, searchType, StartDate.SelectedDate, EndDate.SelectedDate, false, 1);
+            else
+            {
+                presenter.Search(search.Text, searchType, StartDate.SelectedDate, EndDate.SelectedDate, true, cmbCategory.SelectedIndex);
+            }
         }
         private void displaySearchHint()
         {
