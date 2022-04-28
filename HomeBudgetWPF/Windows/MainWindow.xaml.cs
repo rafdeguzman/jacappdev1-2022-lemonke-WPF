@@ -518,5 +518,21 @@ namespace HomeBudgetWPF
         {
             Refresh();
         }
+
+        private void search_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            presenter.Search(search.Text);            
+        }
+        private void displaySearchHint()
+        {
+            if (search.Text.Length == 0)
+            {
+                searchHint.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                searchHint.Visibility = Visibility.Hidden;
+            }
+        }
     }
 }

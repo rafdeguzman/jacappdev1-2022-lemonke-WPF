@@ -106,26 +106,6 @@ namespace HomeBudgetWPF
                 List<BudgetItem> budgetItemsList = model.GetBudgetItems(start, end, FilterFlag, categoryID);
                 view.ShowBudgetItems(budgetItemsList);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public void BudgetByCategory(DateTime? start, DateTime? end, int categoryID = -1, bool FilterFlag = false )
         {
             List<BudgetItemsByCategory> budgetItemsList = model.GetBudgetItemsByCategory(start, end, FilterFlag, categoryID);
@@ -145,6 +125,76 @@ namespace HomeBudgetWPF
         public void DeleteExpense(int id)
         {
             model.expenses.Delete(id);
+        }
+
+        public void Search(string search, string returnType, DateTime Start, DateTime End, bool FilterFlag, int CategoryId)
+        {
+            switch (returnType)
+            {
+                case "BudgetItem":
+                    List<BudgetItem> budgetItems = model.GetBudgetItems(Start, End, FilterFlag, CategoryId);
+                    List<BudgetItem> searchedItems = new List<BudgetItem>();
+                    foreach (BudgetItem bi in budgetItems)
+                    {
+                        if (bi.Amount.ToString().Contains(search) ||
+                            bi.Balance.ToString().Contains(search) ||
+                            bi.Category.ToString().Contains(search) ||
+                            bi.CategoryID.ToString().Contains(search) ||
+                            bi.Date.ToString().Contains(search) ||
+                            bi.ExpenseID.ToString().Contains(search) ||
+                            bi.ShortDescription.ToString().Contains(search))
+                        {
+                            searchedItems.Add(bi);
+                        }
+                    }
+                    view.ShowBudgetItems(searchedItems);
+                    break;
+                case "BudgetItemsByCategory":
+                    List<BudgetItemsByCategory> budgetItemsByCategory = model.GetBudgetItemsByCategory(Start, End, FilterFlag, CategoryId);
+                    List<BudgetItemsByCategory> searchedBudgetItemsByCategory = new List<BudgetItemsByCategory>();
+                    foreach(BudgetItemsByCategory bibc in budgetItemsByCategory)
+                    {
+                        if(bibc.Category.ToString().Contains(search) ||
+                            bibc.CategoryID.ToString().Contains(search) ||
+                            bibc.Details.ToString().Contains(search) ||
+                            bibc.Total.ToString().Contains(search))
+                        {
+                            searchedBudgetItemsByCategory.Add(bibc);
+                        }
+                    }
+                    view.ShowBudgetItemsByCategory(searchedBudgetItemsByCategory);
+                    break;
+                case "BudgetItemsByMonth":
+                    List<BudgetItemsByMonth> budgetItemsByMonth = model.GetBudgetItemsByMonth(Start, End, FilterFlag, CategoryId);
+                    List<BudgetItemsByMonth> searchedBudgetItemsByMonth = new List<BudgetItemsByMonth>();
+                    foreach(BudgetItemsByMonth bibm in budgetItemsByMonth)
+                    {
+                        if(bibm.Details.ToString().Contains(search) ||
+                            bibm.Month.ToString().Contains(search) ||
+                            bibm.Total.ToString().Contains(search))
+                        {
+                            searchedBudgetItemsByMonth.Add(bibm);
+                        }
+                    }
+                    view.ShowBudgetItemsByDate(searchedBudgetItemsByMonth);
+                    break;
+                case "budgetItemsByCategoryAndMonth":
+                    List<Dictionary<string, object>> budgetItemsByCategoryAndMonth = model.GetBudgetDictionaryByCategoryAndMonth(Start, End, FilterFlag, CategoryId);
+                    List<Dictionary<string, object>> searchedBudgetItemsByCategoryAndMonth = new List<Dictionary<string, object>>();
+                    foreach (Dictionary<string, object> o in budgetItemsByCategoryAndMonth)
+                    {
+                        foreach(string s in o.Values)
+                        {
+                            if (!s.Contains(search))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    break;
+
+            }
+            
         }
 
     }
