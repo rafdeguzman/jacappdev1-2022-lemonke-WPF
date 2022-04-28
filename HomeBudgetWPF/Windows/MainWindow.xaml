@@ -90,7 +90,7 @@
                 <DatePicker Text="Brand" Margin="0,5,5,5" x:Name="StartDate" SelectedDateChanged="Refresh_Event"/>
                 <DatePicker Text="Brand" Margin="0,5,5,5" x:Name="EndDate" SelectedDateChanged="Refresh_Event"/>
                 <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Filter by category" FontSize="12"/>
-                <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" x:Name="cmbCategory" IsEditable="True" TextBoxBase.TextChanged="Refresh_Event" DropDownClosed="Refresh_Event"/>
+                <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" x:Name="cmbCategory" IsEditable="True" TextBoxBase.TextChanged="Refresh_Event" DropDownClosed="cmbCategory_DropDownClosed"/>
                 <Grid Grid.Row="5" Grid.Column="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="23*"/>

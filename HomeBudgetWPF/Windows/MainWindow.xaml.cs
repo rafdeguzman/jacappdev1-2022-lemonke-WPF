@@ -273,13 +273,18 @@ namespace HomeBudgetWPF
             int categoryIndex = cmbCategory.SelectedIndex;
             bool filterByCategory = FilterByCategory.IsChecked.Value;
             bool filterByDate = FilterByDate.IsChecked.Value;
+            dataBudgetLists.ContextMenu.IsOpen = false;
+            dataBudgetLists.ContextMenu.StaysOpen = false;
 
             if (filterByDate || filterByCategory)
             {
+                dataBudgetLists.ContextMenu.IsEnabled = false;
                 Summary(filterByCategory, filterByDate, categoryIndex);
+                
             }
             else
             {
+                dataBudgetLists.ContextMenu.IsEnabled = true;
                 if (sdt != defaultDate && edt != defaultDate && categoryIndex != -1)
                 {
                     presenter.BudgetItemsList(sdt, edt, categoryIndex + 1, true);
@@ -494,8 +499,16 @@ namespace HomeBudgetWPF
 
             dataBudgetLists.ItemsSource = budgetItemsListByMonthAndCategory;
             dataBudgetLists.Columns.Clear();
-            for (int i = 0; i < budgetItemsListByMonthAndCategory.Count ; i++)
+            foreach (string key in budgetItemsListByMonthAndCategory[0].Keys)
             {
+                if (!key.Contains("details:"))
+                {
+                    var column = new DataGridTextColumn();
+                    column.Header = key;
+                    column.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
+                    column.Binding.StringFormat = "c";
+                    dataBudgetLists.Columns.Add(column);
+                }
             }
         }
 
@@ -504,5 +517,9 @@ namespace HomeBudgetWPF
             Refresh();
         }
 
+        private void cmbCategory_DropDownClosed(object sender, EventArgs e)
+        {
+            Refresh();
+        }
     }
 }
