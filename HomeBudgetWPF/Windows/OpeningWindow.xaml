@@ -25,6 +25,7 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
@@ -48,7 +49,15 @@
                     <TextBlock Grid.Column="1" TextAlignment="Right" Style="{DynamicResource TextBlockDefault}" VerticalAlignment="Center" Text="Existing Budget File"/>
                 </Grid>
             </Button>
-
+            <Button Margin="5" x:Name="btnOpenRecent" BorderBrush="{DynamicResource Backdrop}" HorizontalContentAlignment="Stretch" Click="btnOpenRecent_Click" Background="{DynamicResource Alternation1}"  Grid.Column="1" Grid.Row="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="1" TextAlignment="Right" Style="{DynamicResource TextBlockDefault}" VerticalAlignment="Center" Text="Open Recent File"/>
+                </Grid>
+            </Button>
         </Grid>
     </Grid>
     

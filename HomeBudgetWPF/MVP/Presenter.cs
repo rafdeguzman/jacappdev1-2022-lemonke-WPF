@@ -71,29 +71,39 @@ namespace HomeBudgetWPF
             {
                 //newDB is false (opening file)
 
-                //ask for budget folder location
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                string initialPath = config.lastUsedFilePath;
-                int index = initialPath.LastIndexOf('\\') + 1;
-                if (initialPath.Length != 0)
+                // open recent file
+                if (config.recentDB)
                 {
-                    index = 0;
-                    openFileDialog.Filter = "Database Files (*.db)|*.db|All files (*.*)|*.*";
-                    openFileDialog.InitialDirectory = initialPath.Remove(index);
+                    //uses last file
+                    model = new HomeBudget(config.lastUsedFilePath, false);
                 }
-                //open file window
-                if (openFileDialog.ShowDialog() == true)
+                else
                 {
-                    //work here
-                    //if true, set first time user to false
-                    config.firstTimeUser = "False";
-                    //initialize db using filename
-                    string filePath = openFileDialog.FileName;
-                    index = filePath.LastIndexOf('\\') + 1;
-                    model = new HomeBudget(filePath);
-                    config.lastUsedFilePath = filePath;
-                    config.currentFile = filePath.Substring(index);
-                    config.saveConfig();
+                    //ask for budget folder location
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    string initialPath = config.lastUsedFilePath;
+                    int index = initialPath.LastIndexOf('\\') + 1;
+                    if (initialPath.Length != 0)
+                    {
+                        index = 0;
+                        openFileDialog.Filter = "Database Files (*.db)|*.db|All files (*.*)|*.*";
+                        openFileDialog.InitialDirectory = initialPath.Remove(index);
+                    }
+                    //open file window
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        //work here
+                        //if true, set first time user to false
+                        config.firstTimeUser = "False";
+                        //initialize db using filename
+                        string filePath = openFileDialog.FileName;
+                        index = filePath.LastIndexOf('\\') + 1;
+                        model = new HomeBudget(filePath);
+                        config.lastUsedFilePath = filePath;
+                        config.currentFile = filePath.Substring(index);
+                        config.lastUsedFile = config.lastUsedFile + config.currentFile;
+                        config.saveConfig();
+                    }
                 }
             }
         }
