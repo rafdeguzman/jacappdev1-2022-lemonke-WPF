@@ -243,14 +243,9 @@ namespace HomeBudgetWPF
             dataBudgetLists.Columns.Add(column4);
 
             var column5 = new DataGridTextColumn(); // Create a text column object
-            column5.Header = "ShortDescription";
+            column5.Header = "Description";
             column5.Binding = new Binding("ShortDescription");
             dataBudgetLists.Columns.Add(column5);
-
-            var column6 = new DataGridTextColumn(); // Create a text column object
-            column6.Header = "ShortDescription";
-            column6.Binding = new Binding("ShortDescription");
-            dataBudgetLists.Columns.Add(column6);
         }
 
         /// <summary
@@ -476,6 +471,7 @@ namespace HomeBudgetWPF
             var column2 = new DataGridTextColumn(); // Create a text column object
             column2.Header = "Total";
             column2.Binding = new Binding("Total"); // Bind to an object propery
+            column2.Binding.StringFormat = "c";
             dataBudgetLists.Columns.Add(column2);
         }
 
@@ -491,6 +487,7 @@ namespace HomeBudgetWPF
             var column2 = new DataGridTextColumn(); // Create a text column object
             column2.Header = "Total";
             column2.Binding = new Binding("Total"); // Bind to an object propery
+            column2.Binding.StringFormat = "c";
             dataBudgetLists.Columns.Add(column2);
         }
 
