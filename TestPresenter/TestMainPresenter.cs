@@ -28,6 +28,21 @@ namespace TestPresenter
             calledShowBudgetItems = true;
         }
 
+        public void ShowBudgetItemsByDate(List<BudgetItemsByMonth> budgetItemsListByMonth)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowBudgetItemsByCategory(List<BudgetItemsByCategory> budgetItemsListByCategory)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ShowBudgetItemsDateAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
+        {
+            throw new NotImplementedException();
+        }
+
         public TestView()
         {
             config = new Config();
