@@ -119,6 +119,7 @@ namespace HomeBudgetWPF
                 GetUserInput();
                 clear();
                 blastInput.Visibility = Visibility.Visible;
+                ((MainWindow)this.Owner).showOnGrid();
             }
         }
 

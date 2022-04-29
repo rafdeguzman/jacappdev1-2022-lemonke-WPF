@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.IO;
+using System.Diagnostics;
 using Budget;
 
 namespace HomeBudgetWPF
@@ -81,17 +82,15 @@ namespace HomeBudgetWPF
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
             AddExpenseWindow aew = new AddExpenseWindow();
+            aew.Owner = this;
             aew.Show();
-            aew.Closed += AddExpenseWindowClosed;
         }
-        private void AddExpenseWindowClosed(object sender, EventArgs e)
+        public void showOnGrid()
         {
-            ((Window)sender).Closed -= AddExpenseWindowClosed;
             Refresh();
             dataBudgetLists.SelectedIndex = dataBudgetLists.Items.Count - 1;
             dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
         }
-
 
         /// <summary>
         /// Displays the add category window
