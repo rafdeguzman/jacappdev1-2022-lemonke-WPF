@@ -88,10 +88,11 @@ namespace HomeBudgetWPF
         }
         public void showOnGrid()
         {
-            Refresh();
-            dataBudgetLists.SelectedIndex = dataBudgetLists.Items.Count - 1;
-            dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
-            aew.ShowDialog();
+            if(dataBudgetLists.Items.Count > 0)
+            {
+                dataBudgetLists.SelectedIndex = dataBudgetLists.Items.Count - 1;
+                dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
+            }
             Filter();
         }
 
@@ -127,7 +128,6 @@ namespace HomeBudgetWPF
             dynamic selectedItem = dataBudgetLists.SelectedItem;
             UpdateWindow.CallUpdateWindow(selectedItem.ExpenseID, selectedItem.CategoryID - 1, selectedItem.ShortDescription, selectedItem.Amount, selectedItem.Date);
             Filter();
-            Refresh();
             dataBudgetLists.ScrollIntoView(selectedItem);
             dataBudgetLists.SelectedIndex = selectedItem.ExpenseID - 1;
         }
