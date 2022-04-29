@@ -101,34 +101,15 @@ namespace HomeBudgetWPF
         {
             return model.categories.List();
         }
-        public void BudgetItemsList(DateTime? start, DateTime? end, int categoryID = -1 , bool FilterFlag = false)
-        {
-                List<BudgetItem> budgetItemsList = model.GetBudgetItems(start, end, FilterFlag, categoryID);
-                view.ShowBudgetItems(budgetItemsList);
-        }
-        public void BudgetByCategory(DateTime? start, DateTime? end, int categoryID = -1, bool FilterFlag = false )
-        {
-            List<BudgetItemsByCategory> budgetItemsList = model.GetBudgetItemsByCategory(start, end, FilterFlag, categoryID);
-            view.ShowBudgetItemsByCategory(budgetItemsList);
-        }
-        public void BudgetByDate(DateTime? start, DateTime? end, int categoryID = -1, bool FilterFlag = false)
-        {
-            List<BudgetItemsByMonth> budgetItemsList = model.GetBudgetItemsByMonth(start, end, FilterFlag, categoryID);
-            view.ShowBudgetItemsByDate(budgetItemsList);
-        }
-        public void BudgetIByDateandCategory(DateTime? start, DateTime? end, int categoryID = -1, bool FilterFlag = false)
-        {
-            List <Dictionary<string, object>> budgetItemsList = model.GetBudgetDictionaryByCategoryAndMonth(start, end, FilterFlag, categoryID);
-            view.ShowBudgetItemsDateAndCategory(budgetItemsList);
-        }
 
         public void DeleteExpense(int id)
         {
             model.expenses.Delete(id);
         }
 
-        public void Search(string search, string returnType, DateTime? Start, DateTime? End, bool FilterFlag, int CategoryId)
+        public void Filter(string search, string returnType, DateTime? Start, DateTime? End, bool FilterFlag = false, int CategoryId = -1)
         {
+            search = search.ToLower();
             switch (returnType)
             {
                 case "BudgetItem":
@@ -136,13 +117,13 @@ namespace HomeBudgetWPF
                     List<BudgetItem> searchedItems = new List<BudgetItem>();
                     foreach (BudgetItem bi in budgetItems)
                     {
-                        if (bi.Amount.ToString().Contains(search) ||
-                            bi.Balance.ToString().Contains(search) ||
-                            bi.Category.ToString().Contains(search) ||
-                            bi.CategoryID.ToString().Contains(search) ||
-                            bi.Date.ToString().Contains(search) ||
-                            bi.ExpenseID.ToString().Contains(search) ||
-                            bi.ShortDescription.ToString().Contains(search))
+                        if (bi.Amount.ToString().ToLower().Contains(search) ||
+                            bi.Balance.ToString().ToLower().Contains(search) ||
+                            bi.Category.ToString().ToLower().Contains(search) ||
+                            bi.CategoryID.ToString().ToLower().Contains(search) ||
+                            bi.Date.ToString().ToLower().Contains(search) ||
+                            bi.ExpenseID.ToString().ToLower().Contains(search) ||
+                            bi.ShortDescription.ToString().ToLower().Contains(search))
                         {
                             searchedItems.Add(bi);
                         }
@@ -154,10 +135,10 @@ namespace HomeBudgetWPF
                     List<BudgetItemsByCategory> searchedBudgetItemsByCategory = new List<BudgetItemsByCategory>();
                     foreach(BudgetItemsByCategory bibc in budgetItemsByCategory)
                     {
-                        if(bibc.Category.ToString().Contains(search) ||
-                            bibc.CategoryID.ToString().Contains(search) ||
-                            bibc.Details.ToString().Contains(search) ||
-                            bibc.Total.ToString().Contains(search))
+                        if(bibc.Category.ToString().ToLower().Contains(search) ||
+                            bibc.CategoryID.ToString().ToLower().Contains(search) ||
+                            bibc.Details.ToString().ToLower().Contains(search) ||
+                            bibc.Total.ToString().ToLower().Contains(search))
                         {
                             searchedBudgetItemsByCategory.Add(bibc);
                         }
@@ -169,9 +150,9 @@ namespace HomeBudgetWPF
                     List<BudgetItemsByMonth> searchedBudgetItemsByMonth = new List<BudgetItemsByMonth>();
                     foreach(BudgetItemsByMonth bibm in budgetItemsByMonth)
                     {
-                        if(bibm.Details.ToString().Contains(search) ||
-                            bibm.Month.ToString().Contains(search) ||
-                            bibm.Total.ToString().Contains(search))
+                        if(bibm.Details.ToString().ToLower().Contains(search) ||
+                            bibm.Month.ToString().ToLower().Contains(search) ||
+                            bibm.Total.ToString().ToLower().Contains(search))
                         {
                             searchedBudgetItemsByMonth.Add(bibm);
                         }

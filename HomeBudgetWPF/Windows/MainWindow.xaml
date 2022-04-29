@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         mc:Ignorable="d"
         Title="Le Monke" MinHeight="500" MaxHeight="500" MinWidth="1000" MaxWidth="1000" Closing="Window_Closing">
@@ -27,7 +28,7 @@
                 <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <DataGrid Grid.Row="0" Grid.ColumnSpan="2" MinHeight="318" MaxHeight="318" Grid.Column="0" x:Name="dataBudgetLists" AutoGenerateColumns="False" IsReadOnly="True" Background="{DynamicResource Alternation2}" AlternationCount="2" Foreground="{DynamicResource TextColor}"  AlternatingRowBackground="{DynamicResource Alternation2}" RowBackground="{DynamicResource Alternation1}" RowHeaderWidth="0" GridLinesVisibility="Horizontal" BorderBrush="{DynamicResource Backdrop}" Margin="10">
+            <DataGrid Grid.Row="0" Grid.ColumnSpan="2" MinHeight="318" MaxHeight="318" Grid.Column="0" SelectionUnit="FullRow" x:Name="dataBudgetLists" AutoGenerateColumns="False" IsReadOnly="True" Background="{DynamicResource Alternation2}" AlternationCount="2" Foreground="{DynamicResource TextColor}"  AlternatingRowBackground="{DynamicResource Alternation2}" RowBackground="{DynamicResource Alternation1}" RowHeaderWidth="0" GridLinesVisibility="None" BorderBrush="{DynamicResource Backdrop}" Margin="10">
                 <!--For Styling The Headers-->
                 <DataGrid.Resources>
                     <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
@@ -47,9 +48,16 @@
                     </Style>
                 </DataGrid.Resources>
 
-                <!--This just adds padding to the cells-->
+                
                 <DataGrid.CellStyle>
                     <Style TargetType="DataGridCell">
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource MainColor}"/>
+                                <Setter Property="Foreground" Value="{DynamicResource Button.TextColor}"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource TextColor}"/>
+                            </Trigger>
+                        </Style.Triggers>
                         <Setter Property="Padding" Value="5"/>
                         <Setter Property="Template">
                             <Setter.Value>
@@ -87,7 +95,7 @@
                 <!--Search-->
                 <Grid Margin="0,0,0,0" Background="White">
                     <Label Name="searchHint" FontSize="14">Search</Label>
-                    <TextBox Background="Transparent" FontSize="14" VerticalAlignment="Center" TextChanged="search_TextChanged" x:Name="search" Width="180" />
+                    <TextBox Background="Transparent" BorderThickness="0" FontSize="14" VerticalAlignment="Center" KeyUp="search_KeyUp" x:Name="search" Width="180" />
                 </Grid>
 
 
@@ -116,7 +124,7 @@
 
             <Button Style="{DynamicResource RoundedButton}" Grid.Column="0" Grid.Row="4" Content="Show Categories" Click="Category_Click" Margin="5,0,5,0" />
             <Button Style="{DynamicResource RoundedButton}" Grid.Column="1" Grid.Row="4" Content="Add Expense" Click="Expense_Click" Margin="5,0,5,0" />
-            <Button Style="{DynamicResource RoundedButton}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" Content="Default" Click="Filter_Click" Margin="5,0,5,0"/>
+            <Button Style="{DynamicResource RoundedButton}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" Content="Reset" Click="Filter_Click" Margin="5,0,5,0"/>
         </Grid>
     </StackPanel>
 </Window>
