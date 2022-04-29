@@ -84,6 +84,7 @@ namespace HomeBudgetWPF
             AddExpenseWindow aew = new AddExpenseWindow();
             aew.Owner = this;
             aew.Show();
+
         }
         public void showOnGrid()
         {
