@@ -84,7 +84,13 @@ namespace HomeBudgetWPF
             AddExpenseWindow aew = new AddExpenseWindow();
             aew.Owner = this;
             aew.Show();
-
+            aew.Closed += AddExpenseWindowClosed;
+        }
+        private void AddExpenseWindowClosed(object sender, EventArgs e)
+        {
+            ((AddExpenseWindow)sender).Closed -= AddExpenseWindowClosed;
+            //bring main window to front when closed
+            this.Activate();
         }
         public void showOnGrid()
         {
@@ -145,11 +151,26 @@ namespace HomeBudgetWPF
             string caption = $"Delete Expense #{ExpenseId}";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult result = MessageBox.Show(deleteWarning, caption, button, icon, MessageBoxResult.Yes);
+            MessageBoxResult result = MessageBox.Show(deleteWarning, caption, button, icon);
             if (result == MessageBoxResult.Yes)
             {
+                int lastIndex = dataBudgetLists.SelectedIndex - 1;
                 presenter.DeleteExpense(ExpenseId);
                 Filter();
+                if (dataBudgetLists.Items.Count > 0)
+                {
+                    // if last item is deleted, change selected item to item above
+                    if (lastIndex == dataBudgetLists.Items.Count - 1)
+                    {
+                        dataBudgetLists.SelectedIndex = dataBudgetLists.Items.Count - 1;
+                        dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
+                    }
+                    else
+                    {
+                        dataBudgetLists.SelectedIndex = (lastIndex += 1);
+                        dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
+                    }
+                }
             }
         }
 
