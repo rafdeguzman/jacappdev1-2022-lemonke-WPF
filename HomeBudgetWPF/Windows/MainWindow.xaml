@@ -91,32 +91,31 @@
             </DataGrid>
 
             <!-- filter -->
-            <StackPanel Grid.Column="2" Margin="20, 0 , 0, 0">
+            <StackPanel Grid.Column="2" Margin="20, 10, 0, 0">
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Filter" Padding="0"/>
                 <!--Search-->
-                <Grid Margin="0,0,0,0" Background="White">
+                <Grid Margin="0,5" Background="White">
                     <Label Name="searchHint" FontSize="14">Search</Label>
-                    <TextBox Background="Transparent" BorderThickness="0" FontSize="14" VerticalAlignment="Center" KeyUp="search_KeyUp" x:Name="search" Width="180" />
+                    <TextBox Background="Transparent" BorderThickness="0" FontSize="14" VerticalAlignment="Center" KeyDown="search_KeyDown" KeyUp="search_KeyUp" x:Name="search" Width="180" Padding="2,0,0,0" />
                 </Grid>
-
-
-                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Filter" Grid.Row="5" Grid.Column="0"/>
-                <DatePicker Text="Brand" Margin="0,5,5,5" x:Name="StartDate" SelectedDateChanged="Refresh_Event"/>
-                <DatePicker Text="Brand" Margin="0,5,5,5" x:Name="EndDate" SelectedDateChanged="Refresh_Event"/>
+                <DatePicker Text="Brand" Margin="0,0,0,5" x:Name="StartDate" SelectedDateChanged="StartDate_SelectedDateChanged"/>
+                <DatePicker Text="Brand" x:Name="EndDate" SelectedDateChanged="EndDate_SelectedDateChanged"/>
                 <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" x:Name="cmbCategory" IsEditable="True" TextBoxBase.TextChanged="Refresh_Event" DropDownClosed="cmbCategory_DropDownClosed"/>
+                <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Summary" Padding="0"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Summary by category" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold" Grid.ColumnSpan="2" Margin="0,0,5,0"/>
-                    <CheckBox Grid.Column="1" x:Name="FilterByCategory" VerticalAlignment="Center" HorizontalAlignment="Left" Checked="Refresh_Event" Unchecked="Refresh_Event"/>
+                    <TextBlock Grid.Column="0" Text="By Category" Style="{DynamicResource TextBlockDefault}" Foreground="{DynamicResource TextColor}" FontSize="12" FontWeight="Bold" Grid.ColumnSpan="2" Padding="0"/>
+                    <CheckBox Grid.Column="1" x:Name="FilterByCategory" VerticalAlignment="Center" HorizontalAlignment="Right" Checked="Refresh_Event" Unchecked="Refresh_Event"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Summary by date" Style="{DynamicResource TextBlockDefault}" FontSize="12" FontWeight="Bold"/>
+                    <TextBlock Grid.Column="0" Text="By Date" Style="{DynamicResource TextBlockDefault}" Foreground="{DynamicResource TextColor}" FontSize="12" FontWeight="Bold" Padding="0"/>
                     <CheckBox Grid.Column="1" x:Name="FilterByDate" VerticalAlignment="Center" HorizontalAlignment="Right" Checked="Refresh_Event" Unchecked="Refresh_Event"></CheckBox>
                 </Grid>
 
