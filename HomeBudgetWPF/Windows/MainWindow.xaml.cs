@@ -443,19 +443,5 @@ namespace HomeBudgetWPF
                 Filter();
             }
         }
-
-        public bool SaveFile()
-        {
-            
-        }
-
-        public bool OpenFile()
-        {
-            throw new NotImplementedException();
-        }
-        public string getFilePath()
-        {
-            return filePath;
-        }
     }
 }

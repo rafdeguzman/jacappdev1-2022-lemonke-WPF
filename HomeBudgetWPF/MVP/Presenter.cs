@@ -53,42 +53,40 @@ namespace HomeBudgetWPF
                     saveFileDialog.DefaultExt = "db";
                     saveFileDialog.Filter = "Database files (*.db)|*.db|All files (*.*)|*.*";
                     saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    if (v.SaveFile())
+                    bool? dialogResult = saveFileDialog.ShowDialog();
+                    switch (dialogResult)
                     {
-                        //set firstTimeUser to false
-                        config.firstTimeUser = "false";
-                        //initialize new db with chosen filename
-                        string filePath = saveFileDialog.FileName;
-                        int index = filePath.LastIndexOf('\\') + 1;
-                        model = new HomeBudget(filePath, true);
-                        config.lastUsedFilePath = filePath;
-                        config.currentFile = filePath.Substring(index);
-                        config.saveConfig();
-                        view.ShowFilesCreated(config.lastUsedFilePath);
-                    }
-                    if (saveFileDialog.ShowDialog() == true)
-                    {
-                        //set firstTimeUser to false
-                        config.firstTimeUser = "false";
-                        //initialize new db with chosen filename
-                        string filePath = saveFileDialog.FileName;
-                        int index = filePath.LastIndexOf('\\') + 1;
-                        model = new HomeBudget(filePath, true);
-                        config.lastUsedFilePath = filePath;
-                        config.currentFile = filePath.Substring(index);
-                        config.saveConfig();
-                        view.ShowFilesCreated(config.lastUsedFilePath);
+                        case true:
+                            // User accepted dialog box
+
+                            //set firstTimeUser to false
+                            config.firstTimeUser = "false";
+                            //initialize new db with chosen filename
+                            string filePath = saveFileDialog.FileName;
+                            int index = filePath.LastIndexOf('\\') + 1;
+                            model = new HomeBudget(filePath, true);
+                            config.lastUsedFilePath = filePath;
+                            config.currentFile = filePath.Substring(index);
+                            config.saveConfig();
+                            view.ShowFilesCreated(config.lastUsedFilePath);
+                            break;
+                        case false:
+                            // User canceled dialog box
+                            return;
+                        default:
+                            // Indeterminate
+                            break;
                     }
                 }
             }
             else
             {
-                //newDB is false (opening file)
-
-                // open recent file
+                // newDB is false (opening file)
                 if (config.recentDB)
                 {
-                    //uses last file
+                    // open recent file
+
+                    // uses last file
                     model = new HomeBudget(config.lastUsedFilePath, false);
                 }
                 else
@@ -118,6 +116,7 @@ namespace HomeBudgetWPF
                         config.saveConfig();
                     }
                 }
+
             }
         }
         public List<Category> GetCategories()
