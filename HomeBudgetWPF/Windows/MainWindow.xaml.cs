@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.IO;
+using HomeBudgetWPF.Windows;
 using Budget;
 
 namespace HomeBudgetWPF
@@ -28,6 +29,8 @@ namespace HomeBudgetWPF
         const int EXTENSION_LENGTH = 3;
         private readonly Presenter presenter;
         Config config;
+        string filePath;
+        int index;
         #endregion
 
         #region Constructors
@@ -38,13 +41,22 @@ namespace HomeBudgetWPF
         {
             InitializeComponent();
             config = new Config();
-            presenter = new Presenter(this, config.newDB);
-            SetCurrentFile();
-            FilterByCategory.IsChecked = false;
-            FilterByDate.IsChecked = false;
-            //get expenses
-            ResetFilter();
-            Filter();
+            try
+            {
+                presenter = new Presenter(this, config.newDB);
+                SetCurrentFile();
+                FilterByCategory.IsChecked = false;
+                FilterByDate.IsChecked = false;
+                //get expenses
+                ResetFilter();
+                Filter();
+            }
+            catch
+            {
+                OpeningWindow ow = new OpeningWindow();
+                ow.Show();
+            }
+            
         }
         #endregion
 
@@ -432,9 +444,18 @@ namespace HomeBudgetWPF
             }
         }
 
-        private void deleteKeyPressExecuted(object sender, ExecutedRoutedEventArgs e)
+        public bool SaveFile()
         {
-            btnDelete_Click();
+            
+        }
+
+        public bool OpenFile()
+        {
+            throw new NotImplementedException();
+        }
+        public string getFilePath()
+        {
+            return filePath;
         }
     }
 }

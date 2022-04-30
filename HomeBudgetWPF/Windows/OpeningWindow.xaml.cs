@@ -10,9 +10,13 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Win32;
 using System.Configuration;
+using System.Collections.Specialized;
+using System.IO;
+using HomeBudgetWPF;
+using Budget;
 
 namespace HomeBudgetWPF.Windows
 {
@@ -50,6 +54,7 @@ namespace HomeBudgetWPF.Windows
         {
             config.newDB = true;
             MainWindow mw = new MainWindow();
+            mw.Owner = this;
             mw.Show();
             this.Close();
         }
@@ -67,6 +72,7 @@ namespace HomeBudgetWPF.Windows
             
             //work here
             MainWindow mw = new MainWindow();
+            mw.Owner = this;
             mw.Show();
             this.Close();
         }
@@ -88,6 +94,7 @@ namespace HomeBudgetWPF.Windows
                 config.recentDB = true;
                 //work
                 MainWindow mw = new MainWindow();
+                mw.Owner = this;
                 mw.Show();
                 this.Close();
             }

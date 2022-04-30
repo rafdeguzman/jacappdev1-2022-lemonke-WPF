@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Collections.Specialized;
 using System.Windows;
 using Microsoft.Win32;
+using HomeBudgetWPF.Windows;
 
 namespace HomeBudgetWPF
 {
@@ -52,6 +53,19 @@ namespace HomeBudgetWPF
                     saveFileDialog.DefaultExt = "db";
                     saveFileDialog.Filter = "Database files (*.db)|*.db|All files (*.*)|*.*";
                     saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                    if (v.SaveFile())
+                    {
+                        //set firstTimeUser to false
+                        config.firstTimeUser = "false";
+                        //initialize new db with chosen filename
+                        string filePath = saveFileDialog.FileName;
+                        int index = filePath.LastIndexOf('\\') + 1;
+                        model = new HomeBudget(filePath, true);
+                        config.lastUsedFilePath = filePath;
+                        config.currentFile = filePath.Substring(index);
+                        config.saveConfig();
+                        view.ShowFilesCreated(config.lastUsedFilePath);
+                    }
                     if (saveFileDialog.ShowDialog() == true)
                     {
                         //set firstTimeUser to false
@@ -101,7 +115,6 @@ namespace HomeBudgetWPF
                         model = new HomeBudget(filePath);
                         config.lastUsedFilePath = filePath;
                         config.currentFile = filePath.Substring(index);
-                        config.lastUsedFile = config.lastUsedFile + config.currentFile;
                         config.saveConfig();
                     }
                 }
