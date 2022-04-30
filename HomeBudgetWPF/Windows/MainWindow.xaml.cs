@@ -94,12 +94,17 @@ namespace HomeBudgetWPF
         }
         public void showOnGrid()
         {
-            if(dataBudgetLists.Items.Count > 0)
+            Filter();
+            if (dataBudgetLists.Items.Count > 0)
             {
                 dataBudgetLists.SelectedIndex = dataBudgetLists.Items.Count - 1;
                 dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
             }
-            Filter();
+            else
+            {
+                dataBudgetLists.SelectedIndex = 0;
+                dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
+            }
         }
 
         /// <summary>
@@ -121,7 +126,7 @@ namespace HomeBudgetWPF
             DisplayCategories(presenter.GetCategories());
             this.Activate();
         }
-        public void helpMe()
+        public void redrawCategories()
         {
             DisplayCategories(presenter.GetCategories());
         }

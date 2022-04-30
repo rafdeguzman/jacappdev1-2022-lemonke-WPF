@@ -115,9 +115,9 @@ namespace HomeBudgetWPF
                 category = categoryName;
                 presenter.AddCategory(cmbCategoryTypes.SelectedIndex);
                 if (this.Owner is MainWindow)
-                    ((MainWindow)this.Owner).helpMe();
+                    ((MainWindow)this.Owner).redrawCategories();
                 else if (this.Owner is AddExpenseWindow)
-                    ((MainWindow)((AddExpenseWindow)this.Owner).Owner).helpMe();    // get aew.Owner and call that one's function
+                    ((MainWindow)((AddExpenseWindow)this.Owner).Owner).redrawCategories();    // get aew.Owner and call that one's function
             }
             else
             {
