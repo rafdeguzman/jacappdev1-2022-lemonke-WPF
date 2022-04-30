@@ -77,12 +77,12 @@ namespace HomeBudgetWPF
             }
             else
             {
-                //newDB is false (opening file)
-
-                // open recent file
+                // newDB is false (opening file)
                 if (config.recentDB)
                 {
-                    //uses last file
+                    // open recent file
+
+                    // uses last file
                     model = new HomeBudget(config.lastUsedFilePath, false);
                 }
                 else
@@ -119,6 +119,7 @@ namespace HomeBudgetWPF
                             break;
                     }
                 }
+
             }
         }
         public List<Category> GetCategories()
