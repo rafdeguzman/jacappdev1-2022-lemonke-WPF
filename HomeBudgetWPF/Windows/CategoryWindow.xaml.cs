@@ -114,6 +114,10 @@ namespace HomeBudgetWPF
                 cmbCategories.Items.Add(categoryName);
                 category = categoryName;
                 presenter.AddCategory(cmbCategoryTypes.SelectedIndex);
+                if (this.Owner is MainWindow)
+                    ((MainWindow)this.Owner).helpMe();
+                else if (this.Owner is AddExpenseWindow)
+                    ((MainWindow)((AddExpenseWindow)this.Owner).Owner).helpMe();    // get aew.Owner and call that one's function
             }
             else
             {

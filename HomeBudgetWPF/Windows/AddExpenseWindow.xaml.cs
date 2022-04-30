@@ -197,6 +197,7 @@ namespace HomeBudgetWPF
             if (e.Key == Key.Return)
             {
                 CategoryWindow cw = new CategoryWindow();
+                cw.Owner = this;
                 cw.Show();
                 cw.Closed += CategoryWindowClosed;
                 TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;

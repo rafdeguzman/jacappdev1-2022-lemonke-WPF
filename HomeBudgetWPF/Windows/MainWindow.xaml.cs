@@ -110,7 +110,20 @@ namespace HomeBudgetWPF
         private void Category_Click(object sender, RoutedEventArgs e)
         {
             CategoryWindow cw = new CategoryWindow();
-            cw.ShowDialog();
+            cw.Owner = this;
+            //cw.ShowDialog();
+            cw.Show();
+            cw.Closed += CategoryWindowClosed;
+        }
+        private void CategoryWindowClosed(object sender, EventArgs e)
+        {
+            ((CategoryWindow)sender).Closed -= CategoryWindowClosed;
+            DisplayCategories(presenter.GetCategories());
+            this.Activate();
+        }
+        public void helpMe()
+        {
+            DisplayCategories(presenter.GetCategories());
         }
 
         /// <summary>
