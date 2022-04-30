@@ -53,31 +53,25 @@ namespace HomeBudgetWPF
                     saveFileDialog.DefaultExt = "db";
                     saveFileDialog.Filter = "Database files (*.db)|*.db|All files (*.*)|*.*";
                     saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    if (v.SaveFile())
+                    bool? saveFile = saveFileDialog.ShowDialog();
+                    switch (saveFile)
                     {
-                        //set firstTimeUser to false
-                        config.firstTimeUser = "false";
-                        //initialize new db with chosen filename
-                        string filePath = saveFileDialog.FileName;
-                        int index = filePath.LastIndexOf('\\') + 1;
-                        model = new HomeBudget(filePath, true);
-                        config.lastUsedFilePath = filePath;
-                        config.currentFile = filePath.Substring(index);
-                        config.saveConfig();
-                        view.ShowFilesCreated(config.lastUsedFilePath);
-                    }
-                    if (saveFileDialog.ShowDialog() == true)
-                    {
-                        //set firstTimeUser to false
-                        config.firstTimeUser = "false";
-                        //initialize new db with chosen filename
-                        string filePath = saveFileDialog.FileName;
-                        int index = filePath.LastIndexOf('\\') + 1;
-                        model = new HomeBudget(filePath, true);
-                        config.lastUsedFilePath = filePath;
-                        config.currentFile = filePath.Substring(index);
-                        config.saveConfig();
-                        view.ShowFilesCreated(config.lastUsedFilePath);
+                        case true:
+                            //set firstTimeUser to false
+                            config.firstTimeUser = "false";
+                            //initialize new db with chosen filename
+                            string filePath = saveFileDialog.FileName;
+                            int index = filePath.LastIndexOf('\\') + 1;
+                            model = new HomeBudget(filePath, true);
+                            config.lastUsedFilePath = filePath;
+                            config.currentFile = filePath.Substring(index);
+                            config.saveConfig();
+                            view.ShowFilesCreated(config.lastUsedFilePath);
+                            break;
+                        case false:
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -104,18 +98,25 @@ namespace HomeBudgetWPF
                         openFileDialog.InitialDirectory = initialPath.Remove(index);
                     }
                     //open file window
-                    if (openFileDialog.ShowDialog() == true)
+                    bool? openFile = openFileDialog.ShowDialog();
+                    switch (openFile)
                     {
-                        //work here
-                        //if true, set first time user to false
-                        config.firstTimeUser = "False";
-                        //initialize db using filename
-                        string filePath = openFileDialog.FileName;
-                        index = filePath.LastIndexOf('\\') + 1;
-                        model = new HomeBudget(filePath);
-                        config.lastUsedFilePath = filePath;
-                        config.currentFile = filePath.Substring(index);
-                        config.saveConfig();
+                        case true:
+                            //work here
+                            //if true, set first time user to false
+                            config.firstTimeUser = "False";
+                            //initialize db using filename
+                            string filePath = openFileDialog.FileName;
+                            index = filePath.LastIndexOf('\\') + 1;
+                            model = new HomeBudget(filePath);
+                            config.lastUsedFilePath = filePath;
+                            config.currentFile = filePath.Substring(index);
+                            config.saveConfig();
+                            break;
+                        case false:
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
