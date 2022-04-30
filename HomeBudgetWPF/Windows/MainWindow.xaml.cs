@@ -84,16 +84,26 @@ namespace HomeBudgetWPF
             AddExpenseWindow aew = new AddExpenseWindow();
             aew.Owner = this;
             aew.Show();
-
+            aew.Closed += AddExpenseWindowClosed;
         }
+        private void AddExpenseWindowClosed(object sender, EventArgs e)
+        {
+            ((AddExpenseWindow)sender).Closed -= AddExpenseWindowClosed;
+            //bring main window to front when closed
+            this.Activate();
+        }
+        /// <summary>
+        /// Selects the added last added item on the grid and brings it to view.
+        /// If there are no items, will not run so that SelectedIndex does not go negative.
+        /// </summary>
         public void showOnGrid()
         {
-            if(dataBudgetLists.Items.Count > 0)
+            Filter();
+            if (dataBudgetLists.Items.Count > 0)
             {
                 dataBudgetLists.SelectedIndex = dataBudgetLists.Items.Count - 1;
                 dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
             }
-            Filter();
         }
 
         /// <summary>
@@ -148,8 +158,23 @@ namespace HomeBudgetWPF
             MessageBoxResult result = MessageBox.Show(deleteWarning, caption, button, icon);
             if (result == MessageBoxResult.Yes)
             {
+                int lastIndex = dataBudgetLists.SelectedIndex - 1;
                 presenter.DeleteExpense(ExpenseId);
                 Filter();
+                if(dataBudgetLists.Items.Count > 0)
+                {
+                    // if last item is deleted, change selected item to item above
+                    if (lastIndex == dataBudgetLists.Items.Count - 1)
+                    {
+                        dataBudgetLists.SelectedIndex = dataBudgetLists.Items.Count - 1;
+                        dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
+                    }
+                    else
+                    {
+                        dataBudgetLists.SelectedIndex = (lastIndex += 1);
+                        dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
+                    }
+                }
             }
         }
 
@@ -405,6 +430,11 @@ namespace HomeBudgetWPF
             {
                 Filter();
             }
+        }
+
+        private void deleteKeyPressExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            btnDelete_Click();
         }
     }
 }
