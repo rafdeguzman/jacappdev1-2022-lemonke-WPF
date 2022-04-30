@@ -343,8 +343,9 @@ namespace HomeBudgetWPF
                 filterType = "budgetItemsByCategoryAndMonth";
             }
             bool filterFlag = cmbCategory.SelectedIndex == -1 ? false : true;
+            int x = dataBudgetLists.SelectedIndex;
             presenter.Filter(search.Text, filterType, StartDate.SelectedDate, EndDate.SelectedDate, filterFlag, cmbCategory.SelectedIndex + 1);
-            ScrollIntoView();
+            dataBudgetLists.SelectedIndex = x;
         }
         private void ResetFilter()
         {
@@ -437,7 +438,9 @@ namespace HomeBudgetWPF
         private void ScrollIntoView()
         {
             if(dataBudgetLists.SelectedItem != null)
+            {
                 dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
+            }    
         }
     }
 }
