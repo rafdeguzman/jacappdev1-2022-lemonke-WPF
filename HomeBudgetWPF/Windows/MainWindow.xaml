@@ -95,13 +95,13 @@
                 <!--Search-->
                 <Grid Margin="0,0,0,0" Background="White">
                     <Label Name="searchHint" FontSize="14">Search</Label>
-                    <TextBox Background="Transparent" BorderThickness="0" FontSize="14" VerticalAlignment="Center" KeyUp="search_KeyUp" x:Name="search" Width="180" />
+                    <TextBox Background="Transparent" BorderThickness="0" FontSize="14" VerticalAlignment="Center" KeyDown="search_KeyDown" KeyUp="search_KeyUp" x:Name="search" Width="180" />
                 </Grid>
 
 
                 <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Filter" Grid.Row="5" Grid.Column="0"/>
-                <DatePicker Text="Brand" Margin="0,5,5,5" x:Name="StartDate" SelectedDateChanged="Refresh_Event"/>
-                <DatePicker Text="Brand" Margin="0,5,5,5" x:Name="EndDate" SelectedDateChanged="Refresh_Event"/>
+                <DatePicker Text="Brand" Margin="0,5,5,5" x:Name="StartDate" SelectedDateChanged="StartDate_SelectedDateChanged"/>
+                <DatePicker Text="Brand" Margin="0,5,5,5" x:Name="EndDate" SelectedDateChanged="EndDate_SelectedDateChanged"/>
                 <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" x:Name="cmbCategory" IsEditable="True" TextBoxBase.TextChanged="Refresh_Event" DropDownClosed="cmbCategory_DropDownClosed"/>
                 <Grid>
                     <Grid.ColumnDefinitions>

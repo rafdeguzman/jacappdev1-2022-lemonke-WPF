@@ -133,7 +133,7 @@ namespace HomeBudgetWPF
             string caption = $"Delete Expense #{ExpenseId}";
             MessageBoxButton button = MessageBoxButton.YesNo;
             MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBoxResult result = MessageBox.Show(deleteWarning, caption, button, icon);
+            MessageBoxResult result = MessageBox.Show(deleteWarning, caption, button, icon, MessageBoxResult.Yes);
             if (result == MessageBoxResult.Yes)
             {
                 presenter.DeleteExpense(ExpenseId);
@@ -151,7 +151,7 @@ namespace HomeBudgetWPF
             string caption = "New Database File";
             MessageBoxButton button = MessageBoxButton.YesNoCancel;
             MessageBoxImage icon = MessageBoxImage.Question;
-            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon);
+            MessageBoxResult result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.Yes);
             if (result == MessageBoxResult.Yes)
                 return true;
 
@@ -174,7 +174,7 @@ namespace HomeBudgetWPF
             MessageBoxButton button = MessageBoxButton.OK;
             MessageBoxImage icon = MessageBoxImage.Information;
             MessageBoxResult result;
-            result = MessageBox.Show(messageBoxText, caption, button, icon);
+            result = MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
         }
         /// <summary>
         /// Closes all windows
@@ -186,7 +186,7 @@ namespace HomeBudgetWPF
             if (MessageBox.Show("Do you really want to force-close the app? Changes are automatically saved.",
                     "Close App",
                     MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
             {
                 System.Windows.Application.Current.Shutdown();
             }
@@ -344,6 +344,7 @@ namespace HomeBudgetWPF
             }
             bool filterFlag = cmbCategory.SelectedIndex == -1 ? false : true;
             presenter.Filter(search.Text, filterType, StartDate.SelectedDate, EndDate.SelectedDate, filterFlag, cmbCategory.SelectedIndex + 1);
+            ScrollIntoView();
         }
         private void ResetFilter()
         {
@@ -375,8 +376,9 @@ namespace HomeBudgetWPF
             }
         }
 
-        private void search_KeyUp(object sender, KeyEventArgs e)
+        private void search_KeyDown(object sender, KeyEventArgs e)
         {
+            displaySearchHint();
             if(e.Key == Key.Return || e.Key == Key.Enter)
             {
                 if(dataBudgetLists.SelectedIndex == -1)
@@ -388,11 +390,54 @@ namespace HomeBudgetWPF
                     int count = dataBudgetLists.Items.Count;
                     dataBudgetLists.SelectedIndex = (dataBudgetLists.SelectedIndex + 1) % count;
                 }
+                ScrollIntoView();
             }
             else
             {
                 Filter();
             }
+        }
+
+        private void search_KeyUp(object sender, KeyEventArgs e)
+        {
+            displaySearchHint();
+            Filter();
+        }
+        private void Refresh(bool isStart)
+        {
+            if (StartDate.SelectedDate > EndDate.SelectedDate && EndDate.SelectedDate != null && StartDate.SelectedDate != null)
+            {
+                string messageBoxText;
+                string caption = "Date Conflict Error";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Information;
+                if (isStart)
+                {
+                    messageBoxText = "Selected start date is after end date. End Date was changed to new start date.";
+                    EndDate.SelectedDate = StartDate.SelectedDate;
+                }                    
+                else
+                {
+                    messageBoxText = "Selected end date is before end date. Start Date was changed to new end date.";
+                    StartDate.SelectedDate = EndDate.SelectedDate;
+                }
+                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+            }
+        }
+
+        private void StartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Refresh(true);
+        }
+
+        private void EndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Refresh(false);
+        }
+        private void ScrollIntoView()
+        {
+            if(dataBudgetLists.SelectedItem != null)
+                dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
         }
     }
 }

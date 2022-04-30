@@ -160,18 +160,19 @@ namespace HomeBudgetWPF
                     view.ShowBudgetItemsByDate(searchedBudgetItemsByMonth);
                     break;
                 case "budgetItemsByCategoryAndMonth":
-                    List<Dictionary<string, object>> budgetItemsByCategoryAndMonth = model.GetBudgetDictionaryByCategoryAndMonth(Start, End, FilterFlag, CategoryId);
+                    Dictionary<string, object> budgetItemsByCategoryAndMonth = model.GetBudgetDictionaryByCategoryAndMonth(Start, End, FilterFlag, CategoryId)[0];
                     List<Dictionary<string, object>> searchedBudgetItemsByCategoryAndMonth = new List<Dictionary<string, object>>();
-                    foreach (Dictionary<string, object> o in budgetItemsByCategoryAndMonth)
+                    Dictionary<string, object> dictionary = new Dictionary<string, object>();
+                    foreach (KeyValuePair<string, object> s in budgetItemsByCategoryAndMonth)
                     {
-                        foreach(string s in o.Values)
+                        if(s.Key.ToLower().Contains(search) ||
+                            s.Value.ToString().ToLower().Contains(search))
                         {
-                            if (!s.Contains(search))
-                            {
-                                break;
-                            }
+                            dictionary.Add(s.Key, s.Value);
                         }
                     }
+                    searchedBudgetItemsByCategoryAndMonth.Add(dictionary);
+                    view.ShowBudgetItemsDateAndCategory(searchedBudgetItemsByCategoryAndMonth);
                     break;
 
             }
