@@ -15,5 +15,6 @@ namespace HomeBudgetWPF
         void ShowBudgetItemsByDate(List<BudgetItemsByMonth> budgetItemsListByMonth);
         void ShowBudgetItemsByCategory(List<BudgetItemsByCategory> budgetItemsListByCategory);
         void ShowBudgetItemsDateAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory);
+
     }
 }

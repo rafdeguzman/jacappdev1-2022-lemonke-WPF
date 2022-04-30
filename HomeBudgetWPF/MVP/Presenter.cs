@@ -9,7 +9,6 @@ using System.Configuration;
 using System.Collections.Specialized;
 using System.Windows;
 using Microsoft.Win32;
-using HomeBudgetWPF.Windows;
 
 namespace HomeBudgetWPF
 {
@@ -53,7 +52,7 @@ namespace HomeBudgetWPF
                     saveFileDialog.DefaultExt = "db";
                     saveFileDialog.Filter = "Database files (*.db)|*.db|All files (*.*)|*.*";
                     saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    bool? saveFile = saveFileDialog.ShowDialog();
+                    bool? saveFile= saveFileDialog.ShowDialog();
                     switch (saveFile)
                     {
                         case true:
@@ -77,12 +76,12 @@ namespace HomeBudgetWPF
             }
             else
             {
-                // newDB is false (opening file)
+                //newDB is false (opening file)
+
+                // open recent file
                 if (config.recentDB)
                 {
-                    // open recent file
-
-                    // uses last file
+                    //uses last file
                     model = new HomeBudget(config.lastUsedFilePath, false);
                 }
                 else
@@ -119,7 +118,6 @@ namespace HomeBudgetWPF
                             break;
                     }
                 }
-
             }
         }
         public List<Category> GetCategories()

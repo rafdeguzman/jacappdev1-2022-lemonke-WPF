@@ -30,11 +30,6 @@ namespace HomeBudgetWPF
             get { return config.AppSettings.Settings["lastUsedFilePath"].Value; }
             set { config.AppSettings.Settings["lastUsedFilePath"].Value = value; saveConfig(); }
         }
-        public string lastUsedFile
-        {
-            get { return config.AppSettings.Settings["lastUsedFile"].Value; }
-            set { config.AppSettings.Settings["lastUsedFile"].Value = value; saveConfig(); }
-        }
         public string currentFile
         {
             get { return config.AppSettings.Settings["currentFile"].Value; }

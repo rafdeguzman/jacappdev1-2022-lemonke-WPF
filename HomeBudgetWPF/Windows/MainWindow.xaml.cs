@@ -15,7 +15,6 @@ using System.Windows.Shapes;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.IO;
-using HomeBudgetWPF.Windows;
 using Budget;
 
 namespace HomeBudgetWPF
@@ -29,8 +28,6 @@ namespace HomeBudgetWPF
         const int EXTENSION_LENGTH = 3;
         private readonly Presenter presenter;
         Config config;
-        string filePath;
-        int index;
         #endregion
 
         #region Constructors
@@ -41,22 +38,13 @@ namespace HomeBudgetWPF
         {
             InitializeComponent();
             config = new Config();
-            try
-            {
-                presenter = new Presenter(this, config.newDB);
-                SetCurrentFile();
-                FilterByCategory.IsChecked = false;
-                FilterByDate.IsChecked = false;
-                //get expenses
-                ResetFilter();
-                Filter();
-            }
-            catch
-            {
-                OpeningWindow ow = new OpeningWindow();
-                ow.Show();
-            }
-            
+            presenter = new Presenter(this, config.newDB);
+            SetCurrentFile();
+            FilterByCategory.IsChecked = false;
+            FilterByDate.IsChecked = false;
+            //get expenses
+            ResetFilter();
+            Filter();
         }
         #endregion
 
