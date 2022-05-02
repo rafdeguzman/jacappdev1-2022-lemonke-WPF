@@ -194,7 +194,7 @@ namespace HomeBudgetWPF
                     }                    
                     view.ShowBudgetItemsByMonth(budgetItemsByMonth);
                     break;
-                case "budgetItemsByMonthAndCategory":
+                case "BudgetItemsByMonthAndCategory":
                     List<Dictionary<string, object>> budgetItemsByCategoryAndMonth = model.GetBudgetDictionaryByCategoryAndMonth(Start, End, FilterFlag, CategoryId);
                     if(search != string.Empty)
                     {
