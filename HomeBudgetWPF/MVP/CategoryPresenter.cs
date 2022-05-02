@@ -58,5 +58,10 @@ namespace HomeBudgetWPF
             return categoryTypes;
         }
 
+        public void closeDb()
+        {
+            model.CloseDB();
+        }
+
     }
 }

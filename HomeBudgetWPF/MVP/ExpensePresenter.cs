@@ -104,6 +104,10 @@ namespace HomeBudgetWPF
         {
             return userInputFromDuplicateExpense;
         }
+        public void closeDb()
+        {
+            model.CloseDB();
+        }
     }
 
 }

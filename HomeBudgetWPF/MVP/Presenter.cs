@@ -194,7 +194,7 @@ namespace HomeBudgetWPF
                     }                    
                     view.ShowBudgetItemsByMonth(budgetItemsByMonth);
                     break;
-                case "budgetItemsByCategoryAndMonth":
+                case "budgetItemsByMonthAndCategory":
                     List<Dictionary<string, object>> budgetItemsByCategoryAndMonth = model.GetBudgetDictionaryByCategoryAndMonth(Start, End, FilterFlag, CategoryId);
                     if(search != string.Empty)
                     {
@@ -219,6 +219,11 @@ namespace HomeBudgetWPF
 
             }
             
+        }
+
+        public void closeDb()
+        {
+            model.CloseDB();
         }
 
     }

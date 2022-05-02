@@ -401,7 +401,7 @@ namespace HomeBudgetWPF
             }
             else if (FilterByCategory.IsChecked.Value && FilterByDate.IsChecked.Value)
             {
-                filterType = "budgetItemsByCategoryAndMonth";
+                filterType = "budgetItemsByMonthAndCategory";
             }
             bool filterFlag = cmbCategory.SelectedIndex == -1 ? false : true;
             int x = dataBudgetLists.SelectedIndex;
