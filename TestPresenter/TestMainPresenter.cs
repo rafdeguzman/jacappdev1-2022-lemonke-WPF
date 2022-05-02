@@ -11,6 +11,7 @@ namespace TestPresenter
         public bool calledShowFilesCreated;
         public bool calledShowFirstTimeMessage;
         public bool calledShowBudgetItems;
+        public bool ShowBudgetItemsByMonth;
         Config config;
         public void ShowFilesCreated(string path)
         {
@@ -28,17 +29,17 @@ namespace TestPresenter
             calledShowBudgetItems = true;
         }
 
-        public void ShowBudgetItemsByDate(List<BudgetItemsByMonth> budgetItemsListByMonth)
-        {
-            throw new NotImplementedException();
-        }
-
         public void ShowBudgetItemsByCategory(List<BudgetItemsByCategory> budgetItemsListByCategory)
         {
             throw new NotImplementedException();
         }
 
-        public void ShowBudgetItemsDateAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
+        public void ShowBudgetItemsMonthAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ViewInterface.ShowBudgetItemsByMonth(List<BudgetItemsByMonth> budgetItemsListByMonth)
         {
             throw new NotImplementedException();
         }
@@ -74,6 +75,15 @@ namespace TestPresenter
                 ExpensePresenter p3 = new ExpensePresenter(view3);
                 p3.AddExpense(DateTime.Now, 1, 100, "abc", true);
                 Assert.True(view3.calledLastInput);
+            }
+
+            [Fact]
+            public void TestFilter_BudgetItems()
+            {
+                TestView view = new TestView();
+                Presenter p = new Presenter(view, true);
+                p.Filter("", "BudgetItems", null, null);
+                Assert.True(view.calledShowBudgetItems);
             }
         }
     }

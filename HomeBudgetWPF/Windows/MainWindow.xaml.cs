@@ -316,7 +316,7 @@ namespace HomeBudgetWPF
         {
             System.Windows.Application.Current.Shutdown();
         }
-        public void ShowBudgetItemsByDate(List<BudgetItemsByMonth> budgetItemsListByMonth)
+        public void ShowBudgetItemsByMonth(List<BudgetItemsByMonth> budgetItemsListByMonth)
         {
             ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByMonth;
@@ -350,14 +350,23 @@ namespace HomeBudgetWPF
             dataBudgetLists.Columns.Add(column2);
         }
 
-        public void ShowBudgetItemsDateAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
+                public void ShowBudgetItemsMonthAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
         {
             ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByMonthAndCategory;
             dataBudgetLists.Columns.Clear();
+            var columnTotal = new DataGridTextColumn();
+
             foreach (string key in budgetItemsListByMonthAndCategory[0].Keys)
             {
-                if (!key.Contains("details:"))
+                if (key.Contains("Total"))
+                {
+                    columnTotal = new DataGridTextColumn();
+                    columnTotal.Header = key;
+                    columnTotal.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
+                    columnTotal.Binding.StringFormat = "c";
+                }
+                if (!key.Contains("details:") && !key.Contains("Total"))
                 {
                     var column = new DataGridTextColumn();
                     column.Header = key;
@@ -366,6 +375,7 @@ namespace HomeBudgetWPF
                     dataBudgetLists.Columns.Add(column);
                 }
             }
+            dataBudgetLists.Columns.Add(columnTotal);
         }
 
         private void Refresh_Event(object sender, RoutedEventArgs e)
@@ -380,7 +390,7 @@ namespace HomeBudgetWPF
         private void Filter()
         {
             displaySearchHint();
-            string filterType = "BudgetItem";
+            string filterType = "BudgetItems";
             if (FilterByCategory.IsChecked.Value && !FilterByDate.IsChecked.Value)
             {
                 filterType = "BudgetItemsByCategory";
@@ -400,7 +410,7 @@ namespace HomeBudgetWPF
         }
         private void ResetFilter()
         {
-            presenter.Filter("", "BudgetItem", null, null);
+            presenter.Filter("", "BudgetItems", null, null);
             search.Text = string.Empty;
             displaySearchHint();
             StartDate.SelectedDate = null;
