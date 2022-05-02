@@ -26,6 +26,7 @@ namespace HomeBudgetWPF
         #region Backing Fields
         private int id;
         private readonly ExpensePresenter presenter;
+        private HomeBudget model;
         #endregion
 
         #region Constructor
@@ -37,7 +38,7 @@ namespace HomeBudgetWPF
         /// <param name="desc">The new description of the expense</param>
         /// <param name="amount">The new amount of the expense</param>
         /// <param name="dt">The new DateTime of the expense</param>
-        public UpdateWindow(int id, int catId, string desc, double amount, DateTime dt)
+        public UpdateWindow(int id, int catId, string desc, double amount, DateTime dt, HomeBudget model)
         {
             InitializeComponent();
             // Set the properties
@@ -48,8 +49,9 @@ namespace HomeBudgetWPF
             txtDescription.Text = desc;
             txtAmount.Text = amount.ToString();
             datePicker.SelectedDate = dt;
-            presenter = new ExpensePresenter(this);
+            presenter = new ExpensePresenter(this, model);
             checkCredit.IsChecked = false;
+            this.model = model;
         }
 
         /// <summary>
@@ -60,9 +62,9 @@ namespace HomeBudgetWPF
         /// <param name="desc">The new description of the expense</param>
         /// <param name="amount">The new amount of the expense</param>
         /// <param name="dt">The new DateTime of the expense</param>
-        public static void CallUpdateWindow(int id, int catId, string desc, double amount, DateTime dt)
+        public static void CallUpdateWindow(int id, int catId, string desc, double amount, DateTime dt, HomeBudget model)
         {
-            UpdateWindow uw = new UpdateWindow(id, catId, desc, amount, dt);
+            UpdateWindow uw = new UpdateWindow(id, catId, desc, amount, dt, model);
             uw.ShowDialog();
         }
         #endregion
@@ -213,7 +215,7 @@ namespace HomeBudgetWPF
         {
             if (e.Key == Key.Return)
             {
-                CategoryWindow cw = new CategoryWindow();
+                CategoryWindow cw = new CategoryWindow(model);
                 cw.Show();
                 cw.Closed += CategoryWindowClosed;
                 TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;

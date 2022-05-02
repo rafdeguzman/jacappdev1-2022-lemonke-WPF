@@ -25,17 +25,19 @@ namespace HomeBudgetWPF
     {
         #region Backing Fields
         private readonly ExpensePresenter presenter;
+        private HomeBudget model;
         #endregion
 
         #region Constructors
         /// <summary>
         /// Adds an expense to the database from input fields
         /// </summary>
-        public AddExpenseWindow()
+        public AddExpenseWindow(HomeBudget model)
         {
             InitializeComponent();
             datePicker.SelectedDate = DateTime.Today;
-            presenter = new ExpensePresenter(this);
+            presenter = new ExpensePresenter(this, model);
+            this.model = model;
             checkCredit.IsChecked = false;
         }
         #endregion
@@ -196,7 +198,7 @@ namespace HomeBudgetWPF
         {
             if (e.Key == Key.Return)
             {
-                CategoryWindow cw = new CategoryWindow();
+                CategoryWindow cw = new CategoryWindow(model);
                 cw.Owner = this;
                 cw.Show();
                 cw.Closed += CategoryWindowClosed;

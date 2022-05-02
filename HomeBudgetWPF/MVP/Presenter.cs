@@ -201,6 +201,9 @@ namespace HomeBudgetWPF
             }
             
         }
-
+        public HomeBudget GetModel()
+        {
+            return model;
+        }
     }
 }

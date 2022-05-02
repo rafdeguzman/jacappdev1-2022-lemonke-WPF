@@ -24,11 +24,11 @@ namespace HomeBudgetWPF
         private static bool previousIsChecked;
         private static bool userInputFromDuplicateExpense;
 
-        public ExpensePresenter(ExpenseInterface v)
+        public ExpensePresenter(ExpenseInterface v, HomeBudget model)
         {
             config = new Config();
             string filePath = config.lastUsedFilePath;
-            model = new HomeBudget(filePath, !File.Exists(filePath));
+            this.model = model;
 
             view = v;
 

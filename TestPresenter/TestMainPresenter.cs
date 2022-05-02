@@ -60,18 +60,18 @@ namespace TestPresenter
                 Assert.True(view.calledShowFirstTimeMessage);
 
                 TestCategoryView view1 = new TestCategoryView();
-                CategoryPresenter p1 = new CategoryPresenter(view1);
+                CategoryPresenter p1 = new CategoryPresenter(view1, p.GetModel());
                 Assert.IsType<CategoryPresenter>(p1);
                 Assert.True(view1.calledDisplayCategories);
                 Assert.True(view1.calledDisplayCategoryTypes);
 
                 TestExpenseView view2 = new TestExpenseView();
-                ExpensePresenter p2 = new ExpensePresenter(view2);
+                ExpensePresenter p2 = new ExpensePresenter(view2, p.GetModel());
                 Assert.IsType<ExpensePresenter>(p2);
                 Assert.True(view2.calledDisplayCategories);
 
                 TestExpenseView view3 = new TestExpenseView();
-                ExpensePresenter p3 = new ExpensePresenter(view3);
+                ExpensePresenter p3 = new ExpensePresenter(view3, p.GetModel());
                 p3.AddExpense(DateTime.Now, 1, 100, "abc", true);
                 Assert.True(view3.calledLastInput);
             }

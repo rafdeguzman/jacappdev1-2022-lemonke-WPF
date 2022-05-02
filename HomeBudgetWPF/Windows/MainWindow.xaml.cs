@@ -28,6 +28,7 @@ namespace HomeBudgetWPF
         const int EXTENSION_LENGTH = 3;
         private readonly Presenter presenter;
         Config config;
+        HomeBudget model;
         #endregion
 
         #region Constructors
@@ -39,6 +40,7 @@ namespace HomeBudgetWPF
             InitializeComponent();
             config = new Config();
             presenter = new Presenter(this, config.newDB);
+            model = presenter.GetModel();
             SetCurrentFile();
             FilterByCategory.IsChecked = false;
             FilterByDate.IsChecked = false;
@@ -81,7 +83,7 @@ namespace HomeBudgetWPF
         /// <param name="e"></param>
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
-            AddExpenseWindow aew = new AddExpenseWindow();
+            AddExpenseWindow aew = new AddExpenseWindow(model);
             aew.Owner = this;
             aew.Show();
             aew.Closed += AddExpenseWindowClosed;
@@ -114,7 +116,7 @@ namespace HomeBudgetWPF
         /// <param name="e"></param>
         private void Category_Click(object sender, RoutedEventArgs e)
         {
-            CategoryWindow cw = new CategoryWindow();
+            CategoryWindow cw = new CategoryWindow(model);
             cw.Owner = this;
             //cw.ShowDialog();
             cw.Show();
@@ -150,7 +152,7 @@ namespace HomeBudgetWPF
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             dynamic selectedItem = dataBudgetLists.SelectedItem;
-            UpdateWindow.CallUpdateWindow(selectedItem.ExpenseID, selectedItem.CategoryID - 1, selectedItem.ShortDescription, selectedItem.Amount, selectedItem.Date);
+            UpdateWindow.CallUpdateWindow(selectedItem.ExpenseID, selectedItem.CategoryID - 1, selectedItem.ShortDescription, selectedItem.Amount, selectedItem.Date, presenter.GetModel());
             Filter();
             dataBudgetLists.ScrollIntoView(selectedItem);
             dataBudgetLists.SelectedIndex = selectedItem.ExpenseID - 1;

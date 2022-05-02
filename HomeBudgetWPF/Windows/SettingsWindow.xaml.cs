@@ -26,7 +26,6 @@ namespace HomeBudgetWPF
         private static Uri currentTheme;
         private Config config;
 
-        private static bool darkMode = true;
         // URI's to the different themes
         private Uri NavyUri =
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/Navy.xaml");
