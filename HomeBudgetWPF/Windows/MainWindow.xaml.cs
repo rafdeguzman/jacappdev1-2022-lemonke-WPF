@@ -16,6 +16,7 @@ using System.Configuration;
 using System.Collections.Specialized;
 using System.IO;
 using Budget;
+using System.Windows.Controls.DataVisualization.Charting;
 
 namespace HomeBudgetWPF
 {
@@ -43,8 +44,12 @@ namespace HomeBudgetWPF
             FilterByCategory.IsChecked = false;
             FilterByDate.IsChecked = false;
             //get expenses
+<<<<<<< Updated upstream
             ResetFilter();
             Filter();
+=======
+            Refresh();
+>>>>>>> Stashed changes
         }
         #endregion
 
@@ -343,11 +348,7 @@ namespace HomeBudgetWPF
             column1.Binding = new Binding("Category"); // Bind to an object propery
             dataBudgetLists.Columns.Add(column1); // Add the defined column to the
 
-            var column2 = new DataGridTextColumn(); // Create a text column object
-            column2.Header = "Total";
-            column2.Binding = new Binding("Total"); // Bind to an object propery
-            column2.Binding.StringFormat = "c";
-            dataBudgetLists.Columns.Add(column2);
+
         }
 
         public void ShowBudgetItemsDateAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
@@ -355,9 +356,18 @@ namespace HomeBudgetWPF
             ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByMonthAndCategory;
             dataBudgetLists.Columns.Clear();
-            foreach (string key in budgetItemsListByMonthAndCategory[0].Keys)
+            var columnTotal = new DataGridTextColumn();
+
+            foreach (string key in budgetItemsListByMonthAndCategory[1].Keys)
             {
-                if (!key.Contains("details:"))
+                if (key.Contains("Total"))
+                {
+                    columnTotal = new DataGridTextColumn();
+                    columnTotal.Header = key;
+                    columnTotal.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
+                    columnTotal.Binding.StringFormat = "c";
+                }
+                if (!key.Contains("details:") && !key.Contains("Total"))
                 {
                     var column = new DataGridTextColumn();
                     column.Header = key;
@@ -366,6 +376,7 @@ namespace HomeBudgetWPF
                     dataBudgetLists.Columns.Add(column);
                 }
             }
+            dataBudgetLists.Columns.Add(columnTotal);
         }
 
         private void Refresh_Event(object sender, RoutedEventArgs e)
