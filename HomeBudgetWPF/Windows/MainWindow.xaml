@@ -5,14 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:HomeBudgetWPF"
-        xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
-
         mc:Ignorable="d"
         Title="Le Monke" MinHeight="500" MaxHeight="500" MinWidth="1000" MaxWidth="1000" Closing="Window_Closing">
     <StackPanel Background="{DynamicResource App.Background}">
-        <local:DataChartControl Loaded="DataChartControl_Loaded">
-            
-        </local:DataChartControl>
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
                 <MenuItem Header="Open" Click="btnOpenFile"/>
@@ -21,7 +16,6 @@
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
             <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
         </Menu>
-        
         <TextBlock Margin="15,10,0,0" Foreground="{DynamicResource MainColor}" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" FontFamily="Comic Sans MS" />
         <TextBlock Margin="15,0,0,0" Foreground="{DynamicResource TextColor}" Text="Expenses" FontWeight="Bold" x:Name="fileName"/>
         <Grid Margin="0,0,20,0">
