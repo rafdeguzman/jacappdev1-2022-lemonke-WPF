@@ -345,37 +345,47 @@ namespace HomeBudgetWPF
             column1.Binding = new Binding("Category"); // Bind to an object propery
             dataBudgetLists.Columns.Add(column1); // Add the defined column to the
 
-
+            var column2 = new DataGridTextColumn(); // Create a text column object
+            column2.Header = "Total";
+            column2.Binding = new Binding("Total"); // Bind to an object propery
+            column2.Binding.StringFormat = "c";
+            dataBudgetLists.Columns.Add(column2); // Add the defined column to the
         }
 
-                public void ShowBudgetItemsMonthAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
+        public void ShowBudgetItemsMonthAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
         {
             ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByMonthAndCategory;
             dataBudgetLists.Columns.Clear();
             var columnTotal = new DataGridTextColumn();
+            List<string> keys = new List<string>();
 
-            for(int i = 0; i < budgetItemsListByMonthAndCategory.Count; i++)
+            for (int i = 0; i < budgetItemsListByMonthAndCategory.Count; i++)
             {
                 foreach (string key in budgetItemsListByMonthAndCategory[i].Keys)
                 {
-                    if (key.Contains("Total"))
+                    if (!keys.Contains(key))
                     {
-                        columnTotal = new DataGridTextColumn();
-                        columnTotal.Header = key;
-                        columnTotal.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
-                        columnTotal.Binding.StringFormat = "c";
-                    }
-                    if (!key.Contains("details:") && !key.Contains("Total"))
-                    {
-                        var column = new DataGridTextColumn();
-                        column.Header = key;
-                        column.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
-                        column.Binding.StringFormat = "c";
-                        dataBudgetLists.Columns.Add(column);
+                        keys.Add(key);
+                        if (key.Contains("Total"))
+                        {
+                            columnTotal = new DataGridTextColumn();
+                            columnTotal.Header = key;
+                            columnTotal.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
+                            columnTotal.Binding.StringFormat = "c";
+
+                        }
+                        if (!key.Contains("details:") && !key.Contains("Total"))
+                        {
+                            var column = new DataGridTextColumn();
+                            column.Header = key;
+                            column.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
+                            column.Binding.StringFormat = "c";
+                            dataBudgetLists.Columns.Add(column);
+                        }
                     }
                 }
-            }            
+            }
             dataBudgetLists.Columns.Add(columnTotal);
         }
 
@@ -402,7 +412,7 @@ namespace HomeBudgetWPF
             }
             else if (FilterByCategory.IsChecked.Value && FilterByDate.IsChecked.Value)
             {
-                filterType = "budgetItemsByMonthAndCategory";
+                filterType = "BudgetItemsByMonthAndCategory";
             }
             bool filterFlag = cmbCategory.SelectedIndex == -1 ? false : true;
             int x = dataBudgetLists.SelectedIndex;
@@ -425,7 +435,7 @@ namespace HomeBudgetWPF
         {
             dataBudgetLists.ContextMenu.IsOpen = false;
             dataBudgetLists.ContextMenu.StaysOpen = false;
-            dataBudgetLists.ContextMenu.IsEnabled = enable ? true : false;            
+            dataBudgetLists.ContextMenu.IsEnabled = enable ? true : false;
         }
         private void displaySearchHint()
         {
@@ -442,9 +452,9 @@ namespace HomeBudgetWPF
         private void search_KeyDown(object sender, KeyEventArgs e)
         {
             displaySearchHint();
-            if(e.Key == Key.Return || e.Key == Key.Enter)
+            if (e.Key == Key.Return || e.Key == Key.Enter)
             {
-                if(dataBudgetLists.SelectedIndex == -1)
+                if (dataBudgetLists.SelectedIndex == -1)
                 {
                     dataBudgetLists.SelectedIndex = 0;
                 }
@@ -478,7 +488,7 @@ namespace HomeBudgetWPF
                 {
                     messageBoxText = "Selected start date is after end date. End Date was changed to new start date.";
                     EndDate.SelectedDate = StartDate.SelectedDate;
-                }                    
+                }
                 else
                 {
                     messageBoxText = "Selected end date is before end date. Start Date was changed to new end date.";
@@ -499,15 +509,15 @@ namespace HomeBudgetWPF
         }
         private void ScrollIntoView()
         {
-            if(dataBudgetLists.SelectedItem != null)
+            if (dataBudgetLists.SelectedItem != null)
             {
                 dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
-            }    
+            }
         }
 
         private void GenerateChart_Click(object sender, RoutedEventArgs e)
         {
-           UserControlWindow ucw = new UserControlWindow();
+            UserControlWindow ucw = new UserControlWindow();
             ucw.Show();
             presenter.GeneratePieChart();
         }

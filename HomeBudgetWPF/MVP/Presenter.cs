@@ -52,7 +52,7 @@ namespace HomeBudgetWPF
                     saveFileDialog.DefaultExt = "db";
                     saveFileDialog.Filter = "Database files (*.db)|*.db|All files (*.*)|*.*";
                     saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                    bool? saveFile= saveFileDialog.ShowDialog();
+                    bool? saveFile = saveFileDialog.ShowDialog();
                     switch (saveFile)
                     {
                         case true:
@@ -137,7 +137,7 @@ namespace HomeBudgetWPF
             {
                 case "BudgetItems":
                     List<BudgetItem> budgetItems = model.GetBudgetItems(Start, End, FilterFlag, CategoryId);
-                    if(search != string.Empty)
+                    if (search != string.Empty)
                     {
                         List<BudgetItem> searchedItems = new List<BudgetItem>();
                         foreach (BudgetItem bi in budgetItems)
@@ -154,12 +154,12 @@ namespace HomeBudgetWPF
                             }
                         }
                         budgetItems = searchedItems;
-                    }                    
+                    }
                     view.ShowBudgetItems(budgetItems);
                     break;
                 case "BudgetItemsByCategory":
                     List<BudgetItemsByCategory> budgetItemsByCategory = model.GetBudgetItemsByCategory(Start, End, FilterFlag, CategoryId);
-                    if(search != string.Empty)
+                    if (search != string.Empty)
                     {
                         List<BudgetItemsByCategory> searchedBudgetItemsByCategory = new List<BudgetItemsByCategory>();
                         foreach (BudgetItemsByCategory bibc in budgetItemsByCategory)
@@ -173,12 +173,12 @@ namespace HomeBudgetWPF
                             }
                         }
                         budgetItemsByCategory = searchedBudgetItemsByCategory;
-                    }                    
+                    }
                     view.ShowBudgetItemsByCategory(budgetItemsByCategory);
                     break;
                 case "BudgetItemsByMonth":
                     List<BudgetItemsByMonth> budgetItemsByMonth = model.GetBudgetItemsByMonth(Start, End, FilterFlag, CategoryId);
-                    if(search != string.Empty)
+                    if (search != string.Empty)
                     {
                         List<BudgetItemsByMonth> searchedBudgetItemsByMonth = new List<BudgetItemsByMonth>();
                         foreach (BudgetItemsByMonth bibm in budgetItemsByMonth)
@@ -191,12 +191,12 @@ namespace HomeBudgetWPF
                             }
                         }
                         budgetItemsByMonth = searchedBudgetItemsByMonth;
-                    }                    
+                    }
                     view.ShowBudgetItemsByMonth(budgetItemsByMonth);
                     break;
                 case "BudgetItemsByMonthAndCategory":
                     List<Dictionary<string, object>> budgetItemsByCategoryAndMonth = model.GetBudgetDictionaryByCategoryAndMonth(Start, End, FilterFlag, CategoryId);
-                    if(search != string.Empty)
+                    if (search != string.Empty)
                     {
                         List<Dictionary<string, object>> searchedBudgetItemsByCategoryAndMonth = new List<Dictionary<string, object>>();
                         foreach (Dictionary<string, object> d in budgetItemsByCategoryAndMonth)
@@ -204,11 +204,11 @@ namespace HomeBudgetWPF
                             Dictionary<string, object> dictionary = new Dictionary<string, object>();
                             foreach (KeyValuePair<string, object> s in d)
                             {
-                                if (s.Key.ToLower().Contains(search) ||
-                                    s.Value.ToString().ToLower().Contains(search))
+                                if (s.Key.ToLower().Contains(search) || s.Value.ToString().ToLower().Contains(search))
                                 {
                                     dictionary.Add(s.Key, s.Value);
                                 }
+
                             }
                             searchedBudgetItemsByCategoryAndMonth.Add(dictionary);
                         }
@@ -216,7 +216,7 @@ namespace HomeBudgetWPF
                     }
                     view.ShowBudgetItemsMonthAndCategory(budgetItemsByCategoryAndMonth);
                     break;
-            }            
+            }
         }
 
         public void closeDb()
@@ -233,7 +233,7 @@ namespace HomeBudgetWPF
             UserControlWindow ucw = new UserControlWindow();
             ucw.Show();
             List<object> months = new List<object>();
-            foreach(Dictionary<string, object> d in model.GetBudgetDictionaryByCategoryAndMonth(view.GetStartDate(), view.GetEndDate(), false, view.GetCategoryId()))
+            foreach (Dictionary<string, object> d in model.GetBudgetDictionaryByCategoryAndMonth(view.GetStartDate(), view.GetEndDate(), false, view.GetCategoryId()))
             {
                 months.Add(d["Month"]);
             }
