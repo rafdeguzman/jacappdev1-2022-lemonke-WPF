@@ -16,7 +16,6 @@ using System.Configuration;
 using System.Collections.Specialized;
 using System.IO;
 using Budget;
-using System.Windows.Controls.DataVisualization.Charting;
 
 namespace HomeBudgetWPF
 {
@@ -45,13 +44,9 @@ namespace HomeBudgetWPF
             SetCurrentFile();
             FilterByCategory.IsChecked = false;
             FilterByDate.IsChecked = false;
-            //get expenses
-<<<<<<< Updated upstream
             ResetFilter();
             Filter();
-=======
             Refresh();
->>>>>>> Stashed changes
         }
         #endregion
 
@@ -360,24 +355,27 @@ namespace HomeBudgetWPF
             dataBudgetLists.Columns.Clear();
             var columnTotal = new DataGridTextColumn();
 
-            foreach (string key in budgetItemsListByMonthAndCategory[1].Keys)
+            for(int i = 0; i < budgetItemsListByMonthAndCategory.Count; i++)
             {
-                if (key.Contains("Total"))
+                foreach (string key in budgetItemsListByMonthAndCategory[i].Keys)
                 {
-                    columnTotal = new DataGridTextColumn();
-                    columnTotal.Header = key;
-                    columnTotal.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
-                    columnTotal.Binding.StringFormat = "c";
+                    if (key.Contains("Total"))
+                    {
+                        columnTotal = new DataGridTextColumn();
+                        columnTotal.Header = key;
+                        columnTotal.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
+                        columnTotal.Binding.StringFormat = "c";
+                    }
+                    if (!key.Contains("details:") && !key.Contains("Total"))
+                    {
+                        var column = new DataGridTextColumn();
+                        column.Header = key;
+                        column.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
+                        column.Binding.StringFormat = "c";
+                        dataBudgetLists.Columns.Add(column);
+                    }
                 }
-                if (!key.Contains("details:") && !key.Contains("Total"))
-                {
-                    var column = new DataGridTextColumn();
-                    column.Header = key;
-                    column.Binding = new Binding($"[{key}]"); // Notice the square brackets!.
-                    column.Binding.StringFormat = "c";
-                    dataBudgetLists.Columns.Add(column);
-                }
-            }
+            }            
             dataBudgetLists.Columns.Add(columnTotal);
         }
 
@@ -468,15 +466,15 @@ namespace HomeBudgetWPF
             displaySearchHint();
             Filter();
         }
-        private void Refresh(bool isStart)
+        private void Refresh()
         {
-            if (StartDate.SelectedDate > EndDate.SelectedDate && EndDate.SelectedDate != null && StartDate.SelectedDate != null)
+            if (EndDate.SelectedDate != null && StartDate.SelectedDate != null)
             {
                 string messageBoxText;
                 string caption = "Date Conflict Error";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Information;
-                if (isStart)
+                if (StartDate.SelectedDate > EndDate.SelectedDate)
                 {
                     messageBoxText = "Selected start date is after end date. End Date was changed to new start date.";
                     EndDate.SelectedDate = StartDate.SelectedDate;
@@ -492,12 +490,12 @@ namespace HomeBudgetWPF
 
         private void StartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            Refresh(true);
+            Refresh();
         }
 
         private void EndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            Refresh(false);
+            Refresh();
         }
         private void ScrollIntoView()
         {
@@ -505,6 +503,33 @@ namespace HomeBudgetWPF
             {
                 dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
             }    
+        }
+
+        private void GenerateChart_Click(object sender, RoutedEventArgs e)
+        {
+           UserControlWindow ucw = new UserControlWindow();
+            ucw.Show();
+            presenter.GeneratePieChart();
+        }
+
+        public DateTime? GetStartDate()
+        {
+            return StartDate.SelectedDate;
+        }
+
+        public DateTime? GetEndDate()
+        {
+            return EndDate.SelectedDate;
+        }
+
+        public bool GetFilterFlag()
+        {
+            return FilterByCategory.IsChecked.Value;
+        }
+
+        public int GetCategoryId()
+        {
+            return cmbCategory.SelectedIndex + 1;
         }
     }
 }

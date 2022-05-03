@@ -16,5 +16,10 @@ namespace HomeBudgetWPF
         void ShowBudgetItemsByCategory(List<BudgetItemsByCategory> budgetItemsListByCategory);
         void ShowBudgetItemsDateAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory);
 
+        DateTime? GetStartDate();
+        DateTime? GetEndDate();
+        bool GetFilterFlag();
+        int GetCategoryId();
+
     }
 }

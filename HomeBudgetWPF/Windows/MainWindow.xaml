@@ -6,13 +6,9 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:HomeBudgetWPF"
         xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
-
         mc:Ignorable="d"
         Title="Le Monke" MinHeight="500" MaxHeight="500" MinWidth="1000" MaxWidth="1000" Closing="Window_Closing">
     <StackPanel Background="{DynamicResource App.Background}">
-        <local:DataChartControl Loaded="DataChartControl_Loaded">
-            
-        </local:DataChartControl>
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
                 <MenuItem Header="Open" Click="btnOpenFile"/>
@@ -124,12 +120,16 @@
                     <TextBlock Grid.Column="0" Text="By Date" Style="{DynamicResource TextBlockDefault}" Foreground="{DynamicResource TextColor}" FontSize="12" FontWeight="Bold" Padding="0"/>
                     <CheckBox Grid.Column="1" x:Name="FilterByDate" VerticalAlignment="Center" HorizontalAlignment="Right" Checked="Refresh_Event" Unchecked="Refresh_Event"></CheckBox>
                 </Grid>
+                <Button Style="{DynamicResource HollowRoundedButton}" HorizontalAlignment="Right" VerticalContentAlignment="Center" Content="Reset" Click="Filter_Click" Margin="0,10,0,0"/>
+
+
 
             </StackPanel>
 
             <Button Style="{DynamicResource RoundedButton}" Grid.Column="0" Grid.Row="4" Content="Show Categories" Click="Category_Click" Margin="5,0,5,0" />
             <Button Style="{DynamicResource RoundedButton}" Grid.Column="1" Grid.Row="4" Content="Add Expense" Click="Expense_Click" Margin="5,0,5,0" />
-            <Button Style="{DynamicResource RoundedButton}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" Content="Reset" Click="Filter_Click" Margin="5,0,5,0"/>
+            <Button Style="{DynamicResource HollowRoundedButton}" HorizontalAlignment="Right" Grid.Column="2" Grid.Row="4" x:Name="GenerateChart" Click="GenerateChart_Click" Content="Generate Chart" Margin="0"/>
+            
         </Grid>
     </StackPanel>
 </Window>

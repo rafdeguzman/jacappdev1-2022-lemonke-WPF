@@ -205,5 +205,16 @@ namespace HomeBudgetWPF
         {
             return model;
         }
+
+        public void GeneratePieChart()
+        {
+            UserControlWindow ucw = new UserControlWindow();
+            ucw.Show();
+            List<object> months = new List<object>();
+            foreach(Dictionary<string, object> d in model.GetBudgetDictionaryByCategoryAndMonth(view.GetStartDate(), view.GetEndDate(), false, view.GetCategoryId()))
+            {
+                months.Add(d["Month"]);
+            }
+        }
     }
 }
