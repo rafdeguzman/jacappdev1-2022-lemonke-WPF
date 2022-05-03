@@ -11,10 +11,10 @@ namespace HomeBudgetWPF
     {
         public bool ShowFirstTimeMessage();
         public void ShowFilesCreated(string path);
-        void ShowBudgetItems(List<BudgetItem> budgetItemsList);
-        void ShowBudgetItemsByDate(List<BudgetItemsByMonth> budgetItemsListByMonth);
+        public void ShowBudgetItems(List<BudgetItem> budgetItemsList);
+        void ShowBudgetItemsByMonth(List<BudgetItemsByMonth> budgetItemsListByMonth);
         void ShowBudgetItemsByCategory(List<BudgetItemsByCategory> budgetItemsListByCategory);
-        void ShowBudgetItemsDateAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory);
+        void ShowBudgetItemsMonthAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory);
 
         DateTime? GetStartDate();
         DateTime? GetEndDate();

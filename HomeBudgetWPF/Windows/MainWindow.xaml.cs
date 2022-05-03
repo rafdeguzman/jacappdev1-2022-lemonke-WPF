@@ -318,7 +318,7 @@ namespace HomeBudgetWPF
         {
             System.Windows.Application.Current.Shutdown();
         }
-        public void ShowBudgetItemsByDate(List<BudgetItemsByMonth> budgetItemsListByMonth)
+        public void ShowBudgetItemsByMonth(List<BudgetItemsByMonth> budgetItemsListByMonth)
         {
             ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByMonth;
@@ -348,7 +348,7 @@ namespace HomeBudgetWPF
 
         }
 
-        public void ShowBudgetItemsDateAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
+                public void ShowBudgetItemsMonthAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
         {
             ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByMonthAndCategory;
@@ -391,7 +391,7 @@ namespace HomeBudgetWPF
         private void Filter()
         {
             displaySearchHint();
-            string filterType = "BudgetItem";
+            string filterType = "BudgetItems";
             if (FilterByCategory.IsChecked.Value && !FilterByDate.IsChecked.Value)
             {
                 filterType = "BudgetItemsByCategory";
@@ -402,7 +402,7 @@ namespace HomeBudgetWPF
             }
             else if (FilterByCategory.IsChecked.Value && FilterByDate.IsChecked.Value)
             {
-                filterType = "budgetItemsByCategoryAndMonth";
+                filterType = "budgetItemsByMonthAndCategory";
             }
             bool filterFlag = cmbCategory.SelectedIndex == -1 ? false : true;
             int x = dataBudgetLists.SelectedIndex;
@@ -411,7 +411,7 @@ namespace HomeBudgetWPF
         }
         private void ResetFilter()
         {
-            presenter.Filter("", "BudgetItem", null, null);
+            presenter.Filter("", "BudgetItems", null, null);
             search.Text = string.Empty;
             displaySearchHint();
             StartDate.SelectedDate = null;

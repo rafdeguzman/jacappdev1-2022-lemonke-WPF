@@ -6,11 +6,15 @@ using Budget;
 
 namespace TestPresenter
 {
+    [Collection("Sequential")]
     public class TestView : ViewInterface
     {
         public bool calledShowFilesCreated;
         public bool calledShowFirstTimeMessage;
         public bool calledShowBudgetItems;
+        public bool calledShowBudgetItemsByMonth;
+        public bool calledShowBudgetItemsByCategory;
+        public bool calledShowBudgetItemsByMonthAndCategory;
         Config config;
         public void ShowFilesCreated(string path)
         {
@@ -27,21 +31,22 @@ namespace TestPresenter
         {
             calledShowBudgetItems = true;
         }
-
-        public void ShowBudgetItemsByDate(List<BudgetItemsByMonth> budgetItemsListByMonth)
+        public void ShowBudgetItemsByMonth(List<BudgetItemsByMonth> budgetItemsListByMonth)
         {
-            throw new NotImplementedException();
+            calledShowBudgetItemsByMonth = true;
         }
 
         public void ShowBudgetItemsByCategory(List<BudgetItemsByCategory> budgetItemsListByCategory)
         {
-            throw new NotImplementedException();
+            calledShowBudgetItemsByCategory = true;
         }
 
-        public void ShowBudgetItemsDateAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
+        public void ShowBudgetItemsMonthAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
         {
-            throw new NotImplementedException();
+            calledShowBudgetItemsByMonthAndCategory = true;
         }
+
+        
 
         public TestView()
         {
@@ -51,13 +56,60 @@ namespace TestPresenter
         public class TestPresenter
         {
             [Fact]
+            public void anotherTEst()
+            {
+                TestCategoryView testCatView = new TestCategoryView();
+                CategoryPresenter testCatP = new CategoryPresenter(testCatView);
+                Assert.True(testCatView.calledDisplayCategories);
+                Assert.True(testCatView.calledDisplayCategoryTypes);
+                testCatP.closeDb();
+            }
+            [Fact]
             public void TestConstructor()
             {
-                TestView view = new TestView();
-                Presenter p = new Presenter(view, true);
+
+                TestView testView = new TestView();
+                Presenter p = new Presenter(testView, true);
                 Assert.IsType<Presenter>(p);
-                Assert.True(view.calledShowFilesCreated);
-                Assert.True(view.calledShowFirstTimeMessage);
+                Assert.True(testView.calledShowFilesCreated);
+                Assert.True(testView.calledShowFirstTimeMessage);
+                p.closeDb();
+
+                testView = new TestView();
+                p = new Presenter(testView, true);
+                p.Filter("", "BudgetItems", null, null);
+                Assert.True(testView.calledShowBudgetItems);
+                p.closeDb();
+
+                testView = new TestView();
+                p = new Presenter(testView, true);
+                p.Filter("", "BudgetItemsByMonth", null, null);
+                Assert.True(testView.calledShowBudgetItemsByMonth);
+                p.closeDb();
+
+                testView = new TestView();
+                p = new Presenter(testView, true);
+                p.Filter("", "BudgetItemsByCategory", null, null);
+                Assert.True(testView.calledShowBudgetItemsByCategory);
+                p.closeDb();
+
+                testView = new TestView();
+                p = new Presenter(testView, true);
+                p.Filter("", "BudgetItemsByMonthAndCategory", null, null);
+                Assert.True(testView.calledShowBudgetItemsByMonthAndCategory);
+                p.closeDb();
+
+                TestCategoryView testCatView = new TestCategoryView();
+                CategoryPresenter testCatP = new CategoryPresenter(testCatView);
+                Assert.True(testCatView.calledDisplayCategories);
+                Assert.True(testCatView.calledDisplayCategoryTypes);
+                testCatP.closeDb();
+
+                testCatView = new TestCategoryView();
+                testCatP = new CategoryPresenter(testCatView);
+                testCatP.AddCategory(2);
+                Assert.True(testCatView.calledGetStringInput);
+                testCatP.closeDb();
 
                 TestCategoryView view1 = new TestCategoryView();
                 CategoryPresenter p1 = new CategoryPresenter(view1, p.GetModel());
@@ -77,7 +129,7 @@ namespace TestPresenter
             }
         }
     }
-    
+
     public class TestCategoryView : CategoryInterface
     {
         public bool calledDisplayCategories;
@@ -99,8 +151,13 @@ namespace TestPresenter
             calledGetStringInput = true;
             return String.Empty;
         }
+
+        public TestCategoryView()
+        {
+            config = new Config();
+        }
     }
-    
+
     public class TestExpenseView : ExpenseInterface
     {
         public bool calledCheckUserInput;
