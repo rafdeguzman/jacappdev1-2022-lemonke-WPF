@@ -58,6 +58,7 @@ namespace TestPresenter
             [Fact]
             public void TestConstructor()
             {
+
                 TestView testView = new TestView();
                 Presenter p = new Presenter(testView, true);
                 Assert.IsType<Presenter>(p);
