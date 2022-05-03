@@ -56,6 +56,15 @@ namespace TestPresenter
         public class TestPresenter
         {
             [Fact]
+            public void anotherTEst()
+            {
+                TestCategoryView testCatView = new TestCategoryView();
+                CategoryPresenter testCatP = new CategoryPresenter(testCatView);
+                Assert.True(testCatView.calledDisplayCategories);
+                Assert.True(testCatView.calledDisplayCategoryTypes);
+                testCatP.closeDb();
+            }
+            [Fact]
             public void TestConstructor()
             {
 
