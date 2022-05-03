@@ -47,6 +47,7 @@ namespace HomeBudgetWPF
             {
                 // if changing data source, then redraw chart
                 _dataSource = value;
+                cbMonths.ItemsSource = _dataSource;
                 if (chartType == ChartType.ByMonthAndCategory)
 
                     drawByMonthPieChart();

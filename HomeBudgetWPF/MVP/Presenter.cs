@@ -237,6 +237,7 @@ namespace HomeBudgetWPF
             {
                 months.Add(d["Month"]);
             }
+            ucw.DataSource = months;
         }
     }
 }

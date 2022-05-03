@@ -517,8 +517,6 @@ namespace HomeBudgetWPF
 
         private void GenerateChart_Click(object sender, RoutedEventArgs e)
         {
-            UserControlWindow ucw = new UserControlWindow();
-            ucw.Show();
             presenter.GeneratePieChart();
         }
 
