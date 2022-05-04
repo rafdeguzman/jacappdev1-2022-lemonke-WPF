@@ -16,16 +16,14 @@
       <HintPath>dlls\Budget.dll</HintPath>
     </Reference>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
 	
 	<ItemGroup>
 		<None Remove="Images\newDark.png" />
 		<None Remove="Images\newLight.png" />
 		<None Remove="Images\openDark.png" />
 		<None Remove="Images\openLight.png" />
+		<None Remove="Images\recentDark.png" />
+		<None Remove="Images\recentLight.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -40,6 +38,12 @@
 		</Content>
 		<Content Include="Images\openLight.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Images\recentDark.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Images\recentLight.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 

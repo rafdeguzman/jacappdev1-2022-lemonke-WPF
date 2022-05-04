@@ -10,9 +10,11 @@
     <SolidColorBrush x:Key="Button.OnMouseOver" Color="{DynamicResource MouseOverGreen}"/>
     <SolidColorBrush x:Key="Button.TextColor" Color="{DynamicResource White}"/>
     <SolidColorBrush x:Key="TextColor" Color="{DynamicResource Black}"/>
-    <SolidColorBrush x:Key="Alternation1" Color="{DynamicResource LightAlt1}"></SolidColorBrush>
-    <SolidColorBrush x:Key="Alternation2" Color="{DynamicResource LightAlt2}"></SolidColorBrush>
-    <SolidColorBrush x:Key="Backdrop" Color="{DynamicResource LightBackdrop}"></SolidColorBrush>
+    <SolidColorBrush x:Key="Alternation1" Color="{DynamicResource LightAlt1}"/>
+    <SolidColorBrush x:Key="Alternation2" Color="{DynamicResource LightAlt2}"/>
+    <SolidColorBrush x:Key="Backdrop" Color="{DynamicResource LightBackdrop}"/>
+    <!--Change Property of image to Content & Always Copy-->
     <BitmapImage x:Key="openImage" UriSource="/HomeBudgetWPF;component/Images/openLight.png"/>
     <BitmapImage x:Key="newImage" UriSource="/HomeBudgetWPF;component/Images/newLight.png"/>
+    <BitmapImage x:Key="recentImage" UriSource="/HomeBudgetWPF;component/Images/recentLight.png"/>
 </ResourceDictionary>

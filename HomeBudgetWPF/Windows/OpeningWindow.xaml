@@ -55,6 +55,7 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
+                    <Image Grid.Column="0" Width="30" Height="30" Margin="5" x:Name="RecentImage" Source="{DynamicResource recentImage}"/>
                     <TextBlock Grid.Column="1" TextAlignment="Right" Style="{DynamicResource TextBlockDefault}" VerticalAlignment="Center" Text="Open Recent File"/>
                 </Grid>
             </Button>
