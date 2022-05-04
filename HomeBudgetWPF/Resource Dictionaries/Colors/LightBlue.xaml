@@ -13,6 +13,17 @@
     <SolidColorBrush x:Key="Alternation1" Color="{DynamicResource DarkAlt1}"/>
     <SolidColorBrush x:Key="Alternation2" Color="{DynamicResource DarkAlt2}"/>
     <SolidColorBrush x:Key="Backdrop" Color="{DynamicResource DarkBackdrop}"/>
+    <!--Gradient-->
+    <SolidColorBrush x:Key="Gradient1" Color="{DynamicResource BlueGradient1}"/>
+    <SolidColorBrush x:Key="Gradient2" Color="{DynamicResource BlueGradient2}"/>
+    <SolidColorBrush x:Key="Gradient3" Color="{DynamicResource BlueGradient3}"/>
+    <SolidColorBrush x:Key="Gradient4" Color="{DynamicResource BlueGradient4}"/>
+    <SolidColorBrush x:Key="Gradient5" Color="{DynamicResource BlueGradient5}"/>
+    <SolidColorBrush x:Key="Gradient6" Color="{DynamicResource BlueGradient6}"/>
+    <SolidColorBrush x:Key="Gradient7" Color="{DynamicResource BlueGradient7}"/>
+    <SolidColorBrush x:Key="Gradient8" Color="{DynamicResource BlueGradient8}"/>
+    <SolidColorBrush x:Key="Gradient9" Color="{DynamicResource BlueGradient9}"/>
+    <SolidColorBrush x:Key="Gradient10" Color="{DynamicResource BlueGradient10}"/>
     <!--Change Property of image to Content & Always Copy-->
     <BitmapImage x:Key="recentImage" UriSource="/HomeBudgetWPF;component/Images/recentDark.png"/>
     <BitmapImage x:Key="openImage" UriSource="/HomeBudgetWPF;component/Images/openDark.png"/>

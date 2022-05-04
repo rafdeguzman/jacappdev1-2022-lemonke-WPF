@@ -27,19 +27,59 @@
     <Color x:Key="Navy">Navy</Color>
     <Color x:Key="Crimson">DarkRed</Color>
     <Color x:Key="Green">DarkGreen</Color>
+    <Color x:Key="Yellow">#dbd400</Color>
 
     <!--Dark Mode Colors-->
     <Color x:Key="LightBlue">LightSkyBlue</Color>
     <Color x:Key="LightRed">LightCoral</Color>
     <Color x:Key="LightGreen">LightGreen</Color>
+    <Color x:Key="LightYellow">#fffa6b</Color>
 
     <!--Normal Mouse Over-->
     <Color x:Key="MouseOverNavy">#d1e2ff</Color>
     <Color x:Key="MouseOverCrimson">#ffe8ea</Color>
     <Color x:Key="MouseOverGreen">#d4ffe3</Color>
+    <Color x:Key="MouseOverYellow">LightYellow</Color>
 
     <!--Dark Mode Mouse Over-->
     <Color x:Key="MouseOverLightBue">#3729ff</Color>
     <Color x:Key="MouseOverLightRed">#f54c40</Color>
     <Color x:Key="MouseOverLightGreen">#1bd155</Color>
+    <Color x:Key="MouseOverLightYellow">#d9d336</Color>
+
+    <!--Color Gradient Array-->
+    <Color x:Key="RedGradient1">#F08080</Color>
+    <Color x:Key="RedGradient2">#F27370</Color>
+    <Color x:Key="RedGradient3">#F46058</Color>
+    <Color x:Key="RedGradient4">#F55348</Color>
+    <Color x:Key="RedGradient5">#F54C40</Color>
+    <Color x:Key="RedGradient6">#DB3930</Color>
+    <Color x:Key="RedGradient7">#C02620</Color>
+    <Color x:Key="RedGradient8">#A61310</Color>
+    <Color x:Key="RedGradient9">#990A08</Color>
+    <Color x:Key="RedGradient10">#8B0000</Color>
+
+    <Color x:Key="BlueGradient1">#87CEFA</Color>
+    <Color x:Key="BlueGradient2">#73A5FC</Color>
+    <Color x:Key="BlueGradient3">#5F7CFD</Color>
+    <Color x:Key="BlueGradient4">#4B53FE</Color>
+    <Color x:Key="BlueGradient5">#3729FF</Color>
+    <Color x:Key="BlueGradient6">#2A1FE0</Color>
+    <Color x:Key="BlueGradient7">#1C15C0</Color>
+    <Color x:Key="BlueGradient8">#120EA8</Color>
+    <Color x:Key="BlueGradient9">#070690</Color>
+    <Color x:Key="BlueGradient10">#000069</Color>
+
+    <Color x:Key="GreenGradient1">#90EE90</Color>
+    <Color x:Key="GreenGradient2">#73E782</Color>
+    <Color x:Key="GreenGradient3">#56E073</Color>
+    <Color x:Key="GreenGradient4">#1BD155</Color>
+    <Color x:Key="GreenGradient5">#16BD46</Color>
+    <Color x:Key="GreenGradient6">#11A936</Color>
+    <Color x:Key="GreenGradient7">#0E9B2B</Color>
+    <Color x:Key="GreenGradient8">#0B8D20</Color>
+    <Color x:Key="GreenGradient9">#078016</Color>
+    <Color x:Key="GreenGradient10">#006400</Color>
+    
+    
 </ResourceDictionary>

@@ -22,6 +22,10 @@ namespace HomeBudgetWPF
     public partial class UserControlWindow : Window
     {
         Presenter presenter;
+        /// <summary>
+        /// Calls the appropriate methods in the chart user control
+        /// </summary>
+        /// <param name="presenter">The current presenter being user, is sent to user control</param>
         public UserControlWindow(Presenter presenter)
         {
             InitializeComponent();
