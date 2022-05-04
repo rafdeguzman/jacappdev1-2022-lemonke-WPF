@@ -47,6 +47,7 @@ namespace HomeBudgetWPF
         public DataChartControl()
         {
             InitializeComponent();
+            Categories = new List<string>();
         }
         // ----------------------------------------------------------------------------------
         // clear the current data
@@ -181,7 +182,7 @@ namespace HomeBudgetWPF
                         var amount = 0.0;
                         double.TryParse(value, out amount);
                         // only display expenses (i.e., amount < 0)
-                        if (amount < 0)
+                        if (amount > 0)
                         {
                             DisplayData.Add(new KeyValuePair<String, double>
 
@@ -208,9 +209,16 @@ namespace HomeBudgetWPF
             foreach(object x in DataSource)
             {
                 if (x is not null)
-                {
+                {                    
                     var y = x as Dictionary<string, object>;
                     cbMonths.Items.Add(y["Month"].ToString());
+                    foreach(KeyValuePair<string, object> kv in y)
+                    {
+                        if(!kv.Key.Split(":")[0].Equals("details") && !kv.Key.Equals("Month") && !kv.Key.Equals("Total") && !Categories.Contains(kv.Key))
+                        {
+                            Categories.Add(kv.Key);
+                        }
+                    }
                 }                    
             }
         }
