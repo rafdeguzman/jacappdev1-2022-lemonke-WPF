@@ -12,8 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Controls.DataVisualization.Charting;
-using System.Linq;
 
 
 namespace HomeBudgetWPF
@@ -23,10 +21,14 @@ namespace HomeBudgetWPF
     /// </summary>
     public partial class UserControlWindow : Window
     {
-        public UserControlWindow(List<object> objects)
+        Presenter presenter;
+        public UserControlWindow(Presenter presenter)
         {
             InitializeComponent();
-            cbMonths.ItemsSource = objects;
+            this.presenter = presenter;
+            theDataGridView.presenter = presenter;
+            theDataGridView.DataSource = theDataGridView.presenter.GetDataSource();
+            theDataGridView.FillComboBox();
         }
     }
 }

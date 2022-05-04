@@ -229,13 +229,15 @@ namespace HomeBudgetWPF
         }
 
         public void GeneratePieChart()
-        {
-            DataChartControl dcc = new DataChartControl();
-            List<Dictionary<string, object>> myItems = model.GetBudgetDictionaryByCategoryAndMonth(view.GetStartDate(), view.GetEndDate(), false, view.GetCategoryId());
-            List<object> theObjects = myItems.Cast<object>().ToList();
-            dcc.DataSource = theObjects;
-            UserControlWindow ucw = new UserControlWindow(theObjects);
+        {           
+            UserControlWindow ucw = new UserControlWindow(this);
             ucw.Show();
+        }
+
+        public List<object> GetDataSource()
+        {
+            List<Dictionary<string, object>> myItems = model.GetBudgetDictionaryByCategoryAndMonth(view.GetStartDate(), view.GetEndDate(), false, view.GetCategoryId());
+            return myItems.Cast<object>().ToList();            
         }
     }
 }
