@@ -80,6 +80,15 @@
     <Color x:Key="GreenGradient8">#0B8D20</Color>
     <Color x:Key="GreenGradient9">#078016</Color>
     <Color x:Key="GreenGradient10">#006400</Color>
-    
-    
+
+    <Color x:Key="YellowGradient1">#FFE15B</Color>
+    <Color x:Key="YellowGradient2">#FFD92E</Color>
+    <Color x:Key="YellowGradient3">#FFD000</Color>
+    <Color x:Key="YellowGradient4">#FFC300</Color>
+    <Color x:Key="YellowGradient5">#FFB700</Color>
+    <Color x:Key="YellowGradient6">#FFAA00</Color>
+    <Color x:Key="YellowGradient7">#FFA200</Color>
+    <Color x:Key="YellowGradient8">#FF9500</Color>
+    <Color x:Key="YellowGradient9">#FF8800</Color>
+    <Color x:Key="YellowGradient10">#FF7B00</Color>
 </ResourceDictionary>
