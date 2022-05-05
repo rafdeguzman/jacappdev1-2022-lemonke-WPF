@@ -44,5 +44,15 @@ namespace HomeBudgetWPF
         {
             MessageBox.Show("There is no data to create a chart.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
+        /// <summary>
+        /// Displays the settings window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Settings_Click(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow sw = new SettingsWindow();
+            sw.Show();
+        }
     }
 }
