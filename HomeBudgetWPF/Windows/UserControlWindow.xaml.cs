@@ -54,5 +54,20 @@ namespace HomeBudgetWPF
             SettingsWindow sw = new SettingsWindow();
             sw.Show();
         }
+        /// <summary>
+        /// Closes all windows
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCloseAllWindows_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Do you really want to force-close the app? Changes are automatically saved.",
+                    "Close App",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Warning, MessageBoxResult.Yes) == MessageBoxResult.Yes)
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
+        }
     }
 }
