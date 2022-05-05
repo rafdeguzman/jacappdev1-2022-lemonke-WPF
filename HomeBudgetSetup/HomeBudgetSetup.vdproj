@@ -232,6 +232,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_C13EF461FA4FFD1B26EB9BCE81784DA6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_1769518C7A1442EFAB18B6C2CC01493B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -244,13 +250,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C13EF461FA4FFD1B26EB9BCE81784DA6"
+        "OwnerKey" = "8:_ADBE7C85E22E4D9FB22D02A72416F3FC"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C13EF461FA4FFD1B26EB9BCE81784DA6"
+        "OwnerKey" = "8:_942C8011BD524D13B78EBF5225960FCE"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -274,13 +280,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_942C8011BD524D13B78EBF5225960FCE"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_ADBE7C85E22E4D9FB22D02A72416F3FC"
+        "OwnerKey" = "8:_C13EF461FA4FFD1B26EB9BCE81784DA6"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -301,6 +301,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -317,6 +325,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -679,11 +695,6 @@
             "AssemblyAsmDisplayName" = "8:System.Data.SQLite, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_83E4A60AD23916BD680A2CEA2842320D"
-                    {
-                    "Name" = "8:System.Data.SQLite.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:System.Data.SQLite.dll"
             "TargetName" = "8:"
@@ -1297,6 +1308,34 @@
         }
         "Shortcut"
         {
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_4353003437C7461E8F0D836E7B7222F8"
+            {
+            "Name" = "8:Banana Bank"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_451AEC780A9144688B5C47E4B313A286"
+            "Folder" = "8:_6E00C643810E43C995A6719ED2868764"
+            "WorkingFolder" = "8:_1628D8EEE42E4055B77D3AB35C9B4DF2"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_9789D6D102A64853AE76C1FF3E24632E"
+            {
+            "Name" = "8:Banana Bank"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_451AEC780A9144688B5C47E4B313A286"
+            "Folder" = "8:_BF22F74923E54263AECFEF98BAA2BCB6"
+            "WorkingFolder" = "8:_1628D8EEE42E4055B77D3AB35C9B4DF2"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
         }
         "UserInterface"
         {
