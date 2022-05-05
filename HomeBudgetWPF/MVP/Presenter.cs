@@ -226,7 +226,10 @@ namespace HomeBudgetWPF
         public void GeneratePieChart()
         {           
             UserControlWindow ucw = new UserControlWindow(this);
-            ucw.Show();
+            if (ucw.GetCountItems() > 0)
+                ucw.Show();
+            else
+                ucw.ShowError();
         }
 
         public List<object> GetDataSource()

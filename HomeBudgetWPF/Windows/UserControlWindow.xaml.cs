@@ -29,11 +29,20 @@ namespace HomeBudgetWPF
         public UserControlWindow(Presenter presenter)
         {
             InitializeComponent();
+            
             this.presenter = presenter;
             theDataGridView.presenter = presenter;
             theDataGridView.DataSource = theDataGridView.presenter.GetDataSource();
             theDataGridView.FillComboBox();
             theDataGridView.cbMonths.SelectedIndex = theDataGridView.cbMonths.Items.Count - 1;
+        }
+        public int GetCountItems()
+        {
+            return theDataGridView.cbMonths.Items.Count - 1;    // take into account TOTALS, so - 1.
+        }
+        public void ShowError()
+        {
+            MessageBox.Show("There is no data to create a chart.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
     }
 }
