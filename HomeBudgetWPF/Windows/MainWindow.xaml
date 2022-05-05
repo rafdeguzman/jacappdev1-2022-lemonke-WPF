@@ -17,7 +17,7 @@
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
             <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
         </Menu>
-        
+
         <TextBlock Margin="15,10,0,0" Foreground="{DynamicResource MainColor}" Text="OUR BUDGET APP BY MONKE" FontSize="24" FontWeight="Bold" FontFamily="Comic Sans MS" />
         <TextBlock Margin="15,0,0,0" Foreground="{DynamicResource TextColor}" Text="Expenses" FontWeight="Bold" x:Name="fileName"/>
         <Grid Margin="0,0,20,0">
