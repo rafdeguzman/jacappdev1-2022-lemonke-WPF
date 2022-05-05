@@ -26,7 +26,6 @@ namespace HomeBudgetWPF
         private static Uri currentTheme;
         private Config config;
 
-        private static bool darkMode = true;
         // URI's to the different themes
         private Uri NavyUri =
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/Navy.xaml");
@@ -34,12 +33,16 @@ namespace HomeBudgetWPF
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/Crimson.xaml");
         private Uri GreenUri =
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/Green.xaml");
+        private Uri YellowUri =
+            new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/Yellow.xaml");
         private Uri lightBlueUri =
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightBlue.xaml");
         private Uri lightRedUri =
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightRed.xaml");
         private Uri lightGreenUri =
             new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightGreen.xaml");
+        private Uri lightYellowUri =
+            new Uri("pack://application:,,,/HomeBudgetWPF;component/Resource Dictionaries/Colors/LightYellow.xaml");
 
 
         private Uri tbUri =
@@ -139,30 +142,43 @@ namespace HomeBudgetWPF
             {
                 case "Blue":
                     if (GetDarkMode())
-                        currentTheme = lightBlueUri;
+                        Theme = lightBlueUri;
                     else
-                        currentTheme = NavyUri;
+                        Theme = NavyUri;
                     cbNavyOption.IsChecked = true;
                     cbGreenOption.IsChecked = false;
                     cbRedOption.IsChecked = false;
+                    cbYellowOption.IsChecked = false;
                     break;
                 case "Red":
                     if (GetDarkMode())
-                        currentTheme = lightRedUri;
+                        Theme = lightRedUri;
                     else
-                        currentTheme = CrimsonUri;
+                        Theme = CrimsonUri;
                     cbNavyOption.IsChecked = false;
                     cbGreenOption.IsChecked = false;
                     cbRedOption.IsChecked = true;
+                    cbYellowOption.IsChecked = false;
                     break;
                 case "Green":
                     if (GetDarkMode())
-                        currentTheme = lightGreenUri;
+                        Theme = lightGreenUri;
                     else
-                        currentTheme = GreenUri;
+                        Theme = GreenUri;
                     cbNavyOption.IsChecked = false;
                     cbGreenOption.IsChecked = true;
                     cbRedOption.IsChecked = false;
+                    cbYellowOption.IsChecked = false;
+                    break;
+                case "Yellow":
+                    if (GetDarkMode())
+                        Theme = lightYellowUri;
+                    else
+                        Theme = YellowUri;
+                    cbNavyOption.IsChecked = false;
+                    cbGreenOption.IsChecked = false;
+                    cbRedOption.IsChecked = false;
+                    cbYellowOption.IsChecked = true;
                     break;
             }
             if (GetDarkMode())

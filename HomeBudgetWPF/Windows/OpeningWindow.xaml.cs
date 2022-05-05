@@ -61,15 +61,38 @@ namespace HomeBudgetWPF.Windows
         /// <param name="e"></param>
         private void btnOpenDB_Click(object sender, RoutedEventArgs e)
         {
-            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            config.AppSettings.Settings["newDB"].Value = "false";
-            ConfigurationManager.AppSettings.Set("newDB", "false");
-            config.Save(ConfigurationSaveMode.Modified);
+            config.recentDB = false;
+            config.newDB = false;
+            config.saveConfig();
+            
             //work here
             MainWindow mw = new MainWindow();
             mw.Show();
             this.Close();
         }
+
+        private void btnOpenRecent_Click(object sender, RoutedEventArgs e)
+        {
+            if(config.lastUsedFilePath == string.Empty)
+            {
+                string messageBoxText = "There was no recent file found";
+                string caption = "No recent";
+                MessageBoxButton button = MessageBoxButton.OK;
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBoxResult result;
+                result = MessageBox.Show(messageBoxText, caption, button, icon);
+            }
+            else
+            {
+                config.newDB = false;
+                config.recentDB = true;
+                //work
+                MainWindow mw = new MainWindow();
+                mw.Show();
+                this.Close();
+            }
+        }
+
         /// <summary>
         /// Displays the settings window
         /// </summary>

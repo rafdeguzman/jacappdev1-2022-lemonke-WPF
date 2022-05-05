@@ -30,7 +30,6 @@ namespace HomeBudgetWPF
             get { return config.AppSettings.Settings["lastUsedFilePath"].Value; }
             set { config.AppSettings.Settings["lastUsedFilePath"].Value = value; saveConfig(); }
         }
-
         public string currentFile
         {
             get { return config.AppSettings.Settings["currentFile"].Value; }
@@ -45,6 +44,12 @@ namespace HomeBudgetWPF
         {
             get { return bool.Parse(config.AppSettings.Settings["newDB"].Value); }
             set { config.AppSettings.Settings["newDB"].Value = value.ToString(); saveConfig(); }
+        }
+
+        public bool recentDB
+        {
+            get { return bool.Parse(config.AppSettings.Settings["recentDB"].Value); }
+            set { config.AppSettings.Settings["recentDB"].Value = value.ToString(); saveConfig(); }
         }
 
         public string themeColor

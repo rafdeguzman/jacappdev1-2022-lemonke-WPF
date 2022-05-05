@@ -25,17 +25,19 @@ namespace HomeBudgetWPF
     {
         #region Backing Fields
         private readonly ExpensePresenter presenter;
+        private HomeBudget model;
         #endregion
 
         #region Constructors
         /// <summary>
         /// Adds an expense to the database from input fields
         /// </summary>
-        public AddExpenseWindow()
+        public AddExpenseWindow(HomeBudget model)
         {
             InitializeComponent();
             datePicker.SelectedDate = DateTime.Today;
-            presenter = new ExpensePresenter(this);
+            presenter = new ExpensePresenter(this, model);
+            this.model = model;
             checkCredit.IsChecked = false;
         }
         #endregion
@@ -104,6 +106,7 @@ namespace HomeBudgetWPF
         public void GetUserInput()
         {
             presenter.AddExpense(Convert.ToDateTime(datePicker.SelectedDate), cmbCategory.SelectedIndex, double.Parse(txtAmount.Text), txtDescription.Text, checkCredit.IsChecked.Value);
+
         }
 
         /// <summary>
@@ -118,6 +121,7 @@ namespace HomeBudgetWPF
                 GetUserInput();
                 clear();
                 blastInput.Visibility = Visibility.Visible;
+                ((MainWindow)this.Owner).showOnGrid();
             }
         }
 
@@ -194,12 +198,23 @@ namespace HomeBudgetWPF
         {
             if (e.Key == Key.Return)
             {
-                CategoryWindow cw = new CategoryWindow();
+                CategoryWindow cw = new CategoryWindow(model);
+                cw.Owner = this;
                 cw.Show();
+                cw.Closed += CategoryWindowClosed;
                 TextBox tb = cmbCategory.Template.FindName("PART_EditableTextBox", cmbCategory) as TextBox;
                 cw.categoryCBText = tb.Text;
-                DisplayCategories(presenter.ExpensePopulateCategories());
+                
             }
+        }
+
+        //Code taken from StackOverflow.
+        //https://stackoverflow.com/questions/12106657/check-if-opened-window-has-been-closed
+        private void CategoryWindowClosed(object sender, EventArgs e)
+        {
+            ((Window)sender).Closed -= CategoryWindowClosed;
+            DisplayCategories(presenter.ExpensePopulateCategories());
+            cmbCategory.SelectedIndex = cmbCategory.Items.Count - 1;
         }
 
         /// <summary>

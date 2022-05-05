@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Budget;
 
 namespace HomeBudgetWPF
 {
@@ -43,10 +44,10 @@ namespace HomeBudgetWPF
         /// <summary>
         /// Used to add a category
         /// </summary>
-        public CategoryWindow()
+        public CategoryWindow(HomeBudget model)
         {
             InitializeComponent();
-            presenter = new CategoryPresenter(this);
+            presenter = new CategoryPresenter(this, model);
         }
         #endregion
 
@@ -114,6 +115,10 @@ namespace HomeBudgetWPF
                 cmbCategories.Items.Add(categoryName);
                 category = categoryName;
                 presenter.AddCategory(cmbCategoryTypes.SelectedIndex);
+                if (this.Owner is MainWindow)
+                    ((MainWindow)this.Owner).redrawCategories();
+                else if (this.Owner is AddExpenseWindow)
+                    ((MainWindow)((AddExpenseWindow)this.Owner).Owner).redrawCategories();    // get aew.Owner and call that one's function
             }
             else
             {

@@ -7,12 +7,26 @@
     <SolidColorBrush x:Key="OppositeRed" Color="{DynamicResource Crimson}"/>
     <SolidColorBrush x:Key="OppositeGreen" Color="{DynamicResource Green}"/>
     <SolidColorBrush x:Key="OppositeBlue" Color="{DynamicResource Navy}"/>
+    <SolidColorBrush x:Key="OppositeYellow" Color="{DynamicResource Yellow}"/>
     <SolidColorBrush x:Key="Button.OnMouseOver" Color="{DynamicResource MouseOverCrimson}"/>
     <SolidColorBrush x:Key="Button.TextColor" Color="{DynamicResource White}"/>
     <SolidColorBrush x:Key="TextColor" Color="{DynamicResource Black}"/>
     <SolidColorBrush x:Key="Alternation1" Color="{DynamicResource LightAlt1}"/>
     <SolidColorBrush x:Key="Alternation2" Color="{DynamicResource LightAlt2}"/>
     <SolidColorBrush x:Key="Backdrop" Color="{DynamicResource LightBackdrop}"/>
+    <!--Gradient-->
+    <SolidColorBrush x:Key="Gradient1" Color="{DynamicResource RedGradient1}"/>
+    <SolidColorBrush x:Key="Gradient2" Color="{DynamicResource RedGradient2}"/>
+    <SolidColorBrush x:Key="Gradient3" Color="{DynamicResource RedGradient3}"/>
+    <SolidColorBrush x:Key="Gradient4" Color="{DynamicResource RedGradient4}"/>
+    <SolidColorBrush x:Key="Gradient5" Color="{DynamicResource RedGradient5}"/>
+    <SolidColorBrush x:Key="Gradient6" Color="{DynamicResource RedGradient6}"/>
+    <SolidColorBrush x:Key="Gradient7" Color="{DynamicResource RedGradient7}"/>
+    <SolidColorBrush x:Key="Gradient8" Color="{DynamicResource RedGradient8}"/>
+    <SolidColorBrush x:Key="Gradient9" Color="{DynamicResource RedGradient9}"/>
+    <SolidColorBrush x:Key="Gradient10" Color="{DynamicResource RedGradient10}"/>
+    <!--Change Property of image to Content & Always Copy-->
     <BitmapImage x:Key="openImage" UriSource="/HomeBudgetWPF;component/Images/openLight.png"/>
     <BitmapImage x:Key="newImage" UriSource="/HomeBudgetWPF;component/Images/newLight.png"/>
+    <BitmapImage x:Key="recentImage" UriSource="/HomeBudgetWPF;component/Images/recentLight.png"/>
 </ResourceDictionary>

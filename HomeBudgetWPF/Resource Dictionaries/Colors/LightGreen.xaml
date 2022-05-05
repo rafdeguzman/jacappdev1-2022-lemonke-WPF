@@ -7,12 +7,26 @@
     <SolidColorBrush x:Key="OppositeRed" Color="{DynamicResource LightRed}"/>
     <SolidColorBrush x:Key="OppositeGreen" Color="{DynamicResource LightGreen}"/>
     <SolidColorBrush x:Key="OppositeBlue" Color="{DynamicResource LightBlue}"/>
+    <SolidColorBrush x:Key="OppositeYellow" Color="{DynamicResource LightYellow}"/>
     <SolidColorBrush x:Key="Button.OnMouseOver" Color="{DynamicResource MouseOverLightGreen}"/>
     <SolidColorBrush x:Key="Button.TextColor" Color="{DynamicResource Black}"/>
     <SolidColorBrush x:Key="TextColor" Color="{DynamicResource White}"/>
-    <SolidColorBrush x:Key="Alternation1" Color="{DynamicResource DarkAlt1}"></SolidColorBrush>
-    <SolidColorBrush x:Key="Alternation2" Color="{DynamicResource DarkAlt2}"></SolidColorBrush>
-    <SolidColorBrush x:Key="Backdrop" Color="{DynamicResource DarkBackdrop}"></SolidColorBrush>
+    <SolidColorBrush x:Key="Alternation1" Color="{DynamicResource DarkAlt1}"/>
+    <SolidColorBrush x:Key="Alternation2" Color="{DynamicResource DarkAlt2}"/>
+    <SolidColorBrush x:Key="Backdrop" Color="{DynamicResource DarkBackdrop}"/>
+    <!--Gradient-->
+    <SolidColorBrush x:Key="Gradient1" Color="{DynamicResource GreenGradient1}"/>
+    <SolidColorBrush x:Key="Gradient2" Color="{DynamicResource GreenGradient2}"/>
+    <SolidColorBrush x:Key="Gradient3" Color="{DynamicResource GreenGradient3}"/>
+    <SolidColorBrush x:Key="Gradient4" Color="{DynamicResource GreenGradient4}"/>
+    <SolidColorBrush x:Key="Gradient5" Color="{DynamicResource GreenGradient5}"/>
+    <SolidColorBrush x:Key="Gradient6" Color="{DynamicResource GreenGradient6}"/>
+    <SolidColorBrush x:Key="Gradient7" Color="{DynamicResource GreenGradient7}"/>
+    <SolidColorBrush x:Key="Gradient8" Color="{DynamicResource GreenGradient8}"/>
+    <SolidColorBrush x:Key="Gradient9" Color="{DynamicResource GreenGradient9}"/>
+    <SolidColorBrush x:Key="Gradient10" Color="{DynamicResource GreenGradient10}"/>
+    <!--Change Property of image to Content & Always Copy-->
     <BitmapImage x:Key="openImage" UriSource="/HomeBudgetWPF;component/Images/openDark.png"/>
     <BitmapImage x:Key="newImage" UriSource="/HomeBudgetWPF;component/Images/newDark.png"/>
+    <BitmapImage x:Key="recentImage" UriSource="/HomeBudgetWPF;component/Images/recentDark.png"/>
 </ResourceDictionary>

@@ -4,9 +4,12 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetProjects.WpfToolkit.DataVisualization" Version="6.1.94" />
     <PackageReference Include="System.Data.SQLite" Version="1.0.115.5" />
   </ItemGroup>
 
@@ -15,16 +18,14 @@
       <HintPath>dlls\Budget.dll</HintPath>
     </Reference>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Images\" />
-  </ItemGroup>
 	
 	<ItemGroup>
 		<None Remove="Images\newDark.png" />
 		<None Remove="Images\newLight.png" />
 		<None Remove="Images\openDark.png" />
 		<None Remove="Images\openLight.png" />
+		<None Remove="Images\recentDark.png" />
+		<None Remove="Images\recentLight.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -40,10 +41,16 @@
 		<Content Include="Images\openLight.png">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+		<Content Include="Images\recentDark.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Images\recentLight.png">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Page Update="Windows\UpdateWIndow.xaml">
+	  <Page Update="Windows\UpdateWindow.xaml">
 	    <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 	  </Page>
 	</ItemGroup>

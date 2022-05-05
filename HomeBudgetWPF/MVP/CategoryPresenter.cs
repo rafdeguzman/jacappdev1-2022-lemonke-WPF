@@ -15,11 +15,11 @@ namespace HomeBudgetWPF
         HomeBudget model;
         CategoryInterface view;
         Config config;
-        public CategoryPresenter(CategoryInterface v)
+        public CategoryPresenter(CategoryInterface v, HomeBudget model)
         {
             config = new Config();
             string filePath = config.lastUsedFilePath;
-            model = new HomeBudget(filePath, !File.Exists(filePath));
+            this.model = model;
             view = v;
 
             view.DisplayCategories(CategoryPopulateCategories());
@@ -56,6 +56,11 @@ namespace HomeBudgetWPF
             foreach (var categoryType in Enum.GetValues(typeof(Category.CategoryType)))
                 categoryTypes.Add(categoryType.ToString());
             return categoryTypes;
+        }
+
+        public void closeDb()
+        {
+            model.CloseDB();
         }
 
     }
