@@ -73,15 +73,6 @@ jobs:
       uses: actions/setup-dotnet@v2
       with:
         dotnet-version: 3.1.x
-    
-    #Install NuGet
-    - name: Setup Nuget.exe and add to PATH
-      env:
-        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
-      uses: warrenbuckley/Setup-Nuget@v1
-      
-    - name: Run Nuget.exe to restore NuGet packages
-      run: nuget restore $env:Solution_Name
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
