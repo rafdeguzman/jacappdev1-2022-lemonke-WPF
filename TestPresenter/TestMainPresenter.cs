@@ -46,7 +46,25 @@ namespace TestPresenter
             calledShowBudgetItemsByMonthAndCategory = true;
         }
 
-        
+        public DateTime? GetStartDate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DateTime? GetEndDate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool GetFilterFlag()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetCategoryId()
+        {
+            throw new NotImplementedException();
+        }
 
         public TestView()
         {
@@ -58,8 +76,10 @@ namespace TestPresenter
             [Fact]
             public void anotherTEst()
             {
+                TestView testView = new TestView();
+                Presenter p = new Presenter(testView, true);
                 TestCategoryView testCatView = new TestCategoryView();
-                CategoryPresenter testCatP = new CategoryPresenter(testCatView);
+                CategoryPresenter testCatP = new CategoryPresenter(testCatView, p.GetModel());
                 Assert.True(testCatView.calledDisplayCategories);
                 Assert.True(testCatView.calledDisplayCategoryTypes);
                 testCatP.closeDb();
@@ -100,13 +120,13 @@ namespace TestPresenter
                 p.closeDb();
 
                 TestCategoryView testCatView = new TestCategoryView();
-                CategoryPresenter testCatP = new CategoryPresenter(testCatView);
+                CategoryPresenter testCatP = new CategoryPresenter(testCatView, p.GetModel());
                 Assert.True(testCatView.calledDisplayCategories);
                 Assert.True(testCatView.calledDisplayCategoryTypes);
                 testCatP.closeDb();
 
                 testCatView = new TestCategoryView();
-                testCatP = new CategoryPresenter(testCatView);
+                testCatP = new CategoryPresenter(testCatView, p.GetModel());
                 testCatP.AddCategory(2);
                 Assert.True(testCatView.calledGetStringInput);
                 testCatP.closeDb();
