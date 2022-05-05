@@ -46,7 +46,6 @@ namespace HomeBudgetWPF
             FilterByDate.IsChecked = false;
             ResetFilter();
             Filter();
-            Refresh();
         }
         #endregion
 
@@ -476,36 +475,44 @@ namespace HomeBudgetWPF
             displaySearchHint();
             Filter();
         }
-        private void Refresh()
+        private void Refresh(bool start)
         {
             if (EndDate.SelectedDate != null && StartDate.SelectedDate != null)
             {
-                string messageBoxText;
+                string messageBoxText = "";
                 string caption = "Date Conflict Error";
                 MessageBoxButton button = MessageBoxButton.OK;
                 MessageBoxImage icon = MessageBoxImage.Information;
-                if (StartDate.SelectedDate > EndDate.SelectedDate)
+                if (start)
                 {
-                    messageBoxText = "Selected start date is after end date. End Date was changed to new start date.";
-                    EndDate.SelectedDate = StartDate.SelectedDate;
+                    if (StartDate.SelectedDate > EndDate.SelectedDate)
+                    {
+                        messageBoxText = "Selected start date is after end date. End Date was changed to new start date.";
+                        EndDate.SelectedDate = StartDate.SelectedDate;
+                        MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+                    }                    
                 }
                 else
                 {
-                    messageBoxText = "Selected end date is before end date. Start Date was changed to new end date.";
-                    StartDate.SelectedDate = EndDate.SelectedDate;
+                    if(StartDate.SelectedDate > EndDate.SelectedDate)
+                    {
+                        messageBoxText = "Selected end date is before start date. Start Date was changed to new end date.";
+                        StartDate.SelectedDate = EndDate.SelectedDate;
+                        MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
+                    }
                 }
-                MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
             }
+            Filter();
         }
 
         private void StartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            Refresh();
+            Refresh(true);
         }
 
         private void EndDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            Refresh();
+            Refresh(false);
         }
         private void ScrollIntoView()
         {
