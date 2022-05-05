@@ -73,17 +73,17 @@ namespace TestPresenter
 
         public class TestPresenter
         {
-            //[Fact]
-            //public void anotherTEst()
-            //{
-            //    TestView testView = new TestView();
-            //    Presenter p = new Presenter(testView, true);
-            //    TestCategoryView testCatView = new TestCategoryView();
-            //    CategoryPresenter testCatP = new CategoryPresenter(testCatView, p.GetModel());
-            //    Assert.True(testCatView.calledDisplayCategories);
-            //    Assert.True(testCatView.calledDisplayCategoryTypes);
-            //    testCatP.closeDb();
-            //}
+            [Fact]      // sequential tests testing
+            public void anotherTest()
+            {
+                TestView testView = new TestView();
+                Presenter p = new Presenter(testView, true);
+                TestCategoryView testCatView = new TestCategoryView();
+                CategoryPresenter testCatP = new CategoryPresenter(testCatView, p.GetModel());
+                Assert.True(testCatView.calledDisplayCategories);
+                Assert.True(testCatView.calledDisplayCategoryTypes);
+                testCatP.closeDb();
+            }
             [Fact]
             public void TestConstructor()
             {
@@ -119,35 +119,47 @@ namespace TestPresenter
                 Assert.True(testView.calledShowBudgetItemsByMonthAndCategory);
                 p.closeDb();
 
-                //p = new Presenter(testView, true);
-                //TestCategoryView testCatView = new TestCategoryView();
-                //CategoryPresenter testCatP = new CategoryPresenter(testCatView, p.GetModel());
-                //Assert.True(testCatView.calledDisplayCategories);
-                //Assert.True(testCatView.calledDisplayCategoryTypes);
-                //p.closeDb();
+                testView = new TestView();
+                p = new Presenter(testView, true);
+                TestCategoryView testCatView = new TestCategoryView();
+                CategoryPresenter testCatP = new CategoryPresenter(testCatView, p.GetModel());
+                Assert.True(testCatView.calledDisplayCategories);
+                Assert.True(testCatView.calledDisplayCategoryTypes);
+                testCatP.closeDb();
 
-                //p = new Presenter(testView, true);
-                //testCatView = new TestCategoryView();
-                //testCatP = new CategoryPresenter(testCatView, p.GetModel());
-                //testCatP.AddCategory(2);
-                //Assert.True(testCatView.calledGetStringInput);
-                //p.closeDb();
+                testView = new TestView();
+                p = new Presenter(testView, true);
+                testCatView = new TestCategoryView();
+                testCatP = new CategoryPresenter(testCatView, p.GetModel());
+                testCatP.AddCategory(2);
+                Assert.True(testCatView.calledGetStringInput);
+                testCatP.closeDb();
 
-                //testcategoryview view1 = new testcategoryview();
-                //categorypresenter p1 = new categorypresenter(view1, p.getmodel());
-                //assert.istype<categorypresenter>(p1);
-                //assert.true(view1.calleddisplaycategories);
-                //assert.true(view1.calleddisplaycategorytypes);
+                testView = new TestView();
+                p = new Presenter(testView, true);
+                testCatView = new TestCategoryView();
+                testCatP = new CategoryPresenter(testCatView, p.GetModel());
+                Assert.IsType<CategoryPresenter>(testCatP);
+                Assert.True(testCatView.calledDisplayCategories);
+                Assert.True(testCatView.calledDisplayCategoryTypes);
+                testCatP.closeDb();
 
-                TestExpenseView view2 = new TestExpenseView();
-                ExpensePresenter p2 = new ExpensePresenter(view2, p.GetModel());
-                Assert.IsType<ExpensePresenter>(p2);
-                Assert.True(view2.calledDisplayCategories);
+                testView = new TestView();
+                p = new Presenter(testView, true);
+                TestExpenseView testExpView = new TestExpenseView();
+                ExpensePresenter testExpP = new ExpensePresenter(testExpView, p.GetModel());
+                Assert.IsType<ExpensePresenter>(testExpP);
+                Assert.True(testExpView.calledDisplayCategories);
+                testExpP.closeDb();
 
-                TestExpenseView view3 = new TestExpenseView();
-                ExpensePresenter p3 = new ExpensePresenter(view3, p.GetModel());
-                p3.AddExpense(DateTime.Now, 1, 100, "abc", true);
-                Assert.True(view3.calledLastInput);
+
+                testView = new TestView();
+                p = new Presenter(testView, true);
+                testExpView = new TestExpenseView();
+                testExpP = new ExpensePresenter(testExpView, p.GetModel());
+                testExpP.AddExpense(DateTime.Now, 1, 100, "abc", true);
+                Assert.True(testExpView.calledLastInput);
+                testExpP.closeDb();
             }
         }
     }
