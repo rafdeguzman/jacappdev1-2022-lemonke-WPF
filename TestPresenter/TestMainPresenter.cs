@@ -73,17 +73,6 @@ namespace TestPresenter
 
         public class TestPresenter
         {
-            [Fact]      // sequential tests testing
-            public void anotherTest()
-            {
-                TestView testView = new TestView();
-                Presenter p = new Presenter(testView, true);
-                TestCategoryView testCatView = new TestCategoryView();
-                CategoryPresenter testCatP = new CategoryPresenter(testCatView, p.GetModel());
-                Assert.True(testCatView.calledDisplayCategories);
-                Assert.True(testCatView.calledDisplayCategoryTypes);
-                testCatP.closeDb();
-            }
             [Fact]
             public void TestConstructor()
             {
