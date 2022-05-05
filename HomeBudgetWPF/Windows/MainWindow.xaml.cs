@@ -98,7 +98,7 @@ namespace HomeBudgetWPF
         {
             Filter();
             if (dataBudgetLists.Items.Count > 0)
-            {
+            {          
                 dataBudgetLists.SelectedIndex = dataBudgetLists.Items.Count - 1;
                 dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
             }

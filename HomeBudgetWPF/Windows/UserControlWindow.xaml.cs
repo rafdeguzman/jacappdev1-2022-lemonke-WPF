@@ -33,6 +33,7 @@ namespace HomeBudgetWPF
             theDataGridView.presenter = presenter;
             theDataGridView.DataSource = theDataGridView.presenter.GetDataSource();
             theDataGridView.FillComboBox();
+            theDataGridView.cbMonths.SelectedIndex = theDataGridView.cbMonths.Items.Count - 1;
         }
     }
 }

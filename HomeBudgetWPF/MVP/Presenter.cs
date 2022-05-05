@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using Budget;
-using System.Configuration;
-using System.Collections.Specialized;
-using System.Windows;
+﻿using Budget;
 using Microsoft.Win32;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace HomeBudgetWPF
 {
