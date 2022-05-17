@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestPresenter", "TestPresen
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HomeBudgetSetup", "HomeBudgetSetup\HomeBudgetSetup.vdproj", "{352693AF-3765-472C-A547-E8D2619EB572}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnterpriseBudget", "..\EnterpriseBudget\EnterpriseBudget\EnterpriseBudget.csproj", "{BA95BAD9-798D-420A-83CD-478DD8A07BF9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{352693AF-3765-472C-A547-E8D2619EB572}.Debug|Any CPU.ActiveCfg = Debug
 		{352693AF-3765-472C-A547-E8D2619EB572}.Release|Any CPU.ActiveCfg = Release
 		{352693AF-3765-472C-A547-E8D2619EB572}.Release|Any CPU.Build.0 = Release
+		{BA95BAD9-798D-420A-83CD-478DD8A07BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA95BAD9-798D-420A-83CD-478DD8A07BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA95BAD9-798D-420A-83CD-478DD8A07BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA95BAD9-798D-420A-83CD-478DD8A07BF9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
