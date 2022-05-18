@@ -63,7 +63,7 @@ namespace EnterpriseBudget.Model
         /// </summary>
         /// <param name="departmentID">The ID of the department whose budget we want to open</param>
         /// <returns>true if successful, false otherwise</returns>
-        public bool DownLoadAndOpenDepartmentBudgetFile( int departmentID) 
+        public bool DownLoadAndOpenDepartmentBudgetFile(int departmentID) 
         {
             try {
                 var path = $"{sPath}\\{appName}\\{sqliteFileName}";

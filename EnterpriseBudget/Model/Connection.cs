@@ -36,6 +36,10 @@ namespace EnterpriseBudget.Model
             {
                 return false;
             }
-        }  
+        }
+        static public SqlConnection getConnection()
+        {
+            return cnn;
+        }
     }
 }

@@ -206,6 +206,12 @@ namespace HomeBudgetWPF
                 presenter.setUserInputFromDuplicateExpense(false);
             }
         }
+
+        public int getBudgetWithDepartment(int department)
+        {
+            
+            return department;
+        }
         #endregion
     }
 }

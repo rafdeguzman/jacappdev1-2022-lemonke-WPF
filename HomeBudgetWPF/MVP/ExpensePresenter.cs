@@ -7,6 +7,7 @@ using System.IO;
 using Budget;
 using System.Configuration;
 using System.Collections.Specialized;
+using System.Data.SqlClient;
 
 namespace HomeBudgetWPF
 {
