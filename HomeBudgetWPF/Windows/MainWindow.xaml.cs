@@ -114,26 +114,6 @@ namespace HomeBudgetWPF
                 dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
             }
         }
-
-        /// <summary>
-        /// Displays the add category window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Category_Click(object sender, RoutedEventArgs e)
-        {
-            CategoryWindow cw = new CategoryWindow(model);
-            cw.Owner = this;
-            //cw.ShowDialog();
-            cw.Show();
-            cw.Closed += CategoryWindowClosed;
-        }
-        private void CategoryWindowClosed(object sender, EventArgs e)
-        {
-            ((CategoryWindow)sender).Closed -= CategoryWindowClosed;
-            DisplayCategories(presenter.GetCategories());
-            this.Activate();
-        }
         public void redrawCategories()
         {
             DisplayCategories(presenter.GetCategories());
