@@ -71,8 +71,8 @@ namespace EnterpriseBudget.DeptBudgets
                 {
                     txtWait.Text = "Successfully created home budget... now YOU have to do the rest :)";
                     // create main presenter here
-
-                    MainWindow mw = new MainWindow();
+                    // get filePath from budget
+                    MainWindow mw = new MainWindow(presenter.getFilePath());
                     mw.Show();
                 }
                 else

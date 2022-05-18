@@ -136,7 +136,7 @@ namespace HomeBudgetWPF
 
         // Goes over the new color and sets the theme according to the Dark Mode button clicked or not
         // Unchecks all checkboxes other than the one it is setting the color to
-        private void CurrentTheme()
+        public void CurrentTheme()
         {
             switch (GetCurrentColor())
             {

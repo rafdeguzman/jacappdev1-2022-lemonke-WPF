@@ -37,6 +37,12 @@ namespace EnterpriseBudget.DeptBudgets
             return budget.DownLoadAndOpenDepartmentBudgetFile(deptId);
         }
 
+        public string getFilePath()
+        {
+            return budget.getFilePath();
+        }
+
+
         /// <summary>
         /// The view is closing, and needs to tidy-up by calling
         /// this routine.

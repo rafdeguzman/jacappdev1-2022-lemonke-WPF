@@ -27,7 +27,6 @@ namespace HomeBudgetWPF
         public ExpensePresenter(ExpenseInterface v, HomeBudget model)
         {
             config = new Config();
-            string filePath = config.lastUsedFilePath;
             this.model = model;
 
             view = v;

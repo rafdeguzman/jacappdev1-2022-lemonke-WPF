@@ -11,8 +11,7 @@
     <StackPanel Background="{DynamicResource App.Background}">
         <Menu Grid.Row="0">
             <MenuItem Header="_File">
-                <MenuItem Header="Open" Click="btnOpenFile"/>
-                <MenuItem Header="Save" Click="btnSaveFile" />
+                <MenuItem Header="Save"/>
             </MenuItem>
             <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
             <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>

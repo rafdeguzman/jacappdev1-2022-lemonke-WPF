@@ -47,6 +47,17 @@ namespace EnterpriseBudget.Model
             }
         }
 
+        public HomeBudget GetHomeBudget()
+        {
+            return homeBudget;
+        }
+
+        public string getFilePath()
+        {
+            // returns the path to the downloaded budget file
+            return $"{sPath}\\{appName}\\{sqliteFileName}";
+        }
+
         /// <summary>
         /// Get the sqlite file from sqlserver, and open budget file
         /// </summary>

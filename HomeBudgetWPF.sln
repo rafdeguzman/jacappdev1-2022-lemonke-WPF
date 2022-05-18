@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeBudgetWPF", "HomeBudgetWPF\HomeBudgetWPF.csproj", "{F36E2261-B4DF-488C-8DBD-0E41E41A03EE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestPresenter", "TestPresenter\TestPresenter.csproj", "{726199AF-43F4-4094-9965-4A7938374EA7}"
-EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "HomeBudgetSetup", "HomeBudgetSetup\HomeBudgetSetup.vdproj", "{352693AF-3765-472C-A547-E8D2619EB572}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EnterpriseBudget", "EnterpriseBudget\EnterpriseBudget.csproj", "{AF494FA4-72A8-4697-81A9-A3FFCCA8961E}"
@@ -21,10 +19,6 @@ Global
 		{F36E2261-B4DF-488C-8DBD-0E41E41A03EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F36E2261-B4DF-488C-8DBD-0E41E41A03EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F36E2261-B4DF-488C-8DBD-0E41E41A03EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{726199AF-43F4-4094-9965-4A7938374EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{726199AF-43F4-4094-9965-4A7938374EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{726199AF-43F4-4094-9965-4A7938374EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{726199AF-43F4-4094-9965-4A7938374EA7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{352693AF-3765-472C-A547-E8D2619EB572}.Debug|Any CPU.ActiveCfg = Debug
 		{352693AF-3765-472C-A547-E8D2619EB572}.Release|Any CPU.ActiveCfg = Release
 		{352693AF-3765-472C-A547-E8D2619EB572}.Release|Any CPU.Build.0 = Release

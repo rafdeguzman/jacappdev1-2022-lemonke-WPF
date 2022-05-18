@@ -35,17 +35,23 @@ namespace HomeBudgetWPF
         /// <summary>
         /// Constructor for the main Window
         /// </summary>
-        public MainWindow()
+        /// 
+
+        // create a presenter where i can pass in a filepath to initialize the db
+        public MainWindow(string filePath)
         {
             InitializeComponent();
             config = new Config();
-            presenter = new Presenter(this, config.newDB);
+            // takes in view and if new db or not
+            presenter = new Presenter(this, filePath);
             model = presenter.GetModel();
-            SetCurrentFile();
             FilterByCategory.IsChecked = false;
             FilterByDate.IsChecked = false;
             ResetFilter();
             Filter();
+            SettingsWindow sw = new SettingsWindow();
+            sw.CurrentTheme();
+            sw.Close();
         }
         #endregion
 
@@ -242,26 +248,6 @@ namespace HomeBudgetWPF
             {
                 System.Windows.Application.Current.Shutdown();
             }
-        }
-
-        /// <summary>
-        /// Opens a different database file
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnOpenFile(object sender, RoutedEventArgs e)
-        {
-            config.newDB = false;
-            MainWindow mw = new MainWindow();
-            mw.Show();
-            this.Close();
-        }
-        private void btnSaveFile(object sender, RoutedEventArgs e)
-        {
-            config.newDB = true;
-            MainWindow mw = new MainWindow();
-            mw.Show();
-            this.Close();
         }
 
         /// <summary>
