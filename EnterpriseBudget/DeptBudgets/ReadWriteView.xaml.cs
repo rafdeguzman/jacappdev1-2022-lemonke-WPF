@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using HomeBudgetWPF;
 
 namespace EnterpriseBudget.DeptBudgets
 {
@@ -69,15 +68,9 @@ namespace EnterpriseBudget.DeptBudgets
             {
                 if (presenter.LoadData())
                 {
-                    txtWait.Text = "Successfully created home budget... now YOU have to do the rest :)";
-                    // create main presenter here
-                    // get filePath from budget
-                    MainWindow mw = new MainWindow(presenter.getFilePath());
-                    mw.Show();
                 }
                 else
                 {
-                    txtWait.Text = "something went wrong, unable to load home budget";
                 }
             }
         }

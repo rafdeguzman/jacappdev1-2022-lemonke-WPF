@@ -15,9 +15,8 @@ using System.Windows.Shapes;
 using System.Configuration;
 using System.Collections.Specialized;
 using System.IO;
-using Budget;
 
-namespace HomeBudgetWPF
+namespace EnterpriseBudget.DeptBudgets.HomeBudget
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -28,8 +27,9 @@ namespace HomeBudgetWPF
         const int EXTENSION_LENGTH = 3;
         private readonly Presenter presenter;
         private bool humanSave = false;
+        private int depId;
         Config config;
-        HomeBudget model;
+        Budget.HomeBudget model;
         #endregion
 
         #region Constructors
@@ -57,11 +57,17 @@ namespace HomeBudgetWPF
         }
         #endregion
 
+        public int DepId
+        {
+            set { depId = value; }
+        }
+
+
         /// <summary>
         /// Fills the category combobox with all the categories
         /// </summary>
         /// <param name="categories">The list of categories to put in the combobox</param>
-        private void DisplayCategories(List<Category> categories)
+        private void DisplayCategories(List<Budget.Category> categories)
         {
             cmbCategory.DisplayMemberPath = "Description";
             cmbCategory.Items.Clear();
@@ -236,7 +242,7 @@ namespace HomeBudgetWPF
         /// Fills out the datagrid with expenses, is called by the presenter
         /// </summary>
         /// <param name="budgetItems">The list of expenses to bind to the datagrid</param>
-        public void ShowBudgetItems(List<BudgetItem> budgetItems)
+        public void ShowBudgetItems(List<Budget.BudgetItem> budgetItems)
         {
             dataBudgetLists.ItemsSource = budgetItems;
             dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
@@ -284,7 +290,7 @@ namespace HomeBudgetWPF
         {
             System.Windows.Application.Current.Shutdown();
         }
-        public void ShowBudgetItemsByMonth(List<BudgetItemsByMonth> budgetItemsListByMonth)
+        public void ShowBudgetItemsByMonth(List<Budget.BudgetItemsByMonth> budgetItemsListByMonth)
         {
             dataBudgetLists.ItemsSource = budgetItemsListByMonth;
             dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
@@ -300,7 +306,7 @@ namespace HomeBudgetWPF
             dataBudgetLists.Columns.Add(column2);
         }
 
-        public void ShowBudgetItemsByCategory(List<BudgetItemsByCategory> budgetItemsListByCategory)
+        public void ShowBudgetItemsByCategory(List<Budget.BudgetItemsByCategory> budgetItemsListByCategory)
         {
             dataBudgetLists.ItemsSource = budgetItemsListByCategory;
             dataBudgetLists.Columns.Clear(); // Clear all existing columns on the

@@ -103,9 +103,9 @@ namespace EnterpriseBudget.MainControl
             if (employee != null)
             {
                 // define view and presenters
-                var readWriteView = new DeptBudgets.ReadWriteView();
-                readWriteView.presenter = new DeptBudgets.Presenter((DeptBudgets.InterfaceView)readWriteView, employee.deptartmentID);
-                readWriteView.mainControl = this;
+                var model = new Model.DepartmentBudgets();
+                var readWriteView = new DeptBudgets.HomeBudget.MainWindow(model.getFilePath());
+                readWriteView.DepId = employee.deptartmentID;
 
                 // show the view
                 this.GoAway();

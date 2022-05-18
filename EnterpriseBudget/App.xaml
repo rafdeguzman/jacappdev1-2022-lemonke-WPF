@@ -4,6 +4,14 @@
              xmlns:local="clr-namespace:EnterpriseBudget"
              StartupUri="MainControl/View.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/EnterpriseBudget;component/DeptBudgets/HomeBudget/Resource Dictionaries/Colors/LightRed.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/EnterpriseBudget;component/DeptBudgets/HomeBudget/Resource Dictionaries/TextBlockDictionary.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/EnterpriseBudget;component/DeptBudgets/HomeBudget/Resource Dictionaries/ButtonDictionary.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/EnterpriseBudget;component/DeptBudgets/HomeBudget/Resource Dictionaries/Colors/ListOfColors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
     </Application.Resources>
 </Application>
