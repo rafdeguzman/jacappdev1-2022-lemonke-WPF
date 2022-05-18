@@ -43,6 +43,7 @@ namespace HomeBudgetWPF
             InitializeComponent();
             config = new Config();
             // takes in view and if new db or not
+            // expenses is empty by default
             presenter = new Presenter(this, filePath);
             model = presenter.GetModel();
             FilterByCategory.IsChecked = false;
@@ -256,7 +257,6 @@ namespace HomeBudgetWPF
         /// <param name="budgetItems">The list of expenses to bind to the datagrid</param>
         public void ShowBudgetItems(List<BudgetItem> budgetItems)
         {
-            ChangeContentMenu(true);
             dataBudgetLists.ItemsSource = budgetItems;
             dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
             var column1 = new DataGridTextColumn(); // Create a text column object
@@ -305,7 +305,6 @@ namespace HomeBudgetWPF
         }
         public void ShowBudgetItemsByMonth(List<BudgetItemsByMonth> budgetItemsListByMonth)
         {
-            ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByMonth;
             dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
             var column1 = new DataGridTextColumn(); // Create a text column object
@@ -322,7 +321,6 @@ namespace HomeBudgetWPF
 
         public void ShowBudgetItemsByCategory(List<BudgetItemsByCategory> budgetItemsListByCategory)
         {
-            ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByCategory;
             dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
             var column1 = new DataGridTextColumn(); // Create a text column object
@@ -339,7 +337,6 @@ namespace HomeBudgetWPF
 
         public void ShowBudgetItemsMonthAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
         {
-            ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByMonthAndCategory;
             dataBudgetLists.Columns.Clear();
             var columnTotal = new DataGridTextColumn();
@@ -415,12 +412,6 @@ namespace HomeBudgetWPF
             FilterByDate.IsChecked = false;
             DisplayCategories(presenter.GetCategories());
             cmbCategory.Text = "Category";
-        }
-        private void ChangeContentMenu(bool enable)
-        {
-            dataBudgetLists.ContextMenu.IsOpen = false;
-            dataBudgetLists.ContextMenu.StaysOpen = false;
-            dataBudgetLists.ContextMenu.IsEnabled = enable ? true : false;
         }
         private void displaySearchHint()
         {

@@ -75,6 +75,7 @@ namespace EnterpriseBudget.Model
         }
 
         // write binary data to SQLServer
+        // basically save to sql server
         private void WriteBlobToSQLServer(SqlConnection cnn, string fileName, string tableName, string columnName, string whereCondition)
         {
             SqlCommand writeBlob = cnn.CreateCommand();
