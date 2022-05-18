@@ -26,7 +26,6 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         #region Backing Fields
         const int EXTENSION_LENGTH = 3;
         private readonly Presenter presenter;
-        private bool humanSave = false;
         private int depId;
         Config config;
         Budget.HomeBudget model;
@@ -54,11 +53,13 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
             SettingsWindow sw = new SettingsWindow();
             sw.CurrentTheme();
             sw.Close();
+            bool? loaded = presenter.LoadData();
         }
         #endregion
 
         public int DepId
         {
+            get { return depId; }
             set { depId = value; }
         }
 
@@ -111,7 +112,7 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         {
             Filter();
             if (dataBudgetLists.Items.Count > 0)
-            {          
+            {
                 dataBudgetLists.SelectedIndex = dataBudgetLists.Items.Count - 1;
                 dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
             }
@@ -454,11 +455,11 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
                         messageBoxText = "Selected start date is after end date. End Date was changed to new start date.";
                         EndDate.SelectedDate = StartDate.SelectedDate;
                         MessageBox.Show(messageBoxText, caption, button, icon, MessageBoxResult.OK);
-                    }                    
+                    }
                 }
                 else
                 {
-                    if(StartDate.SelectedDate > EndDate.SelectedDate)
+                    if (StartDate.SelectedDate > EndDate.SelectedDate)
                     {
                         messageBoxText = "Selected end date is before start date. Start Date was changed to new end date.";
                         StartDate.SelectedDate = EndDate.SelectedDate;
@@ -513,11 +514,8 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (!humanSave)
-            {
-                humanSave = true;
-                
-            }
+            presenter.setDeptId(DepId);
+            presenter.Save();
         }
     }
 }

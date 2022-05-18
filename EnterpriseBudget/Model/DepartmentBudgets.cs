@@ -74,6 +74,17 @@ namespace EnterpriseBudget.Model
             catch { return false; }
         }
 
+        public bool SaveToSQLServer(int departmentID)
+        {
+            try
+            {
+                var path = $"{sPath}\\{appName}\\{sqliteFileName}";
+                WriteBlobToSQLServer(Connection.cnn, path, "deptBudgets", "sqlitefile", $"deptId={departmentID}");
+                return true;
+            }
+            catch { return false; }
+        }
+
         // write binary data to SQLServer
         // basically save to sql server
         private void WriteBlobToSQLServer(SqlConnection cnn, string fileName, string tableName, string columnName, string whereCondition)

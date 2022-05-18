@@ -9,6 +9,8 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
 {
     public class Presenter
     {
+        Model.DepartmentBudgets budget;
+        int deptId;
         ViewInterface view;
         Budget.HomeBudget model;
         Config config;
@@ -21,6 +23,7 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
             view = v;
             // use filePath given by MainWindow
             model = new Budget.HomeBudget(filePath, false);
+            budget = new Model.DepartmentBudgets();
         }
         public List<Category> GetCategories()
         {
@@ -143,6 +146,43 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         {
             List<Dictionary<string, object>> myItems = model.GetBudgetDictionaryByCategoryAndMonth(view.GetStartDate(), view.GetEndDate(), false, view.GetCategoryId());
             return myItems.Cast<object>().ToList();            
+        }
+
+        /// <summary>
+        /// Get the data from the database, etc
+        /// </summary>
+        /// <returns>true if successful, false otherwise</returns>
+        public bool LoadData()
+        {
+            budget = new Model.DepartmentBudgets();
+            return budget.DownLoadAndOpenDepartmentBudgetFile(deptId);
+        }
+
+        public string getFilePath()
+        {
+            return budget.getFilePath();
+        }
+
+
+        /// <summary>
+        /// The view is closing, and needs to tidy-up by calling
+        /// this routine.
+        /// </summary>
+        public void onClose()
+        {
+            if (budget != null)
+            {
+                budget.Close();
+            }
+        }
+
+        public void setDeptId(int depId)
+        {
+            this.deptId = depId;
+        }
+        public void Save()
+        {
+            budget.SaveToSQLServer(deptId);
         }
     }
 }
