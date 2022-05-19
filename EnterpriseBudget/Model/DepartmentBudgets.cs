@@ -69,10 +69,6 @@ namespace EnterpriseBudget.Model
         {
             try {
                 var path = $"{sPath}\\{appName}\\{sqliteFileName}";
-                if (File.Exists(path))
-                {
-                    path = $"{sPath}\\{appName}\\{sqliteFileNameFromServer}";
-                }
                 ReadAndSaveBlobFromSQLServer(Connection.cnn, "deptBudgets", "sqlitefile", $"deptId={departmentID}",path);
                 homeBudget = new HomeBudget(path, false);
                 return true;
@@ -173,7 +169,8 @@ namespace EnterpriseBudget.Model
             List < KeyValuePair<string, decimal> > categories = new List<KeyValuePair<string, decimal>>();
             SqlCommand command = Connection.cnn.CreateCommand();
             command.CommandText = $"Select bc.name, bl.limit from budgetCategoryLimits bl, budgetCategories bc WHERE bl.deptId = {deptId} and bc.id = bl.catId;";
-            SqlDataReader myReader = command.ExecuteReader();
+            SqlDataReader myReader;
+            myReader = command.ExecuteReader();
 
             while (myReader.Read())
             {
