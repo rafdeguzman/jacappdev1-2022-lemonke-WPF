@@ -111,7 +111,6 @@ namespace EnterpriseBudget.MainControl
                 this.GoAway();
                 readWriteView.ShowDialog();
             }
-
             // user does not have permission
             else
             {

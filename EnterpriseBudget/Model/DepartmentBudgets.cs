@@ -74,6 +74,17 @@ namespace EnterpriseBudget.Model
             catch { return false; }
         }
 
+        public bool SaveToSQLServer(int departmentID)
+        {
+            try
+            {
+                var path = $"{sPath}\\{appName}\\{sqliteFileName}";
+                WriteBlobToSQLServer(Connection.cnn, path, "deptBudgets", "sqlitefile", $"deptId={departmentID}");
+                return true;
+            }
+            catch { return false; }
+        }
+
         // write binary data to SQLServer
         // basically save to sql server
         private void WriteBlobToSQLServer(SqlConnection cnn, string fileName, string tableName, string columnName, string whereCondition)
@@ -140,5 +151,22 @@ namespace EnterpriseBudget.Model
             myReader.Close();
         }
 
+        public List<KeyValuePair<string, decimal>> GetExpenses(int deptId)
+        {
+            List < KeyValuePair<string, decimal> > categories = new List<KeyValuePair<string, decimal>>();
+            SqlCommand command = Connection.cnn.CreateCommand();
+            command.CommandText = $"Select bc.name, bl.limit from budgetCategoryLimits bl, budgetCategories bc WHERE bl.deptId = {deptId} and bc.id = bl.catId;";
+            SqlDataReader myReader = command.ExecuteReader();
+
+            while (myReader.Read())
+            {
+                KeyValuePair<string, decimal> kvp = new KeyValuePair<string, decimal>(myReader.GetString(0), (decimal)myReader.GetDouble(1));
+                categories.Add(kvp);
+            }
+
+            myReader.Close();
+
+            return categories;
+        }
     }
 }
