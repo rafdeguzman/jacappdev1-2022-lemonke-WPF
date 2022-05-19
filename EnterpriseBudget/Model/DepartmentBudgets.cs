@@ -23,6 +23,8 @@ namespace EnterpriseBudget.Model
     public class DepartmentBudgets
     {
         private String sqliteFileName = "deptBudget.db";
+        private String sqliteFileNameToSend = "deptBudgetToSend.db";
+        private String sqliteFileNameFromServer = "deptBudgetFromServer.db";
         private String appName = "EnterpriseBudget";
         private String sPath;
         private HomeBudget homeBudget;
@@ -67,6 +69,10 @@ namespace EnterpriseBudget.Model
         {
             try {
                 var path = $"{sPath}\\{appName}\\{sqliteFileName}";
+                if (File.Exists(path))
+                {
+                    path = $"{sPath}\\{appName}\\{sqliteFileNameFromServer}";
+                }
                 ReadAndSaveBlobFromSQLServer(Connection.cnn, "deptBudgets", "sqlitefile", $"deptId={departmentID}",path);
                 homeBudget = new HomeBudget(path, false);
                 return true;
@@ -78,8 +84,19 @@ namespace EnterpriseBudget.Model
         {
             try
             {
-                var path = $"{sPath}\\{appName}\\{sqliteFileName}";
+                if (!File.Exists($"{sPath}\\{appName}\\{sqliteFileNameToSend}"))
+                {
+                    File.Copy($"{sPath}\\{appName}\\{sqliteFileName}", $"{sPath}\\{appName}\\{sqliteFileNameToSend}");
+                }
+                else
+                {
+                    File.Delete($"{sPath}\\{appName}\\{sqliteFileNameToSend}");
+                    File.Copy($"{sPath}\\{appName}\\{sqliteFileName}", $"{sPath}\\{appName}\\{sqliteFileNameToSend}");
+                }
+
+                var path = $"{sPath}\\{appName}\\{sqliteFileNameToSend}";
                 WriteBlobToSQLServer(Connection.cnn, path, "deptBudgets", "sqlitefile", $"deptId={departmentID}");
+                File.Delete($"{sPath}\\{appName}\\{sqliteFileNameToSend}"); // delete file after for cleanup
                 return true;
             }
             catch { return false; }
@@ -91,7 +108,7 @@ namespace EnterpriseBudget.Model
         {
             SqlCommand writeBlob = cnn.CreateCommand();
             writeBlob.CommandText = $"UPDATE {tableName} set {columnName} = @data where {whereCondition} ";
-            writeBlob.Parameters.AddWithValue("@data", File.ReadAllBytes(fileName));
+            writeBlob.Parameters.AddWithValue("@data", File.ReadAllBytes(fileName));    // dies here
             writeBlob.ExecuteNonQuery();
         }
 
