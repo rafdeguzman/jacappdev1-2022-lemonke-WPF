@@ -28,35 +28,8 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
             InitializeComponent();
         }
 
-        public void DisplayChart(List<KeyValuePair<string, decimal>> kvp, List<Budget.BudgetItem> expenses, int numberOfItemsInExpenses)
+        public void DisplayChart(ChartValues<decimal> spent, ChartValues<decimal> remainder, List<string> labels)
         {
-            SeriesCollection = new SeriesCollection();
-            List<String> labels = new List<string>();
-            ChartValues<decimal> spent = new ChartValues<decimal>();
-            ChartValues<decimal> remainder = new ChartValues<decimal>();
-
-            // For each category
-            for (int i = 0; i < kvp.Count; i++)
-            {
-                decimal totalSpent = 0;
-                decimal limit = kvp[i].Value;
-                string currentCat = kvp[i].Key;
-                labels.Add(currentCat);
-
-                // For each category, add all the fields (Available / Spent)
-                for(int x = 0; x < numberOfItemsInExpenses; x++)
-                {
-                    Budget.BudgetItem currentExpense = expenses[x];
-                    if (currentExpense != null && currentExpense.Category == currentCat)
-                    {
-                        totalSpent += (decimal)currentExpense.Amount;
-                    }
-                }
-                // i dont know about this tbh but the values have to be initialized
-                remainder.Add(totalSpent < 0 ? limit + totalSpent : limit - totalSpent);
-                spent.Add(totalSpent);
-            }
-
             SeriesCollection = new SeriesCollection
             {
                 new StackedColumnSeries

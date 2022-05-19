@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using Path = System.IO.Path;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace EnterpriseBudget.DeptBudgets.HomeBudget
 {
@@ -26,6 +28,8 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         #region Backing Fields
         private readonly ExpensePresenter presenter;
         private Budget.HomeBudget model;
+        private List<KeyValuePair<string, decimal>> limits;
+        private List<KeyValuePair<string, decimal>> alreadySpent; 
         #endregion
 
         #region Constructors
@@ -39,12 +43,45 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
             presenter = new ExpensePresenter(this, model);
             this.model = model;
             checkCredit.IsChecked = false;
-            List<BudgetItem> list = presenter.getAllExpenses();
-            barChartControl.DisplayChart(presenter.getExpenses(budgId), list, list.Count);
+            limits = presenter.getExpenses(budgId);
+            doStuff();
         }
         #endregion
 
         #region Methods
+
+        private void doStuff()
+        {
+            List<Budget.BudgetItem> expenses = presenter.getAllExpenses();
+            List<String> labels = new List<string>();
+            ChartValues<decimal> spent = new ChartValues<decimal>();
+            ChartValues<decimal> remainder = new ChartValues<decimal>();
+            alreadySpent = new List<KeyValuePair<string, decimal>>();
+
+            // For each category
+            for (int i = 0; i < limits.Count; i++)
+            {
+                decimal totalSpent = 0;
+                decimal limit = limits[i].Value;
+                string currentCat = limits[i].Key;
+                labels.Add(currentCat);
+
+                // For each category, add all the fields (Available / Spent)
+                for (int x = 0; x < expenses.Count; x++)
+                {
+                    Budget.BudgetItem currentExpense = expenses[x];
+                    if (currentExpense != null && currentExpense.Category == currentCat)
+                    {
+                        totalSpent += (decimal)currentExpense.Amount;
+                    }
+                }
+                // i dont know about this tbh but the values have to be initialized
+                remainder.Add(limit - totalSpent);
+                spent.Add(totalSpent);
+                alreadySpent.Add(new KeyValuePair<string, decimal>(currentCat, totalSpent));
+            }
+            barChartControl.DisplayChart(spent, remainder, labels);
+        }
 
         /// <summary>
         /// Resets the input fields
@@ -120,6 +157,7 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         {
             if (CheckUserInput())
             {
+                doStuff();
                 GetUserInput();
                 clear();
                 blastInput.Visibility = Visibility.Visible;
