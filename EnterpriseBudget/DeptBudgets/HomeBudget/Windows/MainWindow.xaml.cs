@@ -44,7 +44,7 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
             config = new Config();
             // takes in view and if new db or not
             // expenses is empty by default
-            presenter = new Presenter(this, filePath);
+            presenter = new Presenter(this, filePath, dept);
             model = presenter.GetModel();
             FilterByCategory.IsChecked = false;
             FilterByDate.IsChecked = false;

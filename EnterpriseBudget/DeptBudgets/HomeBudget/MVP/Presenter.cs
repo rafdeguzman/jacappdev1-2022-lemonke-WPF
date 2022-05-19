@@ -15,15 +15,15 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         Budget.HomeBudget model;
         Config config;
         // change this code because we're downloading the sql file from the jac servers
-        public Presenter(ViewInterface v, string filePath)
+        public Presenter(ViewInterface v, string filePath, int deptId)
         {
-            string defaultDirectory;
+            this.deptId = deptId;
             config = new Config();
             //config file setup
             view = v;
             // use filePath given by MainWindow
+            LoadData();
             model = new Budget.HomeBudget(filePath, false);
-            budget = new Model.DepartmentBudgets();
 
 
         }
