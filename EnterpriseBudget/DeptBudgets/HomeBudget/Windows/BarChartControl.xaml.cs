@@ -32,20 +32,17 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         {
             SeriesCollection = new SeriesCollection();
             List<String> labels = new List<string>();
+            ChartValues<decimal> spent = new ChartValues<decimal>();
+            ChartValues<decimal> remainder = new ChartValues<decimal>();
 
             // For each category
             for (int i = 0; i < kvp.Count; i++)
             {
-                SeriesCollection.Add(new StackedColumnSeries
-                {
-                    StackMode = StackMode.Values,
-                    DataLabels = true,
-                    LabelPoint = p => p.X.ToString("c")
-                });
+                decimal totalSpent = 0;
+                decimal limit = kvp[i].Value;
                 string currentCat = kvp[i].Key;
                 labels.Add(currentCat);
-                decimal limit = kvp[i].Value;
-                decimal totalSpent = 0;
+
                 // For each category, add all the fields (Available / Spent)
                 for(int x = 0; x < numberOfItemsInExpenses; x++)
                 {
@@ -56,16 +53,32 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
                     }
                 }
                 // i dont know about this tbh but the values have to be initialized
-                SeriesCollection[i].Values = new ChartValues<decimal> { totalSpent };
-                SeriesCollection[i].Values = new ChartValues<decimal> { limit - totalSpent };
-                
-                SeriesCollection[i].Values.Add(totalSpent);
-                SeriesCollection[i].Values.Add(limit - totalSpent);
-
+                remainder.Add(totalSpent < 0 ? limit + totalSpent : limit - totalSpent);
+                spent.Add(totalSpent);
             }
 
-            Formatter = val => val.ToString("P");
+            SeriesCollection = new SeriesCollection
+            {
+                new StackedColumnSeries
+                {
+                    Title = "Amount Spent",
+                    Values = spent,
+                    StackMode = StackMode.Percentage, // this is not necessary, values is the default stack mode
+                    DataLabels = true,
+                    UseLayoutRounding = false
+                },
+                new StackedColumnSeries
+                {
+                    Title = "Amount Remaining",
+                    Values = remainder,
+                    StackMode = StackMode.Percentage,
+                    DataLabels = true,
+                    UseLayoutRounding = false
+                }
+            };
 
+            Formatter = val => val.ToString("c");
+            Labels = labels.ToArray();
             DataContext = this;
         }
 

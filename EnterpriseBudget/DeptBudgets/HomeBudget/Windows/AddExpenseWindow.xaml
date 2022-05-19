@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EnterpriseBudget.DeptBudgets.HomeBudget"
         mc:Ignorable="d"
-   Title="Add Window" Height="Auto" SizeToContent="Height" MinWidth="450" MaxWidth="450">
+   Title="Add Window" Height="Auto" SizeToContent="Height" MinWidth="450">
     <Grid Background="{DynamicResource App.Background}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -66,13 +66,13 @@
                         <TextBox Background="{DynamicResource Alternation1}" BorderBrush="{DynamicResource TextColor}" Foreground="{DynamicResource TextColor}" Margin="0,5,5,5" Grid.Row="4" Grid.Column="1" x:Name="txtAmount"></TextBox>
 
                         <!--Check Box-->
-                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Credit" Grid.Row="5" Grid.Column="0"/>
+                        <!--<TextBlock Style="{DynamicResource TextBlockDefault}" Text="Credit" Grid.Row="5" Grid.Column="0"/>-->
                         <CheckBox Margin="0,5,5,5" Grid.Row="5" Grid.Column="1" x:Name="checkCredit" HorizontalAlignment="Right" ></CheckBox>
 
                     </Grid>
                 </Border>
                 <!-- Last input -->
-                <Border x:Name="blastInput" Margin="0,0,0,10" Grid.Row="2" Grid.Column="0" Height="400px"  CornerRadius="10" Grid.ColumnSpan="2" Background="{DynamicResource Backdrop}" Padding="10">
+                <Border x:Name="blastInput" Margin="0,0,0,10" Grid.Row="2" Grid.Column="0" Height="400px" Width="auto" CornerRadius="10" Grid.ColumnSpan="2" Background="{DynamicResource Backdrop}" Padding="10">
                     <local:BarChartControl x:Name="barChartControl">
                         
                     </local:BarChartControl>
