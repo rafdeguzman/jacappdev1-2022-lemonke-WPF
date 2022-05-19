@@ -24,6 +24,8 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
             // use filePath given by MainWindow
             model = new Budget.HomeBudget(filePath, false);
             budget = new Model.DepartmentBudgets();
+
+
         }
         public List<Category> GetCategories()
         {

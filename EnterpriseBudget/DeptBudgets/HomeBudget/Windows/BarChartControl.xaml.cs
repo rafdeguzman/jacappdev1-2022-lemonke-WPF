@@ -47,16 +47,21 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
                 decimal limit = kvp[i].Value;
                 decimal totalSpent = 0;
                 // For each category, add all the fields (Available / Spent)
-                for(int x = 0; x < numberOfItemsInExpenses; x ++)
+                for(int x = 0; x < numberOfItemsInExpenses; x++)
                 {
-                    //Budget.BudgetItem currentExpense = expenses[j];
-                    //if(currentExpense != null && currentExpense.Category == currentCat)
-                    //{
-                    //    totalSpent += (decimal)currentExpense.Amount;
-                    //}
+                    Budget.BudgetItem currentExpense = expenses[x];
+                    if (currentExpense != null && currentExpense.Category == currentCat)
+                    {
+                        totalSpent += (decimal)currentExpense.Amount;
+                    }
                 }
+                // i dont know about this tbh but the values have to be initialized
+                SeriesCollection[i].Values = new ChartValues<decimal> { totalSpent };
+                SeriesCollection[i].Values = new ChartValues<decimal> { limit - totalSpent };
+                
                 SeriesCollection[i].Values.Add(totalSpent);
                 SeriesCollection[i].Values.Add(limit - totalSpent);
+
             }
 
             Formatter = val => val.ToString("P");

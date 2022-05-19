@@ -78,13 +78,13 @@ namespace EnterpriseBudget.MainControl
             if (employee != null)
             {
                 // define view and presenters
-                var readOnlyDataView = new DeptBudgets.ReadOnlyView();
-                readOnlyDataView.presenter = new DeptBudgets.Presenter((DeptBudgets.InterfaceView)readOnlyDataView, employee.deptartmentID);
-                readOnlyDataView.mainControl = this;
-                
-                // Show the view
+                var model = new Model.DepartmentBudgets();
+                var readWriteView = new DeptBudgets.HomeBudget.MainWindow(model.getFilePath(), employee.deptartmentID, employee.jobName.ToLower());
+                readWriteView.DepId = employee.deptartmentID;
+
+                // show the view
                 this.GoAway();
-                readOnlyDataView.ShowDialog();
+                readWriteView.ShowDialog();
             }
             else
             {
@@ -92,6 +92,7 @@ namespace EnterpriseBudget.MainControl
             }
         }
 
+        // this is where we call main our main window
         private void ChairPersonButton_Clicked(object sender, RoutedEventArgs e)
         {
             txtStatus.Text = "";
@@ -104,7 +105,7 @@ namespace EnterpriseBudget.MainControl
             {
                 // define view and presenters
                 var model = new Model.DepartmentBudgets();
-                var readWriteView = new DeptBudgets.HomeBudget.MainWindow(model.getFilePath());
+                var readWriteView = new DeptBudgets.HomeBudget.MainWindow(model.getFilePath(), employee.deptartmentID, employee.jobName.ToLower());
                 readWriteView.DepId = employee.deptartmentID;
 
                 // show the view

@@ -16,7 +16,7 @@
                           Separator="{x:Static lvc:DefaultAxes.CleanSeparator}" />
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Usage" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                <lvc:Axis Title="Amount ($CAD)" LabelFormatter="{Binding Formatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
     </Grid>

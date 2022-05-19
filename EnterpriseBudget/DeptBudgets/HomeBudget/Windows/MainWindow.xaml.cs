@@ -38,7 +38,7 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         /// 
 
         // create a presenter where i can pass in a filepath to initialize the db
-        public MainWindow(string filePath)
+        public MainWindow(string filePath, int dept, string job)
         {
             InitializeComponent();
             config = new Config();
@@ -54,6 +54,14 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
             sw.CurrentTheme();
             sw.Close();
             bool? loaded = presenter.LoadData();
+
+            if(job == "faculty")
+            {
+                addExpenseButton.Content = "Not enough permissions";
+                addExpenseButton.SetResourceReference(Control.StyleProperty, "HollowRoundedButton");
+                addExpenseButton.IsEnabled = false;
+            }
+
         }
         #endregion
 
