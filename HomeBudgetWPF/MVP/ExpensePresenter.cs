@@ -7,6 +7,7 @@ using System.IO;
 using Budget;
 using System.Configuration;
 using System.Collections.Specialized;
+using System.Data.SqlClient;
 
 namespace HomeBudgetWPF
 {
@@ -27,7 +28,6 @@ namespace HomeBudgetWPF
         public ExpensePresenter(ExpenseInterface v, HomeBudget model)
         {
             config = new Config();
-            string filePath = config.lastUsedFilePath;
             this.model = model;
 
             view = v;

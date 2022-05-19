@@ -27,6 +27,7 @@ namespace HomeBudgetWPF
         #region Backing Fields
         const int EXTENSION_LENGTH = 3;
         private readonly Presenter presenter;
+        private bool humanSave = false;
         Config config;
         HomeBudget model;
         #endregion
@@ -35,17 +36,24 @@ namespace HomeBudgetWPF
         /// <summary>
         /// Constructor for the main Window
         /// </summary>
-        public MainWindow()
+        /// 
+
+        // create a presenter where i can pass in a filepath to initialize the db
+        public MainWindow(string filePath)
         {
             InitializeComponent();
             config = new Config();
-            presenter = new Presenter(this, config.newDB);
+            // takes in view and if new db or not
+            // expenses is empty by default
+            presenter = new Presenter(this, filePath);
             model = presenter.GetModel();
-            SetCurrentFile();
             FilterByCategory.IsChecked = false;
             FilterByDate.IsChecked = false;
             ResetFilter();
             Filter();
+            SettingsWindow sw = new SettingsWindow();
+            sw.CurrentTheme();
+            sw.Close();
         }
         #endregion
 
@@ -106,26 +114,6 @@ namespace HomeBudgetWPF
                 dataBudgetLists.SelectedIndex = 0;
                 dataBudgetLists.ScrollIntoView(dataBudgetLists.SelectedItem);
             }
-        }
-
-        /// <summary>
-        /// Displays the add category window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Category_Click(object sender, RoutedEventArgs e)
-        {
-            CategoryWindow cw = new CategoryWindow(model);
-            cw.Owner = this;
-            //cw.ShowDialog();
-            cw.Show();
-            cw.Closed += CategoryWindowClosed;
-        }
-        private void CategoryWindowClosed(object sender, EventArgs e)
-        {
-            ((CategoryWindow)sender).Closed -= CategoryWindowClosed;
-            DisplayCategories(presenter.GetCategories());
-            this.Activate();
         }
         public void redrawCategories()
         {
@@ -245,32 +233,11 @@ namespace HomeBudgetWPF
         }
 
         /// <summary>
-        /// Opens a different database file
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnOpenFile(object sender, RoutedEventArgs e)
-        {
-            config.newDB = false;
-            MainWindow mw = new MainWindow();
-            mw.Show();
-            this.Close();
-        }
-        private void btnSaveFile(object sender, RoutedEventArgs e)
-        {
-            config.newDB = true;
-            MainWindow mw = new MainWindow();
-            mw.Show();
-            this.Close();
-        }
-
-        /// <summary>
         /// Fills out the datagrid with expenses, is called by the presenter
         /// </summary>
         /// <param name="budgetItems">The list of expenses to bind to the datagrid</param>
         public void ShowBudgetItems(List<BudgetItem> budgetItems)
         {
-            ChangeContentMenu(true);
             dataBudgetLists.ItemsSource = budgetItems;
             dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
             var column1 = new DataGridTextColumn(); // Create a text column object
@@ -319,7 +286,6 @@ namespace HomeBudgetWPF
         }
         public void ShowBudgetItemsByMonth(List<BudgetItemsByMonth> budgetItemsListByMonth)
         {
-            ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByMonth;
             dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
             var column1 = new DataGridTextColumn(); // Create a text column object
@@ -336,7 +302,6 @@ namespace HomeBudgetWPF
 
         public void ShowBudgetItemsByCategory(List<BudgetItemsByCategory> budgetItemsListByCategory)
         {
-            ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByCategory;
             dataBudgetLists.Columns.Clear(); // Clear all existing columns on the
             var column1 = new DataGridTextColumn(); // Create a text column object
@@ -353,7 +318,6 @@ namespace HomeBudgetWPF
 
         public void ShowBudgetItemsMonthAndCategory(List<Dictionary<string, object>> budgetItemsListByMonthAndCategory)
         {
-            ChangeContentMenu(false);
             dataBudgetLists.ItemsSource = budgetItemsListByMonthAndCategory;
             dataBudgetLists.Columns.Clear();
             var columnTotal = new DataGridTextColumn();
@@ -429,12 +393,6 @@ namespace HomeBudgetWPF
             FilterByDate.IsChecked = false;
             DisplayCategories(presenter.GetCategories());
             cmbCategory.Text = "Category";
-        }
-        private void ChangeContentMenu(bool enable)
-        {
-            dataBudgetLists.ContextMenu.IsOpen = false;
-            dataBudgetLists.ContextMenu.StaysOpen = false;
-            dataBudgetLists.ContextMenu.IsEnabled = enable ? true : false;
         }
         private void displaySearchHint()
         {
@@ -545,6 +503,15 @@ namespace HomeBudgetWPF
         public int GetCategoryId()
         {
             return cmbCategory.SelectedIndex + 1;
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            if (!humanSave)
+            {
+                humanSave = true;
+                
+            }
         }
     }
 }

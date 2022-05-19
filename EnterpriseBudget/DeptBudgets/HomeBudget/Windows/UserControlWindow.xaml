@@ -1,0 +1,25 @@
+﻿<Window x:Class="EnterpriseBudget.DeptBudgets.HomeBudget.UserControlWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        Title="Pie Chart"
+        ResizeMode="NoResize" Height="450" Width="800"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:EnterpriseBudget.DeptBudgets.HomeBudget"
+        xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
+        mc:Ignorable="d" 
+        d:DesignHeight="450" d:DesignWidth="800">
+    <StackPanel>
+        <Menu Grid.Row="0">
+            <MenuItem Header="Settings" x:Name="Settings" Click="Settings_Click"/>
+            <MenuItem Header="Close All" x:Name="CloseAll" Click="btnCloseAllWindows_Click"/>
+        </Menu>
+        <Grid>
+            <!-- Create a chart in column 1 -->
+            <!--<local:DataChartControl x:Name="theDataGridView">
+            </local:DataChartControl>-->
+
+        </Grid>
+    </StackPanel>
+    
+</Window>

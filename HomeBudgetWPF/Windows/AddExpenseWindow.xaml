@@ -51,7 +51,7 @@
 
                         <!--Category-->
                         <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Category" Grid.Row="0" Grid.Column="0"/>
-                        <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True" KeyDown="cmbCategory_KeyDown"/>
+                        <ComboBox Text="Category" Background="{DynamicResource Alternation1}" Margin="0,5,5,5" Grid.Row="0" Grid.Column="1" x:Name="cmbCategory" IsEditable="True"/>
 
                         <!--Date-->
                         <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Date" Grid.Row="1" Grid.Column="0"/>
@@ -85,6 +85,7 @@
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
                             <RowDefinition Height="1*"/>
+                            <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
                         <!-- Last Input Title -->                        
                         <TextBlock Text="Last Input" Foreground="{DynamicResource TextColor}" Margin="5,10,10,10" Grid.Row="0" Grid.Column="0" FontSize="15" FontWeight="Bold"/>
@@ -108,9 +109,13 @@
                         <!--Credit-->
                         <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Credit" Grid.Row="5" Grid.Column="0"/>
                         <TextBlock Style="{DynamicResource TextBlockDefault}" Foreground="{DynamicResource TextColor}" Text="" Grid.Row="5" Grid.Column="1" x:Name="isCredit"/>
+
+
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Credit" Grid.Row="6" Grid.Column="0" x:Name="remainingBudget"/>
+                        <TextBlock Style="{DynamicResource TextBlockDefault}" Text="Credit" Grid.Row="6" Grid.Column="1" x:Name="totalSpent"/>
                     </Grid>
                 </Border>                
-
+                
                 <!--Buttons-->
                 <!--Add Button-->
                 <Button Style="{DynamicResource RoundedButton}" Content="Add" Grid.Row="8" Grid.Column="0" x:Name="btnAdd" Click="btnAdd_Click"/>

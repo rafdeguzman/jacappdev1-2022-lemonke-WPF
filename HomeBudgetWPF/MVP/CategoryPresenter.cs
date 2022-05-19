@@ -18,7 +18,6 @@ namespace HomeBudgetWPF
         public CategoryPresenter(CategoryInterface v, HomeBudget model)
         {
             config = new Config();
-            string filePath = config.lastUsedFilePath;
             this.model = model;
             view = v;
 
