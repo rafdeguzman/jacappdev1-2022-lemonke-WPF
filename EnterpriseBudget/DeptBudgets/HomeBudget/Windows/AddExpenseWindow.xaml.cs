@@ -117,10 +117,7 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
                 msg.AppendLine("Name is a required field.");
             //Amount
             if (string.IsNullOrEmpty(txtAmount.Text))
-                msg.AppendLine("Amount is a required field.");
-            //Brand
-            if (cmbCategory.SelectedIndex == -1)
-                msg.AppendLine("Category is a required field.");
+                msg.AppendLine("Amount is a required field.");            
             //Quantity
             try
             {
@@ -130,6 +127,23 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
             catch
             {
                 msg.AppendLine("Invalid Amount");
+            }
+
+            //Brand
+            if (cmbCategory.SelectedIndex == -1)
+                msg.AppendLine("Category is a required field.");
+            else
+            {
+                for (int i = 0; i < limits.Count; i++)
+                {
+                    if (limits[i].Key == cmbCategory.SelectedItem.ToString())
+                    {
+                        if ((limits[i].Value - alreadySpent[i].Value) < decimal.Parse(txtAmount.Text))
+                        {
+                            msg.AppendLine("Expense Refused, limit would be exceded for category: " + limits[i].Key);
+                        }
+                    }
+                }
             }
 
             if (string.IsNullOrEmpty(msg.ToString()))
