@@ -184,5 +184,9 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         {
             budget.SaveToSQLServer(deptId);
         }
+        public int GetDeptId()
+        {
+            return this.deptId;
+        }
     }
 }

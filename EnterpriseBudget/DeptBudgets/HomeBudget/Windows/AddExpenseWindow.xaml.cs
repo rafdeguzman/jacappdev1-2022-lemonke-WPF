@@ -32,13 +32,15 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         /// <summary>
         /// Adds an expense to the database from input fields
         /// </summary>
-        public AddExpenseWindow(Budget.HomeBudget model)
+        public AddExpenseWindow(Budget.HomeBudget model, int budgId)
         {
             InitializeComponent();
             datePicker.SelectedDate = DateTime.Today;
             presenter = new ExpensePresenter(this, model);
             this.model = model;
             checkCredit.IsChecked = false;
+            List<BudgetItem> list = presenter.getAllExpenses();
+            barChartControl.DisplayChart(presenter.getExpenses(budgId), list, list.Count);
         }
         #endregion
 
@@ -143,23 +145,6 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
             txtAmount.Text = string.Empty;
             txtDescription.Text = string.Empty;
             checkCredit.IsChecked = false;
-        }
-
-        /// <summary>
-        /// Displays the last inputed expense
-        /// </summary>
-        /// <param name="categories">Category of the last expense</param>
-        /// <param name="date">Date of the last expense</param>
-        /// <param name="amount">Amount of the last expense</param>
-        /// <param name="description">Description of the last expense</param>
-        /// <param name="creditFlag">CreditFlag of the last expense</param>
-        public void LastInput(string categories, string date, string amount, string description, string creditFlag)
-        {
-            previousCategory.Text = categories;
-            previousDate.Text = date;
-            previousAmount.Text = amount;
-            previousDescription.Text = description;
-            isCredit.Text = creditFlag;
         }
 
         /// <summary>

@@ -151,5 +151,22 @@ namespace EnterpriseBudget.Model
             myReader.Close();
         }
 
+        public List<KeyValuePair<string, decimal>> GetExpenses(int deptId)
+        {
+            List < KeyValuePair<string, decimal> > categories = new List<KeyValuePair<string, decimal>>();
+            SqlCommand command = Connection.cnn.CreateCommand();
+            command.CommandText = $"Select bc.name, bl.limit from budgetCategoryLimits bl, budgetCategories bc WHERE bl.deptId = {deptId} and bc.id = bl.catId;";
+            SqlDataReader myReader = command.ExecuteReader();
+
+            while (myReader.Read())
+            {
+                KeyValuePair<string, decimal> kvp = new KeyValuePair<string, decimal>(myReader.GetString(0), (decimal)myReader.GetDouble(1));
+                categories.Add(kvp);
+            }
+
+            myReader.Close();
+
+            return categories;
+        }
     }
 }

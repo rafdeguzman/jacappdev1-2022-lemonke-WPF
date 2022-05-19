@@ -16,8 +16,9 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
 
         private readonly ExpenseInterface view;
         private readonly Budget.HomeBudget model;
+        private readonly Model.DepartmentBudgets budget;
 
-        private static DateTime previousDate ;
+        private static DateTime previousDate;
         private static int previousCategoryID;
         private static double previousAmount;
         private static string previousDescription;
@@ -32,6 +33,7 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
             view = v;
 
             view.DisplayCategories(ExpensePopulateCategories());
+            budget = new Model.DepartmentBudgets();
         }
 
         public List<Category> ExpensePopulateCategories()
@@ -43,28 +45,24 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         {
             string isCredit = "";
             catID++;
-            if (SameInputAsLastInput(dt, catID, amount, desc, isChecked))
+            Category categoryType = model.categories.GetCategoryFromId(catID);
+            if (isChecked == false)
             {
-                Category categoryType = model.categories.GetCategoryFromId(catID);
-                if (isChecked == false)
+                if (categoryType.Type == Category.CategoryType.Credit || categoryType.Type == Category.CategoryType.Savings)
                 {
-                    if (categoryType.Type == Category.CategoryType.Credit || categoryType.Type == Category.CategoryType.Savings)
-                    {
-                        model.expenses.Add(dt, catID, amount * -1, desc);
-                    }
-                    else
-                    {
-                        model.expenses.Add(dt, catID, amount, desc);
-                    }
-                    isCredit = "Credit Unchecked";
+                    model.expenses.Add(dt, catID, amount * -1, desc);
                 }
                 else
                 {
-                    model.expenses.Add(dt, catID, amount * -1, desc);
                     model.expenses.Add(dt, catID, amount, desc);
-                    isCredit = "Credit Checked";
                 }
-                view.LastInput(categoryType.Type.ToString(), dt.ToString("yyyy-MM-dd"),amount.ToString(), desc,isCredit);
+                isCredit = "Credit Unchecked";
+            }
+            else
+            {
+                model.expenses.Add(dt, catID, amount * -1, desc);
+                model.expenses.Add(dt, catID, amount, desc);
+                isCredit = "Credit Checked";
             }
         }
         public void UpdateExpense(int id, DateTime dt, int catID, double amount, string desc)
@@ -106,6 +104,15 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         public void closeDb()
         {
             model.CloseDB();
+        }
+        public List<KeyValuePair<string, decimal>> getExpenses(int deptId)
+        {
+            return budget.GetExpenses(deptId);
+        }
+
+        public List<BudgetItem> getAllExpenses()
+        {
+            return model.GetBudgetItems(null, null, false, 0);
         }
     }
 

@@ -59,8 +59,13 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
 
         public int DepId
         {
-            get { return depId; }
-            set { depId = value; }
+            get { 
+                return depId;
+            }
+            set { 
+                depId = value;
+                presenter.setDeptId(DepId);
+            }
         }
 
 
@@ -97,7 +102,7 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
         /// <param name="e"></param>
         private void Expense_Click(object sender, RoutedEventArgs e)
         {
-            AddExpenseWindow aew = new AddExpenseWindow(model);
+            AddExpenseWindow aew = new AddExpenseWindow(model, presenter.GetDeptId());
             aew.Owner = this;
             aew.Show();
             aew.Closed += AddExpenseWindowClosed;
@@ -514,7 +519,6 @@ namespace EnterpriseBudget.DeptBudgets.HomeBudget
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            presenter.setDeptId(DepId);
             presenter.Save();
         }
     }
